@@ -2,6 +2,49 @@
    MAIN · init feature-detect (cada página carga lo suyo)
    ========================================= */
 
+/* Hero Slider */
+function initHeroSlider() {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    if (!slides.length || !dots.length) return;
+
+    let current = 0;
+    let interval;
+
+    function showSlide(n) {
+        slides.forEach((s, i) => {
+            s.classList.toggle('active', i === n);
+            dots[i]?.classList.toggle('active', i === n);
+        });
+        current = n;
+    }
+
+    function nextSlide() {
+        showSlide((current + 1) % slides.length);
+    }
+
+    // Auto-advance every 5 seconds
+    function startAuto() {
+        interval = setInterval(nextSlide, 5000);
+    }
+
+    function stopAuto() {
+        if (interval) clearInterval(interval);
+    }
+
+    // Click on dots
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+            showSlide(i);
+            stopAuto();
+            startAuto();
+        });
+    });
+
+    // Start
+    startAuto();
+}
+
 function initTheme() {
     if (localStorage.getItem('dashTheme') === 'dark') document.body.classList.add('dark');
     const btn = document.getElementById('themeToggle');
@@ -90,6 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(tickRelativeTime, 30000);
     }
 
-    /* 9. Page-specific hook (each page can define window.pageInit) */
+    /* 9. Hero slider (home page) */
+    initHeroSlider();
+
+    /* 10. Page-specific hook (each page can define window.pageInit) */
     if (typeof window.pageInit === 'function') window.pageInit();
 });

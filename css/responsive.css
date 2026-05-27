@@ -4,12 +4,17 @@
 
 @media (max-width: 1100px) {
     .hero-inner { grid-template-columns: 1fr; }
+    .hero-slider { height: 240px; }
+    .slide-content { gap: 24px; padding: 30px; }
+    .slide-avatar { width: 120px; height: 120px; }
+    .slide-name { font-size: 32px; }
     .kpi-strip { grid-template-columns: repeat(2, 1fr); }
     .candidates-grid { grid-template-columns: 1fr; }
     .historia-grid { grid-template-columns: 1fr; }
     .calc-grid { grid-template-columns: 1fr; }
     .main-container { flex-direction: column; padding: 15px 5%; }
     .col-left, .col-right { min-width: 100%; }
+    .ai-verdict-content { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 900px) {
@@ -20,6 +25,26 @@
     .positions-grid { grid-template-columns: 1fr; }
     .channels-grid { grid-template-columns: 1fr; }
     .irregular-grid { grid-template-columns: 1fr 1fr; }
+
+    /* Hero slider mobile */
+    .hero-slider { height: 200px; border-radius: 14px; }
+    .slide-content { gap: 16px; padding: 20px; flex-direction: column; text-align: center; }
+    .slide-avatar { width: 100px; height: 100px; }
+    .slide-initials { font-size: 36px; }
+    .slide-name { font-size: 24px; }
+    .slide-slogan { font-size: 15px; }
+    .slide-proposal { font-size: 13px; }
+    .slide-party { font-size: 10px; }
+
+    /* AI verdict mobile */
+    .ai-verdict-section { padding: 0 20px; }
+    .ai-verdict-container { padding: 24px 18px; }
+    .ai-verdict-header { flex-direction: column; text-align: center; }
+    .ai-verdict-header h2 { font-size: 22px; }
+    .ai-verdict-content { grid-template-columns: 1fr; gap: 18px; }
+    .ai-verdict-main { padding: 18px; }
+    .ai-verdict-text p { font-size: 13.5px; }
+    .ai-stat-value { font-size: 26px; }
 
     /* === HAMBURGER NAV === */
     .navbar {
