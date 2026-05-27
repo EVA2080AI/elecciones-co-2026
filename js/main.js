@@ -2,10 +2,10 @@
    MAIN · init feature-detect (cada página carga lo suyo)
    ========================================= */
 
-/* Hero Slider */
-function initHeroSlider() {
-    const slides = document.querySelectorAll('.hero-slide');
-    const dots = document.querySelectorAll('.slider-dot');
+/* Candidate Slider (Hero) */
+function initCandidateSlider() {
+    const slides = document.querySelectorAll('.candidate-slide');
+    const dots = document.querySelectorAll('.candidate-slider-controls .slider-dot');
     if (!slides.length || !dots.length) return;
 
     let current = 0;
@@ -23,9 +23,9 @@ function initHeroSlider() {
         showSlide((current + 1) % slides.length);
     }
 
-    // Auto-advance every 5 seconds
+    // Auto-advance every 4 seconds
     function startAuto() {
-        interval = setInterval(nextSlide, 5000);
+        interval = setInterval(nextSlide, 4000);
     }
 
     function stopAuto() {
@@ -133,8 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(tickRelativeTime, 30000);
     }
 
-    /* 9. Hero slider (home page) */
-    initHeroSlider();
+    /* 9. Candidate slider (home page) */
+    initCandidateSlider();
 
     /* 10. Page-specific hook (each page can define window.pageInit) */
     if (typeof window.pageInit === 'function') window.pageInit();

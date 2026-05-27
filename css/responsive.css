@@ -3,11 +3,11 @@
    ========================================= */
 
 @media (max-width: 1100px) {
-    .hero-inner { grid-template-columns: 1fr; }
-    .hero-slider { height: 240px; }
-    .slide-content { gap: 24px; padding: 30px; }
-    .slide-avatar { width: 120px; height: 120px; }
-    .slide-name { font-size: 32px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+    .hero-content { align-items: flex-start; }
+    .hero-lead { max-width: 100%; }
+    .candidate-avatar { width: 56px; height: 56px; }
+    .candidate-mini-name { font-size: 16px; }
     .kpi-strip { grid-template-columns: repeat(2, 1fr); }
     .candidates-grid { grid-template-columns: 1fr; }
     .historia-grid { grid-template-columns: 1fr; }
@@ -26,15 +26,12 @@
     .channels-grid { grid-template-columns: 1fr; }
     .irregular-grid { grid-template-columns: 1fr 1fr; }
 
-    /* Hero slider mobile */
-    .hero-slider { height: 200px; border-radius: 14px; }
-    .slide-content { gap: 16px; padding: 20px; flex-direction: column; text-align: center; }
-    .slide-avatar { width: 100px; height: 100px; }
-    .slide-initials { font-size: 36px; }
-    .slide-name { font-size: 24px; }
-    .slide-slogan { font-size: 15px; }
-    .slide-proposal { font-size: 13px; }
-    .slide-party { font-size: 10px; }
+    /* Candidate slider mobile */
+    .candidate-card-mini { padding: 16px; gap: 12px; }
+    .candidate-avatar { width: 52px; height: 52px; }
+    .candidate-initials { font-size: 18px; }
+    .candidate-mini-name { font-size: 15px; }
+    .candidate-slogan { font-size: 12px; }
 
     /* AI verdict mobile */
     .ai-verdict-section { padding: 0 20px; }
