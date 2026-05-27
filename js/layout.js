@@ -57,13 +57,43 @@ function renderNavbar() {
                 <text x="44" y="40" font-family="Outfit, sans-serif" font-weight="600" font-size="11" fill="#cbd5e1">Presidenciales · 2026</text>
             </svg>
         </a>
-        <div class="nav-links">${links}</div>
+        <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">${links}</div>
         <div class="nav-actions">
             <button class="theme-toggle" id="themeToggle" title="Cambiar tema" aria-label="Cambiar tema claro/oscuro">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
             </button>
         </div>
-    </nav>`;
+    </nav>
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>`;
+
+    /* Hamburger interactions */
+    const burger = document.getElementById('navBurger');
+    const linksEl = document.getElementById('navLinks');
+    const backdrop = document.getElementById('navBackdrop');
+    if (!burger || !linksEl) return;
+    const close = () => {
+        linksEl.classList.remove('open');
+        backdrop.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    };
+    const open = () => {
+        linksEl.classList.add('open');
+        backdrop.classList.add('open');
+        burger.classList.add('open');
+        burger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+    };
+    burger.addEventListener('click', () => {
+        linksEl.classList.contains('open') ? close() : open();
+    });
+    backdrop.addEventListener('click', close);
+    linksEl.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 }
 
 function renderDisclaimer() {

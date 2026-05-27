@@ -4,7 +4,6 @@
 
 @media (max-width: 1100px) {
     .hero-inner { grid-template-columns: 1fr; }
-    .hero-aside { order: -1; }
     .kpi-strip { grid-template-columns: repeat(2, 1fr); }
     .candidates-grid { grid-template-columns: 1fr; }
     .historia-grid { grid-template-columns: 1fr; }
@@ -21,36 +20,234 @@
     .positions-grid { grid-template-columns: 1fr; }
     .channels-grid { grid-template-columns: 1fr; }
     .irregular-grid { grid-template-columns: 1fr 1fr; }
+
+    /* === HAMBURGER NAV === */
+    .navbar {
+        padding: 10px 16px;
+        gap: 10px;
+        flex-wrap: nowrap;
+    }
+    .nav-burger { display: inline-flex; }
+    .navbar .nav-links {
+        position: fixed;
+        top: 0; right: 0;
+        height: 100vh; height: 100dvh;
+        width: 88vw; max-width: 340px;
+        background: #0f172a;
+        border-left: 1px solid rgba(255,255,255,0.08);
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 4px;
+        padding: 84px 18px 24px 18px;
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+        z-index: 999;
+        box-shadow: -20px 0 60px rgba(0,0,0,0.4);
+    }
+    .navbar .nav-links.open { transform: translateX(0); }
+    .navbar .nav-links a {
+        display: flex; align-items: center;
+        min-height: 48px;
+        padding: 12px 14px;
+        font-size: 15px;
+        border-radius: 12px;
+        width: 100%;
+    }
+    .navbar .nav-links a.active {
+        background: rgba(252,209,22,0.15);
+        color: var(--co-yellow);
+        box-shadow: inset 0 0 0 1px rgba(252,209,22,0.35);
+    }
+    .nav-actions { margin-left: auto; }
 }
+
 @media (max-width: 600px) {
     .irregular-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 700px) {
-    .navbar { gap: 8px; padding: 10px 14px; }
-    .navbar .nav-links { gap: 4px; }
-    .navbar .nav-links a { font-size: 11.5px; padding: 6px 10px; }
-    .navbar .brand svg { width: 110px; height: 28px; }
-    .nav-actions { width: auto; }
+    .navbar { padding: 10px 14px; }
+    .navbar .brand svg { width: 118px; height: 30px; }
 
-    .hero { padding: 40px 5% 36px 5%; }
-    .hero-logo { width: 76px; height: 76px; }
-    .hero-logo svg { width: 60px; height: 60px; }
-    .hero-stat-grid { grid-template-columns: 1fr 1fr; }
+    /* HERO mobile: title first, stats second, tighter spacing */
+    .hero {
+        padding: 32px 20px 28px 20px;
+    }
+    .hero-inner { gap: 24px; }
+    .hero-logo { width: 64px; height: 64px; margin-bottom: 14px; }
+    .hero-logo svg { width: 52px; height: 52px; }
+    .hero-eyebrow { font-size: 11px; padding: 5px 12px; margin-bottom: 12px; }
+    .hero h1 { font-size: 30px; letter-spacing: -1px; }
+    .hero-lead { font-size: 15px; margin-bottom: 20px; }
+    .hero-cta { gap: 10px; }
+    .hero-cta .btn-primary, .hero-cta .btn-ghost {
+        flex: 1; justify-content: center;
+        font-size: 13.5px; padding: 12px 16px;
+    }
+    .hero-aside { order: 2; margin-top: 4px; }
+    .hero-stat-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+    .hero-stat .value { font-size: 24px; }
+    .hero-stat { padding: 16px 18px; }
 
-    .page-hero { padding: 36px 5% 24px 5%; }
-    .footer-grid { grid-template-columns: 1fr; padding: 32px 5% 20px 5%; }
+    .page-hero { padding: 28px 20px 22px 20px; }
+    .page-hero h1 { font-size: 26px; line-height: 1.15; }
+    .page-hero .lead { font-size: 14.5px; }
+    .breadcrumb { font-size: 11.5px; }
 
-    .section { padding: 20px; }
+    .disclaimer {
+        font-size: 12.5px;
+        padding: 12px 16px;
+        line-height: 1.5;
+    }
+
+    .footer-grid { grid-template-columns: 1fr; padding: 32px 20px 20px 20px; gap: 28px; }
+    .footer-bottom { padding: 16px 20px; font-size: 11px; }
+
+    /* SECTIONS */
+    .section { padding: 18px 16px; border-radius: 14px; }
+    .section h2 { font-size: 17px; gap: 6px; margin-bottom: 16px; }
+    .section-hint { font-size: 12px; }
+    .section-strip { padding: 32px 20px 12px 20px; }
+    .section-strip h2 { font-size: 22px; }
+    .section-strip-lead { font-size: 13.5px; }
+    .main-container { padding: 16px 20px 40px 20px; gap: 16px; }
+
+    /* KPIs */
+    .kpi-strip { grid-template-columns: 1fr 1fr; padding: 20px; gap: 12px; }
+    .kpi { padding: 16px 18px; gap: 6px; }
+    .kpi-value { font-size: 26px; }
+    .kpi-label { font-size: 10.5px; }
+    .kpi-icon { width: 30px; height: 30px; right: 14px; top: 14px; }
+
+    /* Feature cards */
+    .feature-grid { padding: 0 20px; gap: 14px; }
+    .feature-card { padding: 22px; }
+
+    /* Candidate cards */
+    .candidates-grid { padding: 14px 20px; gap: 14px; }
+    .candidate-card { padding: 20px; }
+    .cand-stats { gap: 8px; }
+    .stat-pill { padding: 8px 6px; }
+    .stat-pill .v { font-size: 14px; }
+    .stat-pill .l { font-size: 9px; }
+
+    /* Charts: smaller heights on mobile */
+    .chart-container { height: 280px; }
+    .chart-container.short { height: 220px; }
+    .chart-container.tall { height: 340px; }
+
+    /* Calculator */
+    .gauges-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .gauge-card { padding: 12px; }
+    .gauge-value { font-size: 18px; }
+    .slider-row { grid-template-columns: 1fr; gap: 6px; }
+    .slider-row .controls { min-width: 0; width: 100%; }
+    .slider-row label { font-size: 13px; }
+    .slider-row input[type=range]::-webkit-slider-thumb { width: 24px; height: 24px; }
+    .result-bar { padding: 12px 14px; }
+    .result-pct { font-size: 22px; }
+    .calc-actions { flex-wrap: wrap; }
+    .reset-btn, .share-btn { padding: 10px 14px; min-height: 42px; }
+
+    /* Comparator */
+    .cmp-row { grid-template-columns: 1fr; gap: 8px; }
+    .cmp-vs-mini { text-align: left; padding: 4px 0; opacity: 0.7; }
+    .cmp-summary { padding: 14px; }
+    .cmp-side .num { font-size: 28px; }
+    .cmp-controls { gap: 8px; }
+    .cmp-controls select { flex: 1; min-width: 0; padding: 10px 12px; font-size: 13px; }
+
+    /* Matrix table */
+    .table-container { max-height: 480px; border-radius: 10px; }
+    table { font-size: 12px; min-width: 640px; }
+    th, td { padding: 10px 12px; }
+    .problem-cell { width: 32%; }
+    .wins-summary { padding: 12px; gap: 8px; }
+    .win-pill { min-width: 120px; padding: 10px; }
+    .win-pill .n { font-size: 18px; }
+
+    /* History (candidate detail) */
+    .cdetail-hero-inner { gap: 18px; }
+    .cdetail-avatar { width: 84px; height: 84px; font-size: 28px; }
+    .cdetail-stats { gap: 14px; }
+    .cdetail-stats .num { font-size: 20px; }
+    .hist-meta > div { grid-template-columns: 76px 1fr; gap: 6px; }
+
+    /* Positions grid */
+    .positions-grid { padding: 0 20px; gap: 10px; }
+    .position-card { padding: 14px 16px; }
+
+    /* Denuncias */
+    .report-warning { padding: 16px 18px; gap: 12px; }
+    .channels-grid { padding: 0 20px; gap: 12px; }
+    .channel-card { padding: 18px; }
+    .channel-channels a, .channel-channels span {
+        flex-wrap: wrap;
+        font-size: 12px;
+        padding: 8px 10px;
+        min-height: 44px;
+        align-items: center;
+    }
+    .channel-channels .label { min-width: 50px; font-size: 10px; }
+
+    /* Timeline */
+    .timeline { padding-right: 4px; }
+    .timeline-item { padding: 0 0 18px 18px; }
+    .news-title { font-size: 13.5px; }
+    .news-source, .news-tag { font-size: 10px; }
+
+    /* News filters: scroll horizontal */
+    .news-filter {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        margin-bottom: 12px;
+        -webkit-overflow-scrolling: touch;
+    }
+    .news-filter::-webkit-scrollbar { height: 4px; }
+    .news-filter .chip {
+        flex-shrink: 0;
+        min-height: 36px;
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    /* CTA band */
+    .cta-band { margin: 36px 20px; padding: 26px 22px; border-radius: 18px; }
+    .cta-band .cta-text h3 { font-size: 20px; }
+    .cta-band .cta-text p { font-size: 13.5px; }
+
+    /* FAQ */
+    .faq-item summary { padding: 14px 16px; gap: 10px; min-height: 56px; }
+    .faq-q { font-size: 13.5px; }
+    .faq-a { padding: 0 16px 16px 16px; font-size: 13.5px; }
+    .faq-chevron { width: 26px; height: 26px; }
+
+    /* Prose pages (acerca, contacto) */
+    .prose { font-size: 14.5px; line-height: 1.7; }
+    .prose h2 { font-size: 22px; margin: 36px 0 12px 0; }
+    .prose h3 { font-size: 16px; }
+    .checklist li { padding: 12px 14px; font-size: 13.5px; }
+    .callout { padding: 14px 16px; font-size: 13.5px; gap: 10px; }
+
+    /* Chatbot */
+    .chat-panel { bottom: 86px; right: 12px; left: 12px; width: auto; height: 70vh; max-height: 540px; }
+    .chat-fab { bottom: 16px; right: 16px; width: 54px; height: 54px; }
+
+    /* Toast */
+    .toast { bottom: 80px; right: 16px; left: 16px; text-align: center; }
+}
+
+/* Extra small phones (iPhone SE, small Androids) */
+@media (max-width: 380px) {
     .kpi-strip { grid-template-columns: 1fr; }
     .gauges-grid { grid-template-columns: 1fr; }
-    .slider-row { grid-template-columns: 1fr; }
-    .slider-row .controls { min-width: 0; }
-    .cmp-row { grid-template-columns: 1fr; gap: 8px; }
-    .cmp-vs-mini { text-align: left; }
-
-    .chat-panel { bottom: 86px; right: 12px; width: calc(100vw - 24px); }
-    .chat-fab { bottom: 16px; right: 16px; }
+    .hero-cta { flex-direction: column; }
+    .hero-cta .btn-primary, .hero-cta .btn-ghost { width: 100%; }
+    .hero h1 { font-size: 26px; }
+    .cdetail-stats { flex-direction: column; gap: 10px; }
+    .cdetail-stats > div { flex-direction: row; align-items: baseline; gap: 8px; }
 }
 
 /* Reduced motion */

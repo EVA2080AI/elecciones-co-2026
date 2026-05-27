@@ -23,3 +23,7 @@ build/
 # Hoja de cálculo personal de trabajo
 Hoja de cálculo sin título.xlsx
 .claude/
+
+# Screenshots de auditoría visual (locales, no se commitean)
+m-*.png
+.playwright-mcp/
