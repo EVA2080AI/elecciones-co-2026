@@ -1,0 +1,24 @@
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+node_modules/
+dist/
+build/
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+.env
+.env.local
+.env.*.local
+*.log
+
+# Backup del HTML original (queda como referencia local pero no se commitea)
+# Comentar la línea siguiente si lo quieres incluir
+# dashboard_elecciones.html
+
+# Hoja de cálculo personal de trabajo
+Hoja de cálculo sin título.xlsx

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Análisis Cuantitativo · Elecciones Presidenciales Colombia 2026</title>
+    <meta name="description" content="Análisis cuantitativo completo: solidez dinámica, radar de 10 problemáticas, comparador 1 vs 1, histórico de encuestas, matriz base y veredicto IA imparcial.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#003893">
+    <link rel="canonical" href="./analisis.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Análisis Cuantitativo · Colombia 2026">
+    <meta property="og:image" content="./assets/og-image.svg">
+
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/sections.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body data-page="analisis">
+
+<a href="#main" class="skip-link">Saltar al contenido</a>
+<div id="layout-nav"></div>
+
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <nav class="breadcrumb" aria-label="Ruta">
+            <a href="./index.html">Inicio</a>
+            <span class="sep">/</span>
+            <span class="current">Análisis</span>
+        </nav>
+        <h1>Análisis Cuantitativo</h1>
+        <p class="lead">
+            Visualización completa de la matriz: solidez dinámica que reacciona al feed de noticias, radar de 10 problemáticas, comparador cara a cara, histórico de encuestas y la matriz base con puntajes y posturas.
+        </p>
+    </div>
+</section>
+
+<div id="layout-disclaimer"></div>
+
+<main id="main" class="main-container" style="padding-top:30px;">
+
+    <div class="col-left">
+
+        <div id="solidez" class="section">
+            <h2>
+                Índice de Solidez Dinámico
+                <span class="section-hint">Impactado por el pulso mediático en vivo</span>
+            </h2>
+            <div class="chart-container short"><canvas id="chartSolidez" aria-label="Gráfico de solidez"></canvas></div>
+        </div>
+
+        <div id="radar" class="section">
+            <h2>
+                Radar · 10 Problemáticas Ciudadanas
+                <span class="section-hint">Afinidad por inquietud (0–10)</span>
+            </h2>
+            <div class="chart-container tall"><canvas id="chartRadar" aria-label="Radar de afinidad"></canvas></div>
+        </div>
+
+        <div id="veredicto" class="section">
+            <h2>Análisis Conclusivo · Lectura imparcial</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: center;">
+                <div style="flex: 1; min-width: 280px;">
+                    <div class="ai-opinion" id="aiVerdict"></div>
+                </div>
+                <div style="flex: 1; min-width: 280px;">
+                    <div class="chart-container short"><canvas id="chartPie" aria-label="Distribución de idoneidad"></canvas></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="comparador" class="section">
+            <h2>
+                Comparador 1 vs 1
+                <span class="section-hint">Cara a cara por problemática</span>
+            </h2>
+            <div class="cmp-controls">
+                <select id="cmpA" aria-label="Candidato A"></select>
+                <span class="cmp-vs">VS</span>
+                <select id="cmpB" aria-label="Candidato B"></select>
+            </div>
+            <div class="cmp-summary" id="cmpSummary"></div>
+            <div class="cmp-rows" id="cmpRows"></div>
+        </div>
+
+        <div id="historico" class="section">
+            <h2>
+                Encuestas · Intención de Voto (6 meses)
+                <span class="section-hint">Tendencia histórica</span>
+            </h2>
+            <div class="chart-container short"><canvas id="chartHistory" aria-label="Histórico de encuestas"></canvas></div>
+        </div>
+
+        <div id="matriz" class="section">
+            <h2>
+                Matriz Base de Problemáticas
+                <span class="section-hint">★ marca el candidato con mejor enfoque por inquietud</span>
+            </h2>
+            <div class="table-container">
+                <table id="matrixTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Inquietud Ciudadana</th>
+                            <th scope="col">Paloma Valencia</th>
+                            <th scope="col">Iván Cepeda</th>
+                            <th scope="col">A. de la Espriella</th>
+                        </tr>
+                    </thead>
+                    <tbody id="matrixBody"></tbody>
+                </table>
+            </div>
+            <div class="wins-summary" id="winsSummary"></div>
+        </div>
+
+    </div>
+
+    <div class="col-right">
+        <div class="section">
+            <h2>¿Quieres probar tu afinidad?</h2>
+            <p style="font-size:14px;line-height:1.6;color:var(--text-light);margin:0 0 16px 0;">
+                Ajusta la importancia que tú le das a cada inquietud y calcula tu afinidad personal con cada candidato en segundos.
+            </p>
+            <a class="btn-primary" href="./calculadora.html" style="display:inline-flex;">
+                Ir a la calculadora
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+
+        <div class="section">
+            <h2>Indicadores en vivo</h2>
+            <div id="kpis" class="kpi-strip" style="grid-template-columns:1fr;padding:0;">
+                <div class="kpi tone-success">
+                    <span class="kpi-label">Líder en idoneidad</span>
+                    <span class="kpi-value" id="kpi-leader">—</span>
+                    <span class="kpi-sub" id="kpi-leader-sub">Calculando…</span>
+                </div>
+                <div class="kpi">
+                    <span class="kpi-label">Menciones (feed)</span>
+                    <span class="kpi-value" id="kpi-mentions">0</span>
+                    <span class="kpi-sub" id="kpi-mentions-sub">—</span>
+                </div>
+                <div class="kpi tone-warning">
+                    <span class="kpi-label">Sentimiento global</span>
+                    <span class="kpi-value" id="kpi-sentiment">—</span>
+                    <span class="kpi-sub" id="kpi-sentiment-sub">—</span>
+                </div>
+                <div class="kpi" id="kpiMomentum">
+                    <span class="kpi-label">Mayor momentum</span>
+                    <span class="kpi-value" id="kpi-momentum">—</span>
+                    <span class="kpi-sub" id="kpi-momentum-sub">—</span>
+                </div>
+            </div>
+            <!-- Hidden timeline so news.js processNews has where to render filters -->
+            <div style="display:none">
+                <span id="lastUpdate"></span>
+                <ul id="timelineList"></ul>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<div id="layout-foot"></div>
+<div id="layout-chat"></div>
+
+<script src="./js/data.js"></script>
+<script src="./js/utils.js"></script>
+<script src="./js/layout.js"></script>
+<script src="./js/render.js"></script>
+<script src="./js/charts.js"></script>
+<script src="./js/news.js"></script>
+<script src="./js/chatbot.js"></script>
+<script src="./js/main.js"></script>
+</body>
+</html>

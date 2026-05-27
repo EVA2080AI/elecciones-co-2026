@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" role="img" aria-label="Elecciones Presidenciales Colombia 2026">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fcd116"/>
+      <stop offset="50%" stop-color="#003893"/>
+      <stop offset="100%" stop-color="#ce1126"/>
+    </linearGradient>
+    <clipPath id="circle">
+      <circle cx="28" cy="28" r="22"/>
+    </clipPath>
+  </defs>
+  <!-- Flag disc -->
+  <circle cx="28" cy="28" r="23" fill="#fff" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+  <g clip-path="url(#circle)">
+    <rect x="6"  y="6"  width="44" height="22" fill="#fcd116"/>
+    <rect x="6"  y="28" width="44" height="11" fill="#003893"/>
+    <rect x="6"  y="39" width="44" height="11" fill="#ce1126"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="60" y="25" font-family="'Outfit',system-ui,sans-serif" font-weight="800" font-size="15" fill="currentColor" letter-spacing="-0.4">
+    ELECCIONES
+  </text>
+  <text x="60" y="44" font-family="'Outfit',system-ui,sans-serif" font-weight="700" font-size="13" fill="currentColor" opacity="0.7" letter-spacing="-0.2">
+    Presidenciales · 2026
+  </text>
+</svg>
