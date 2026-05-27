@@ -50,45 +50,79 @@
 
 <main id="main" style="max-width:1400px;margin:0 auto;padding:30px 5% 0 5%;">
 
+    <!-- INSTRUCCIONES Y ESCALA -->
     <div class="callout info">
         <div class="callout-icon">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></svg>
         </div>
         <div>
-            <strong>¿Cómo funciona?</strong>
-            Mueve cada slider entre 0 (no me importa) y 10 (es lo más importante). El resultado se actualiza en vivo. <strong>Tu información NUNCA sale de este navegador.</strong>
+            <strong>Cómo usar la calculadora</strong>
+            <ol style="margin:8px 0 0 18px;padding:0;font-size:13.5px;line-height:1.6;">
+                <li>Mira la lista de 10 inquietudes ciudadanas.</li>
+                <li>Mueve cada slider según qué tan importante es <em>para ti</em>.</li>
+                <li>El resultado se actualiza automáticamente.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ESCALA VISUAL -->
+    <div class="scale-legend" aria-hidden="true">
+        <div class="scale-label">Escala de prioridad:</div>
+        <div class="scale-track">
+            <span class="scale-stop"><strong>1</strong><small>Menos<br>importante</small></span>
+            <span class="scale-stop"><strong>3</strong><small>Poco<br>relevante</small></span>
+            <span class="scale-stop"><strong>5</strong><small>Importante</small></span>
+            <span class="scale-stop"><strong>7</strong><small>Muy<br>importante</small></span>
+            <span class="scale-stop"><strong>10</strong><small>Más<br>importante</small></span>
         </div>
     </div>
 
     <div id="calc" class="section">
         <h2>
             Pondera tus prioridades
-            <span class="section-hint">10 inquietudes ciudadanas · 0 a 10 según tu prioridad</span>
+            <span class="section-hint">Los sliders inician en 0 (sin definir). Mueve los que te importen.</span>
         </h2>
         <div class="calc-grid">
             <div class="sliders" id="slidersContainer"></div>
-            <div class="calc-results">
+            <div class="calc-results" id="calcResults">
                 <h3>Tu afinidad calculada</h3>
+
+                <!-- Estado vacío: aparece cuando todos los sliders están en 0 -->
+                <div class="calc-empty" id="calcEmpty">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <p><strong>Mueve al menos un slider para empezar.</strong></p>
+                    <p style="font-size:12.5px;">Asigna prioridad <strong>1 (menos importante)</strong> a <strong>10 (más importante)</strong> a las inquietudes que más te importen. La calculadora cruzará tus prioridades con las propuestas oficiales de cada candidato.</p>
+                </div>
+
                 <div class="result-bar"><div class="result-fill" style="background: var(--c-paloma);" id="fill-paloma"></div>
                     <div class="result-row">
                         <span class="result-name">Paloma Valencia<span class="winner-tag" id="tag-paloma" style="display:none">MAYOR AFINIDAD</span></span>
-                        <span class="result-pct" id="pct-paloma">0%</span>
+                        <span class="result-pct" id="pct-paloma">—</span>
                     </div>
                 </div>
                 <div class="result-bar"><div class="result-fill" style="background: var(--c-cepeda);" id="fill-cepeda"></div>
                     <div class="result-row">
                         <span class="result-name">Iván Cepeda<span class="winner-tag" id="tag-cepeda" style="display:none">MAYOR AFINIDAD</span></span>
-                        <span class="result-pct" id="pct-cepeda">0%</span>
+                        <span class="result-pct" id="pct-cepeda">—</span>
                     </div>
                 </div>
                 <div class="result-bar"><div class="result-fill" style="background: var(--c-tigre);" id="fill-tigre"></div>
                     <div class="result-row">
                         <span class="result-name">A. de la Espriella<span class="winner-tag" id="tag-tigre" style="display:none">MAYOR AFINIDAD</span></span>
-                        <span class="result-pct" id="pct-tigre">0%</span>
+                        <span class="result-pct" id="pct-tigre">—</span>
                     </div>
                 </div>
+
+                <div class="calc-methodology">
+                    <details>
+                        <summary>¿Cómo se calcula?</summary>
+                        <p>Para cada inquietud, cada candidato obtiene una <strong>fracción</strong> de los puntos disponibles (según qué tan directa es su propuesta). La calculadora multiplica esa fracción por <strong>tu prioridad personal</strong> y suma todo.</p>
+                        <p style="font-size:12.5px;color:var(--text-light);">Esto significa que <strong>tú</strong> defines qué pesa, no la matriz. Si nunca priorizas una inquietud, no afecta el resultado.</p>
+                    </details>
+                </div>
+
                 <div class="calc-actions">
-                    <button class="reset-btn" id="resetSliders">Restablecer</button>
+                    <button class="reset-btn" id="resetSliders">Reiniciar</button>
                     <button class="share-btn" id="shareResults">Copiar resultado</button>
                 </div>
             </div>

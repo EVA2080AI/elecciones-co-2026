@@ -3,19 +3,62 @@
           Semana, Google News) via rss2json proxy + auto-refresh.
    ========================================= */
 
-const RSS_PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
+const RSS2JSON_PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
+const ALLORIGINS_PROXY = 'https://api.allorigins.win/raw?url=';
 const REFRESH_MS = 120000; // 2 minutos
 const MAX_PER_SOURCE = 8;
 const MAX_TOTAL = 60;
+const FETCH_TIMEOUT = 12000; // 12s por fuente
+
+function fetchWithTimeout(url, ms) {
+    return Promise.race([
+        fetch(url),
+        new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms))
+    ]);
+}
+
+/* Parser para RSS XML crudo (Google News, etc.) */
+function parseRssXml(xmlString) {
+    const doc = new DOMParser().parseFromString(xmlString, 'text/xml');
+    if (doc.querySelector('parsererror')) return [];
+    const items = [...doc.querySelectorAll('item')];
+    return items.map(it => {
+        const title = it.querySelector('title')?.textContent || '';
+        const link = it.querySelector('link')?.textContent || '';
+        const pubDate = it.querySelector('pubDate')?.textContent || '';
+        const description = it.querySelector('description')?.textContent || '';
+        return { title, link, pubDate, description };
+    });
+}
+
+async function fetchViaRss2Json(src) {
+    const url = `${RSS2JSON_PROXY}${encodeURIComponent(src.rss)}&_t=${Date.now()}`;
+    const resp = await fetchWithTimeout(url, FETCH_TIMEOUT);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+    if (data.status !== 'ok' || !Array.isArray(data.items)) {
+        throw new Error(data.message || 'invalid feed');
+    }
+    return data.items;
+}
+
+async function fetchViaAllorigins(src) {
+    const url = `${ALLORIGINS_PROXY}${encodeURIComponent(src.rss)}&_t=${Date.now()}`;
+    const resp = await fetchWithTimeout(url, FETCH_TIMEOUT);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const xml = await resp.text();
+    if (!xml || xml.trim()[0] !== '<') throw new Error('not XML');
+    const items = parseRssXml(xml);
+    if (items.length === 0) throw new Error('no items parsed');
+    return items;
+}
 
 async function fetchSource(src) {
     try {
-        const url = `${RSS_PROXY}${encodeURIComponent(src.rss)}&_t=${Date.now()}`;
-        const resp = await fetch(url);
-        if (!resp.ok) throw new Error('HTTP ' + resp.status);
-        const data = await resp.json();
-        if (data.status !== 'ok' || !Array.isArray(data.items)) return [];
-        return data.items.slice(0, MAX_PER_SOURCE).map(it => ({
+        const items = src.proxy === 'allorigins-raw'
+            ? await fetchViaAllorigins(src)
+            : await fetchViaRss2Json(src);
+        return items.slice(0, MAX_PER_SOURCE).map(it => ({
             title: stripHtml(it.title),
             link: it.link,
             pubDate: it.pubDate || new Date().toISOString(),
@@ -57,10 +100,19 @@ async function fetchLiveNews() {
 
     if (all.length === 0) {
         if (timelineList) {
-            timelineList.innerHTML = `<li class="empty-state" style="color:var(--accent);">
-                <strong>No se pudo cargar el feed</strong><br>
-                <span style="font-size:13px;color:var(--text-light);">Verifica tu conexión o intenta de nuevo en unos minutos. El proxy gratuito tiene límite de uso.</span>
+            timelineList.innerHTML = `<li class="empty-state" style="text-align:left;padding:24px;">
+                <div style="display:flex;gap:12px;align-items:flex-start;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2.2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r=".5" fill="currentColor"/></svg>
+                    <div>
+                        <strong style="color:var(--primary);display:block;margin-bottom:6px;">No se pudo cargar el feed en este momento</strong>
+                        <span style="font-size:13px;color:var(--text-light);line-height:1.55;">
+                            Los servicios públicos de RSS (rss2json y allorigins) tienen límites de uso gratuito. Reintenta en 1–2 minutos con el botón ↻ arriba.
+                        </span>
+                        <button id="retryFeedBtn" style="margin-top:12px;background:var(--highlight);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;cursor:pointer;">Reintentar ahora</button>
+                    </div>
+                </div>
             </li>`;
+            document.getElementById('retryFeedBtn')?.addEventListener('click', fetchLiveNews);
         }
         return;
     }

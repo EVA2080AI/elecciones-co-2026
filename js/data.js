@@ -14,6 +14,10 @@ window.CANDIDATES = {
         ideology: 'Derecha institucional',
         slogan: '"Orden, firmeza y corazón"',
         baseSolidez: 75,
+        /* photo: ruta a foto del candidato. Si no existe, se usa el avatar
+           con iniciales como fallback automático. Para reemplazar con foto
+           real, sube la imagen a /assets/ y cambia esta ruta. */
+        photo: './assets/candidato-paloma.svg',
         proposals: [
             'Seguridad total e inversión privada',
             'Reactivación de hidrocarburos',
@@ -32,6 +36,7 @@ window.CANDIDATES = {
         ideology: 'Izquierda progresista',
         slogan: '"El poder de la verdad"',
         baseSolidez: 78,
+        photo: './assets/candidato-cepeda.svg',
         proposals: [
             'Continuidad de reformas sociales',
             'Austeridad republicana y transición energética',
@@ -50,6 +55,7 @@ window.CANDIDATES = {
         ideology: 'Derecha radical',
         slogan: '"13 milagros para salvar a Colombia"',
         baseSolidez: 72,
+        photo: './assets/candidato-tigre.svg',
         proposals: [
             '10 megacárceles y seguridad implacable',
             'Reducción del Estado en 40%',
@@ -58,6 +64,14 @@ window.CANDIDATES = {
         bio: 'Abogado penalista independiente. Su discurso disruptivo propone seguridad implacable, reducción drástica del Estado y libertad económica total.',
         keywords: ['espriella', 'tigre', 'abelardo']
     }
+};
+
+/* Resolver ruta de foto considerando subdirectorios (ej. /candidato/*) */
+window.candidatePhoto = function (c) {
+    if (!c || !c.photo) return null;
+    /* Si la página está en subdirectorio, ajusta la ruta */
+    const inSubdir = location.pathname.includes('/candidato/');
+    return inSubdir ? c.photo.replace('./assets/', '../assets/') : c.photo;
 };
 
 window.PROBLEMS = [
@@ -268,14 +282,30 @@ window.PROJECT_FAQ = [
     }
 ];
 
-/* RSS sources for "minuto a minuto" — major Colombian + Latin American outlets */
+/* RSS sources verificados (testeados 2026-05-27).
+   `proxy` indica cómo se descargan:
+   - 'rss2json': servicio que devuelve JSON ya parseado (más simple)
+   - 'allorigins-raw': descarga RSS XML crudo y se parsea con DOMParser
+     en el cliente (necesario para feeds que rss2json no acepta) */
 window.NEWS_SOURCES = [
-    { id: 'eltiempo', name: 'El Tiempo',       rss: 'https://www.eltiempo.com/rss/politica.xml' },
-    { id: 'semana',   name: 'Semana',          rss: 'https://www.semana.com/rss/nacion.xml' },
-    { id: 'rcn',      name: 'Noticias RCN',    rss: 'https://www.noticiasrcn.com/rss/politica' },
-    { id: 'caracol',  name: 'Caracol Radio',   rss: 'https://caracol.com.co/rss/politica/index.xml' },
-    { id: 'cnnesp',   name: 'CNN en Español',  rss: 'https://cnnespanol.cnn.com/category/colombia/feed/' },
-    { id: 'gnews',    name: 'Google News CO',  rss: 'https://news.google.com/rss/search?q=elecciones+presidenciales+colombia+2026&hl=es-419&gl=CO&ceid=CO:es-419' }
+    { id: 'et-elecciones', name: 'El Tiempo · Elecciones 2026',
+      rss: 'https://www.eltiempo.com/rss/elecciones-2026.xml',
+      proxy: 'rss2json' },
+    { id: 'et-politica',   name: 'El Tiempo · Política',
+      rss: 'https://www.eltiempo.com/rss/politica.xml',
+      proxy: 'rss2json' },
+    { id: 'et-colombia',   name: 'El Tiempo · Colombia',
+      rss: 'https://www.eltiempo.com/rss/colombia.xml',
+      proxy: 'rss2json' },
+    { id: 'et-opinion',    name: 'El Tiempo · Opinión',
+      rss: 'https://www.eltiempo.com/rss/opinion.xml',
+      proxy: 'rss2json' },
+    { id: 'gnews-elec',    name: 'Google News · Elecciones',
+      rss: 'https://news.google.com/rss/search?q=elecciones+presidenciales+colombia+2026&hl=es-419&gl=CO&ceid=CO:es-419',
+      proxy: 'allorigins-raw' },
+    { id: 'gnews-cand',    name: 'Google News · Candidatos',
+      rss: 'https://news.google.com/rss/search?q=%22Paloma+Valencia%22+OR+%22Iv%C3%A1n+Cepeda%22+OR+%22Espriella%22&hl=es-419&gl=CO&ceid=CO:es-419',
+      proxy: 'allorigins-raw' }
 ];
 
 /* Derived calculations (shared) */

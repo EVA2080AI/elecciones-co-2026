@@ -9,10 +9,14 @@ function renderCandidateCards() {
         const c = CANDIDATES[k];
         const idn = IDONEIDAD.pct[k].toFixed(1);
         const wins = WIN_COUNTS[k];
+        const photo = window.candidatePhoto ? candidatePhoto(c) : null;
+        const avatarHtml = photo
+            ? `<div class="avatar avatar-photo" aria-hidden="true"><img src="${photo}" alt="" loading="lazy" onerror="this.parentNode.classList.remove('avatar-photo');this.parentNode.textContent='${c.initials}';"></div>`
+            : `<div class="avatar" aria-hidden="true">${c.initials}</div>`;
         return `
         <article class="candidate-card" style="--ccolor: ${c.color}" itemscope itemtype="https://schema.org/Person">
             <div class="cand-head">
-                <div class="avatar" aria-hidden="true">${c.initials}</div>
+                ${avatarHtml}
                 <div>
                     <h3 class="cand-name" itemprop="name">${c.name}</h3>
                     <div class="cand-party"><span itemprop="affiliation">${c.party}</span> · ${c.ideology}</div>
@@ -370,12 +374,16 @@ function renderCandidateDetail() {
     const idn = IDONEIDAD.pct[k].toFixed(1);
     const wins = WIN_COUNTS[k];
 
-    /* Hero block */
+    /* Hero block con foto si está disponible */
     const hero = document.getElementById('candDetailHero');
     if (hero) {
+        const photo = window.candidatePhoto ? candidatePhoto(c) : null;
+        const avatarHtml = photo
+            ? `<div class="cdetail-avatar cdetail-avatar-photo"><img src="${photo}" alt="" onerror="this.parentNode.classList.remove('cdetail-avatar-photo');this.parentNode.textContent='${c.initials}';"></div>`
+            : `<div class="cdetail-avatar">${c.initials}</div>`;
         hero.innerHTML = `
             <div class="cdetail-hero-inner" style="--ccolor: ${c.color}">
-                <div class="cdetail-avatar">${c.initials}</div>
+                ${avatarHtml}
                 <div>
                     <span class="cdetail-party">${c.party}</span>
                     <h1>${c.name}</h1>
