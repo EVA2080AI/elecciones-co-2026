@@ -413,58 +413,6 @@ body.dark .megamenu-foot {
 .nav-item:nth-last-child(2).has-mega:hover > .megamenu,
 .nav-item:nth-last-child(2).has-mega:focus-within > .megamenu { transform: translateX(0) translateY(0); }
 
-/* Responsive: stack en móvil */
-@media (max-width: 900px) {
-    .nav-item { width: 100%; display: block; }
-    .nav-item > a { width: 100%; }
-    .nav-caret { display: none; }
-    .megamenu {
-        position: static !important;
-        min-width: 0; width: 100%;
-        max-width: 100%;
-        opacity: 1; visibility: visible;
-        transform: none !important;
-        box-shadow: none; border: none;
-        background: transparent;
-        padding: 0;
-        border-radius: 0;
-        border-left: 2px solid rgba(255,255,255,0.08);
-        margin-left: 14px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.25s ease;
-    }
-    .megamenu::after { display: none; }
-    .nav-item.has-mega.expanded > .megamenu { max-height: 1200px; }
-    .megamenu-inner { padding: 12px 0 12px 14px; gap: 0; }
-    .megamenu-cols {
-        grid-template-columns: 1fr;
-        gap: 4px;
-    }
-    .megamenu-col {
-        padding: 12px 16px;
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .megamenu-col:last-child { border-bottom: none; }
-    .megamenu-col-link {
-        flex-direction: row;
-        align-items: center;
-        gap: 12px;
-    }
-    .megamenu-icon { width: 32px; height: 32px; }
-    .megamenu-icon svg { width: 20px; height: 20px; }
-    .megamenu-text { gap: 2px; }
-    .megamenu-title {
-        font-size: 14px;
-        color: rgba(255,255,255,0.9);
-    }
-    .megamenu-desc {
-        font-size: 12px;
-        color: rgba(255,255,255,0.5);
-    }
-    .megamenu-foot { display: none; }
-}
 
 /* HERO · fondo sobrio, una sola textura sutil */
 .hero {
@@ -917,7 +865,7 @@ body.dark .toast { color: #0f172a; background: #f1f5f9; }
 }
 .back-to-top:hover { background: var(--highlight); color: #fff; border-color: var(--highlight); }
 body.dark .back-to-top { background: rgba(30,41,59,0.9); color: #e2e8f0; }
-@media (max-width: 640px) {
+ @media (max-width: 767px) {
     .back-to-top { bottom: 86px; right: 18px; width: 40px; height: 40px; }
 }
 
@@ -1554,7 +1502,7 @@ body.dark .hero-visual-trio .face { border-color: #0f172a; }
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+ @media (max-width: 767px) {
     .page-hero { padding: 48px 20px 36px 20px; }
     .page-hero-inner { grid-template-columns: 1fr; gap: 32px; }
     .page-hero-visual { min-height: 0; order: 2; }

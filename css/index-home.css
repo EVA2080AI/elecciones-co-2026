@@ -274,34 +274,34 @@
 }
 
 /* Responsive para candidate visual grid */
-@media (max-width: 900px) {
+@media (max-width: 767px) {
     .candidates-visual-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    
+
     .candidate-photo-wrapper {
         padding-top: 60%; /* Más ancho en móvil */
     }
-}
 
-@media (max-width: 600px) {
-    .candidate-photo-wrapper {
-        padding-top: 75%;
-    }
-    
     .candidate-info {
         padding: 16px;
     }
-    
+
     .candidate-name {
         font-size: 18px;
     }
-    
+
     .candidate-stats-mini {
         flex-direction: column;
         gap: 6px;
         align-items: center;
+    }
+}
+
+@media (max-width: 379px) {
+    .candidate-photo-wrapper {
+        padding-top: 75%;
     }
 }
 
@@ -457,26 +457,26 @@ body.dark .main-slider-nav {
     background: var(--highlight);
 }
 
-@media (max-width: 900px) {
+ @media (max-width: 767px) {
     .slide-layout-alt {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 32px;
     }
-    
+
     .hero-eyebrow {
         justify-content: center;
     }
-    
+
     .hero-cta {
         justify-content: center;
     }
-    
+
     .slide-graphic {
         width: 200px;
         height: 200px;
     }
-    
+
     .slide-graphic svg {
         width: 100px;
         height: 100px;
