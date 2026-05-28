@@ -1,7 +1,5 @@
-import { NextResponse } from 'next/server';
-
 /**
- * Gemini API Proxy - Serverless Function para Vercel
+ * Gemini API Proxy - Vercel Serverless Function
  * Protege la API key de Gemini y agrega rate limiting
  * 
  * Environment variables requeridas:
@@ -9,10 +7,10 @@ import { NextResponse } from 'next/server';
  * - GEMINI_RATE_LIMIT: Peticiones por hora por IP (default: 100)
  */
 
-// Rate limiting simple en memoria (en producción usar Redis/Upstash)
-const requestCounts = new Map<string, number[]>();
+// Rate limiting simple en memoria
+const requestCounts = new Map();
 
-function checkRateLimit(ip: string, limit: number = 100): boolean {
+function checkRateLimit(ip, limit = 100) {
   const now = Date.now();
   const windowMs = 60 * 60 * 1000; // 1 hora
   
@@ -28,7 +26,19 @@ function checkRateLimit(ip: string, limit: number = 100): boolean {
   return true;
 }
 
-export async function POST(request: Request) {
+export const config = {
+  runtime: 'edge',
+};
+
+export default async function handler(request) {
+  // Solo permitir POST
+  if (request.method !== 'POST') {
+    return new Response(
+      JSON.stringify({ error: 'Método no permitido' }),
+      { status: 405, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+  
   const ip = request.headers.get('x-forwarded-for') || 
              request.headers.get('x-real-ip') || 
              'unknown';
@@ -36,9 +46,9 @@ export async function POST(request: Request) {
   // Verificar rate limiting
   const rateLimit = parseInt(process.env.GEMINI_RATE_LIMIT || '100');
   if (!checkRateLimit(ip, rateLimit)) {
-    return NextResponse.json(
-      { error: 'Rate limit excedido. Intenta en 1 hora.' },
-      { status: 429 }
+    return new Response(
+      JSON.stringify({ error: 'Rate limit excedido. Intenta en 1 hora.' }),
+      { status: 429, headers: { 'Content-Type': 'application/json' } }
     );
   }
   
@@ -47,17 +57,17 @@ export async function POST(request: Request) {
     const { prompt, system, temperature, topP, maxTokens } = body;
     
     if (!prompt) {
-      return NextResponse.json(
-        { error: 'El prompt es requerido' },
-        { status: 400 }
+      return new Response(
+        JSON.stringify({ error: 'El prompt es requerido' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
     
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      return NextResponse.json(
-        { error: 'API key no configurada en el servidor' },
-        { status: 500 }
+      return new Response(
+        JSON.stringify({ error: 'API key no configurada en el servidor' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
     
@@ -74,7 +84,7 @@ export async function POST(request: Request) {
     };
     
     if (system) {
-      (requestBody as any).systemInstruction = { parts: [{ text: system }] };
+      requestBody.systemInstruction = { parts: [{ text: system }] };
     }
     
     const response = await fetch(url, {
@@ -87,35 +97,32 @@ export async function POST(request: Request) {
       const errorText = await response.text().catch(() => 'Error desconocido');
       console.error(`Gemini API error: ${response.status} - ${errorText}`);
       
-      // No exponer detalles del error de Gemini al cliente
-      return NextResponse.json(
-        { error: 'Error al procesar la solicitud' },
-        { status: response.status === 429 ? 429 : 500 }
+      return new Response(
+        JSON.stringify({ error: 'Error al procesar la solicitud' }),
+        { status: response.status === 429 ? 429 : 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
     
     const data = await response.json();
-    const text = data?.candidates?.[0]?.content?.parts?.map((p: any) => p.text).filter(Boolean).join('\n').trim();
+    const text = data?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('\n').trim();
     
     if (!text) {
-      return NextResponse.json(
-        { error: 'Respuesta vacía de Gemini' },
-        { status: 500 }
+      return new Response(
+        JSON.stringify({ error: 'Respuesta vacía de Gemini' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
     
-    return NextResponse.json({ text }, { status: 200 });
+    return new Response(
+      JSON.stringify({ text }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
     
   } catch (error) {
     console.error('Error en proxy Gemini:', error);
-    return NextResponse.json(
-      { error: 'Error interno del servidor' },
-      { status: 500 }
+    return new Response(
+      JSON.stringify({ error: 'Error interno del servidor' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
 }
-
-// Config para Vercel Edge Runtime (opcional, más rápido)
-export const config = {
-  runtime: 'edge',
-};
