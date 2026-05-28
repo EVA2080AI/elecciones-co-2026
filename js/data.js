@@ -329,9 +329,6 @@ window.NEWS_SOURCES = [
       rss: 'https://www.semana.com/rss/politica/',
       proxy: 'rss2json' },
     /* Portales de noticias */
-    { id: 'publimetro', name: 'Publimetro · Colombia',
-      rss: 'https://www.publimetro.com.co/feed/',
-      proxy: 'rss2json' },
     { id: 'caracol-noticias', name: 'Caracol Noticias',
       rss: 'https://caracol.com.co/rss/programa/noticias_caracol',
       proxy: 'rss2json' },
