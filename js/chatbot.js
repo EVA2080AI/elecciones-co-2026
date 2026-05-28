@@ -193,12 +193,45 @@ function addMessage(role, text, source) {
     body.scrollTop = body.scrollHeight;
 }
 
-function handleChatQuery(query) {
+function addTypingIndicator() {
+    const body = document.getElementById('chatBody');
+    if (!body) return null;
+    const div = document.createElement('div');
+    div.className = 'chat-msg bot chat-typing';
+    div.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+    return div;
+}
+
+async function handleChatQuery(query) {
     if (!query || !query.trim()) return;
     addMessage('user', query);
+
+    /* Always retrieve local KB for context (incluso si usamos Gemini) */
     const results = searchKB(query);
+
+    /* Si Gemini está disponible, úsalo para una respuesta en lenguaje natural.
+       Caemos al KB rule-based si falla la API o no hay key. */
+    if (window.geminiChat && window.SECRETS?.GEMINI_API_KEY) {
+        const typing = addTypingIndicator();
+        try {
+            const text = await geminiChat(query, results);
+            typing?.remove();
+            const sources = results.length
+                ? [...new Set(results.map(r => r.source))].slice(0, 3).join(' · ')
+                : null;
+            addMessage('bot', text, sources);
+            return;
+        } catch (e) {
+            typing?.remove();
+            console.warn('Gemini fail, fallback a KB:', e.message);
+            /* fallthrough al KB local */
+        }
+    }
+
     const answer = buildAnswer(query, results);
-    setTimeout(() => addMessage('bot', answer.text, answer.source), 250);
+    setTimeout(() => addMessage('bot', answer.text, answer.source), 200);
 }
 
 function initChatbot() {

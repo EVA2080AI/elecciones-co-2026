@@ -16,6 +16,10 @@ build/
 .env.*.local
 *.log
 
+# Secrets locales (API keys, credenciales) — nunca commitear
+js/secrets.local.js
+js/secrets.*.local.js
+
 # Backup del HTML original (queda como referencia local pero no se commitea)
 # Comentar la línea siguiente si lo quieres incluir
 # dashboard_elecciones.html

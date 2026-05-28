@@ -8,6 +8,7 @@
     <meta name="description" content="Pulso de noticias en vivo sobre las Elecciones Presidenciales de Colombia 2026 desde El Tiempo, Semana, Noticias RCN, Caracol Radio, CNN en Español y Google News. Sentimiento, nube de palabras y filtros por candidato y medio.">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#003893">
+    <meta name="google-site-verification" content="JAsClEr0GB8K-33n_wmkLkP-TVci0RHSeBiCw-uOekg">
     <link rel="canonical" href="https://eleccionespresidenciales2026.com/noticias.html">
 
     <meta property="og:type" content="article">
@@ -77,6 +78,23 @@
             </ul>
         </div>
 
+        <div id="youtube" class="section">
+            <h2>
+                Videos en YouTube
+                <span class="section-hint" id="ytStatus">Cargando…</span>
+            </h2>
+            <p style="font-size:12.5px;color:var(--text-light);margin:-10px 0 14px 0;">
+                Videos recientes publicados por medios y creadores sobre el proceso electoral 2026. Ordenados por fecha.
+            </p>
+            <div class="news-filter" id="ytFilters" role="tablist" aria-label="Filtrar videos por candidato">
+                <button class="chip active" data-yt-filter="all">Todos</button>
+                <button class="chip" data-yt-filter="paloma">Paloma</button>
+                <button class="chip" data-yt-filter="cepeda">Cepeda</button>
+                <button class="chip" data-yt-filter="tigre">Espriella</button>
+            </div>
+            <div id="ytGrid" class="yt-grid" aria-live="polite"></div>
+        </div>
+
         <div id="mentions" class="section">
             <h2>
                 Menciones en el tiempo
@@ -138,12 +156,15 @@
 <div id="layout-foot"></div>
 <div id="layout-chat"></div>
 
+<script src="./js/secrets.local.js"></script>
 <script src="./js/data.js"></script>
 <script src="./js/utils.js"></script>
 <script src="./js/layout.js"></script>
 <script src="./js/render.js"></script>
 <script src="./js/charts.js"></script>
 <script src="./js/news.js"></script>
+<script src="./js/youtube.js"></script>
+<script src="./js/gemini.js"></script>
 <script src="./js/chatbot.js"></script>
 <script src="./js/main.js"></script>
 <script>
@@ -173,10 +194,14 @@ function renderCandidatesSocial() {
 }
 
 /* Initialize on page load */
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', renderCandidatesSocial);
-} else {
+function initNoticiasExtras() {
     renderCandidatesSocial();
+    if (window.renderYouTubeFeed) renderYouTubeFeed();
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNoticiasExtras);
+} else {
+    initNoticiasExtras();
 }
 </script>
 </body>

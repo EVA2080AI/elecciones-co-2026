@@ -1118,3 +1118,101 @@ body.dark .faq-intro {
     from { opacity: 0; transform: translateY(-4px); }
     to   { opacity: 1; transform: translateY(0); }
 }
+
+/* =========================================
+   YOUTUBE FEED · cards de video en noticias
+   ========================================= */
+.yt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 8px;
+}
+.yt-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.yt-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.10);
+    border-color: rgba(59,130,246,0.4);
+}
+.yt-thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: #0f172a;
+    overflow: hidden;
+}
+.yt-thumb img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .35s ease;
+}
+.yt-card:hover .yt-thumb img { transform: scale(1.04); }
+.yt-play {
+    position: absolute;
+    inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 50%);
+    pointer-events: none;
+}
+.yt-play svg {
+    background: rgba(220, 38, 38, 0.92);
+    border-radius: 999px;
+    padding: 10px 14px 10px 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+.yt-body {
+    padding: 12px 14px 14px 14px;
+    display: flex; flex-direction: column; gap: 6px;
+    flex: 1;
+}
+.yt-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0;
+    color: var(--text);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.yt-meta {
+    margin-top: auto;
+    font-size: 11.5px;
+    color: var(--text-light);
+    display: flex; align-items: center; gap: 6px;
+}
+.yt-channel { font-weight: 600; }
+.yt-dot { opacity: 0.5; }
+.yt-skel {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 0 0 14px 0;
+    overflow: hidden;
+}
+.yt-skel .skel-line { margin: 10px 14px; }
+.yt-skel .skel-line:first-child { margin: 0; border-radius: 0; }
+.yt-empty, .yt-error {
+    grid-column: 1 / -1;
+    padding: 24px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 13px;
+    border: 1px dashed var(--card-border);
+    border-radius: 12px;
+}
+.yt-error { color: var(--accent); }
+
+/* Filter buttons reuse .news-filter; ensure spacing */
+#ytFilters { margin-bottom: 14px; }

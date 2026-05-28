@@ -9,6 +9,7 @@
     <meta name="keywords" content="elecciones colombia 2026, presidenciales colombia, paloma valencia, ivan cepeda, abelardo de la espriella, candidatos presidenciales, voto informado">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta name="theme-color" content="#003893">
+    <meta name="google-site-verification" content="JAsClEr0GB8K-33n_wmkLkP-TVci0RHSeBiCw-uOekg">
     <link rel="canonical" href="https://eleccionespresidenciales2026.com/">
 
     <meta property="og:type" content="website">
@@ -182,12 +183,16 @@
             </div>
             <div class="ai-verdict-content">
                 <div class="ai-verdict-main">
-                    <div class="ai-verdict-text">
-                        <p><strong class="highlight">Panorama general:</strong> Las elecciones presidenciales de Colombia 2026 presentan un escenario altamente polarizado con tres propuestas diferenciadas. El análisis cuantitativo revela que <strong>Paloma Valencia</strong> mantiene ventaja en percepción de seguridad y gestión económica, mientras que <strong>Iván Cepeda</strong> lidera en propuestas sociales y ambientales. <strong>Abelardo de la Espriella</strong> emerge como fenómeno disruptivo con propuestas radicales que resuenan en segmentos específicos.</p>
-                        
-                        <p><strong class="highlight">Factores clave:</strong> La indecisión electoral persiste en ~35% del electorado. La seguridad (68%) y la economía (61%) son las principales preocupaciones. La polarización ideológica se mantiene alta pero con matices: el 52% busca opciones intermedias.</p>
-                        
-                        <p><strong class="highlight">Proyección IA:</strong> Según el análisis de encuestas, matriz de posiciones y sentimiento mediático, la elección podría definirse en segunda vuelta. La calculadora de afinidad muestra que el 43% de votantes tiene preferencias mixtas (no 100% alineadas con un solo candidato).</p>
+                    <div class="ai-verdict-text" id="aiVerdictText">
+                        <p><strong class="highlight">Panorama general:</strong> <span id="verdict-panorama">Las elecciones presidenciales de Colombia 2026 presentan un escenario altamente polarizado con tres propuestas diferenciadas. El análisis cuantitativo revela que <strong>Paloma Valencia</strong> mantiene ventaja en percepción de seguridad y gestión económica, mientras que <strong>Iván Cepeda</strong> lidera en propuestas sociales y ambientales. <strong>Abelardo de la Espriella</strong> emerge como fenómeno disruptivo con propuestas radicales que resuenan en segmentos específicos.</span></p>
+
+                        <p><strong class="highlight">Factores clave:</strong> <span id="verdict-factores">La indecisión electoral persiste en ~35% del electorado. La seguridad (68%) y la economía (61%) son las principales preocupaciones. La polarización ideológica se mantiene alta pero con matices: el 52% busca opciones intermedias.</span></p>
+
+                        <p><strong class="highlight">Proyección IA:</strong> <span id="verdict-proyeccion">Según el análisis de encuestas, matriz de posiciones y sentimiento mediático, la elección podría definirse en segunda vuelta. La calculadora de afinidad muestra que el 43% de votantes tiene preferencias mixtas (no 100% alineadas con un solo candidato).</span></p>
+                        <p class="verdict-meta" id="verdict-meta" style="font-size:11.5px;color:var(--text-light);margin-top:14px;display:none;">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="vertical-align:-2px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                            Verdicto recalculado por Gemini sobre el feed actual · <span id="verdict-time"></span>
+                        </p>
                     </div>
                 </div>
                 <div class="ai-verdict-stats">
@@ -368,6 +373,8 @@
 <script src="./js/charts.js"></script>
 <script src="./js/calculator.js"></script>
 <script src="./js/news.js"></script>
+<script src="./js/secrets.local.js"></script>
+<script src="./js/gemini.js"></script>
 <script src="./js/chatbot.js"></script>
 <script src="./js/main.js"></script>
 <script>
