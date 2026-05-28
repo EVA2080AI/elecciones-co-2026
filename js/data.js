@@ -288,6 +288,7 @@ window.PROJECT_FAQ = [
    - 'allorigins-raw': descarga RSS XML crudo y se parsea con DOMParser
      en el cliente (necesario para feeds que rss2json no acepta) */
 window.NEWS_SOURCES = [
+    /* El Tiempo */
     { id: 'et-elecciones', name: 'El Tiempo · Elecciones 2026',
       rss: 'https://www.eltiempo.com/rss/elecciones-2026.xml',
       proxy: 'rss2json' },
@@ -297,9 +298,18 @@ window.NEWS_SOURCES = [
     { id: 'et-colombia',   name: 'El Tiempo · Colombia',
       rss: 'https://www.eltiempo.com/rss/colombia.xml',
       proxy: 'rss2json' },
-    { id: 'et-opinion',    name: 'El Tiempo · Opinión',
-      rss: 'https://www.eltiempo.com/rss/opinion.xml',
+    /* Semana */
+    { id: 'semana-politica', name: 'Semana · Política',
+      rss: 'https://www.semana.com/rss/politica/',
       proxy: 'rss2json' },
+    /* Portales de noticias */
+    { id: 'publimetro', name: 'Publimetro · Colombia',
+      rss: 'https://www.publimetro.com.co/feed/',
+      proxy: 'rss2json' },
+    { id: 'caracol-noticias', name: 'Caracol Noticias',
+      rss: 'https://caracol.com.co/rss/programa/noticias_caracol',
+      proxy: 'rss2json' },
+    /* Google News */
     { id: 'gnews-elec',    name: 'Google News · Elecciones',
       rss: 'https://news.google.com/rss/search?q=elecciones+presidenciales+colombia+2026&hl=es-419&gl=CO&ceid=CO:es-419',
       proxy: 'allorigins-raw' },
@@ -307,6 +317,28 @@ window.NEWS_SOURCES = [
       rss: 'https://news.google.com/rss/search?q=%22Paloma+Valencia%22+OR+%22Iv%C3%A1n+Cepeda%22+OR+%22Espriella%22&hl=es-419&gl=CO&ceid=CO:es-419',
       proxy: 'allorigins-raw' }
 ];
+
+/* Redes sociales oficiales de candidatos */
+window.CANDIDATES_SOCIAL = {
+    paloma: {
+        twitter: 'https://twitter.com/PalomaValencia',
+        instagram: 'https://instagram.com/palomavalencia',
+        tiktok: 'https://tiktok.com/@palomavalencia',
+        facebook: 'https://facebook.com/PalomaValenciaOficial'
+    },
+    cepeda: {
+        twitter: 'https://twitter.com/ivancepeda',
+        instagram: 'https://instagram.com/ivancepeda',
+        tiktok: 'https://tiktok.com/@ivancepeda',
+        facebook: 'https://facebook.com/IvanCepeda'
+    },
+    tigre: {
+        twitter: 'https://twitter.com/AbelardoEspriell',
+        instagram: 'https://instagram.com/abelardodelaespriella',
+        tiktok: 'https://tiktok.com/@eltigreespriella',
+        facebook: 'https://facebook.com/AbelardoDeLaEspriella'
+    }
+};
 
 /* Derived calculations (shared) */
 window.computeIdoneidad = function () {

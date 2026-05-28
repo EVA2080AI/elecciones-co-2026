@@ -57,23 +57,28 @@ function initTheme() {
 }
 
 function injectStructuredData() {
-    const data = {
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        name: 'Elecciones Presidenciales Colombia 2026',
-        url: location.href,
-        description: 'Sitio informativo imparcial con análisis cuantitativo, calculadora de afinidad y pulso de noticias en vivo sobre las Elecciones Presidenciales de Colombia 2026.',
-        inLanguage: 'es-CO'
-    };
-    const event = {
+    const isHome = document.body.dataset.page === 'inicio';
+    const schemas = [];
+    if (isHome) {
+        /* WebSite schema only on home — duplicates across pages confuse SE. */
+        schemas.push({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'Elecciones Presidenciales Colombia 2026',
+            url: 'https://eleccionespresidenciales2026.com/',
+            description: 'Sitio informativo imparcial con análisis cuantitativo, calculadora de afinidad y pulso de noticias en vivo sobre las Elecciones Presidenciales de Colombia 2026.',
+            inLanguage: 'es-CO'
+        });
+    }
+    schemas.push({
         '@context': 'https://schema.org',
         '@type': 'Event',
         name: 'Elecciones Presidenciales de Colombia 2026',
         startDate: '2026-05-31',
         eventStatus: 'https://schema.org/EventScheduled',
         location: { '@type': 'Country', name: 'Colombia' }
-    };
-    [data, event].forEach(d => {
+    });
+    schemas.forEach(d => {
         const s = document.createElement('script');
         s.type = 'application/ld+json';
         s.textContent = JSON.stringify(d);
