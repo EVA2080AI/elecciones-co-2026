@@ -169,19 +169,13 @@ function renderNavbar() {
     root.innerHTML = `
     <nav class="navbar" aria-label="Navegación principal">
         <a class="brand" href="${prefix}index.html" aria-label="Inicio Elecciones Presidenciales Colombia 2026">
-            <svg viewBox="0 0 220 56" aria-hidden="true">
-                <defs>
-                    <clipPath id="navflag"><circle cx="20" cy="28" r="16"/></clipPath>
-                </defs>
-                <g clip-path="url(#navflag)">
-                    <rect x="4" y="12" width="32" height="16" fill="#fcd116"/>
-                    <rect x="4" y="28" width="32" height="8"  fill="#003893"/>
-                    <rect x="4" y="36" width="32" height="8"  fill="#ce1126"/>
-                </g>
-                <circle cx="20" cy="28" r="16" fill="none" stroke="rgba(255,255,255,0.4)"/>
-                <text x="44" y="25" font-family="Outfit, sans-serif" font-weight="800" font-size="13" fill="#fff">ELECCIONES</text>
-                <text x="44" y="40" font-family="Outfit, sans-serif" font-weight="600" font-size="11" fill="#cbd5e1">Presidenciales · 2026</text>
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+                <circle cx="16" cy="16" r="15" fill="#0f172a" stroke="#0f172a" stroke-width="2"/>
+                <path d="M8 14h16v4H8z" fill="#fcd116"/>
+                <path d="M8 18h16v3H8z" fill="#003893"/>
+                <path d="M8 21h16v3H8z" fill="#ce1126"/>
             </svg>
+            <span class="brand-text">Elecciones 2026</span>
         </a>
         <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
             <span></span><span></span><span></span>
