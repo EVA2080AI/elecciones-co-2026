@@ -14,10 +14,8 @@ window.CANDIDATES = {
         ideology: 'Derecha institucional',
         slogan: '"Orden, firmeza y corazón"',
         baseSolidez: 75,
-        /* photo: ruta a foto del candidato. Si no existe, se usa el avatar
-           con iniciales como fallback automático. Para reemplazar con foto
-           real, sube la imagen a /assets/ y cambia esta ruta. */
-        photo: './assets/candidato-paloma.svg',
+        /* Foto real desde internet (fallback a SVG si falla) */
+        photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Paloma_Valencia_2020.jpg/440px-Paloma_Valencia_2020.jpg',
         proposals: [
             'Seguridad total e inversión privada',
             'Reactivación de hidrocarburos',
@@ -36,7 +34,7 @@ window.CANDIDATES = {
         ideology: 'Izquierda progresista',
         slogan: '"El poder de la verdad"',
         baseSolidez: 78,
-        photo: './assets/candidato-cepeda.svg',
+        photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Iv%C3%A1n_Cepeda_2018.jpg/440px-Iv%C3%A1n_Cepeda_2018.jpg',
         proposals: [
             'Continuidad de reformas sociales',
             'Austeridad republicana y transición energética',
@@ -55,7 +53,7 @@ window.CANDIDATES = {
         ideology: 'Derecha radical',
         slogan: '"13 milagros para salvar a Colombia"',
         baseSolidez: 72,
-        photo: './assets/candidato-tigre.svg',
+        photo: 'https://www.abelardodelaespriella.com/wp-content/uploads/2023/08/abelardo-de-la-espriella-foto-perfil.jpg',
         proposals: [
             '10 megacárceles y seguridad implacable',
             'Reducción del Estado en 40%',
@@ -74,76 +72,82 @@ window.candidatePhoto = function (c) {
     return inSubdir ? c.photo.replace('./assets/', '../assets/') : c.photo;
 };
 
+/* PUNTAJES TÉCNICOS NEUTRALES · Metodología actualizada
+   Cada puntaje 0-10 refleja qué tan ESPECÍFICA Y DIRECTAMENTE la propuesta
+   del candidato aborda esa inquietud, NO si es "buena" o "mala".
+   Escala: 0=nada específico, 5=propuesta genérica, 10=plan detallado con métricas
+   Todos los candidatos parten de base 5 (propuesta promedio).
+   Ajustes: +2 si tiene plan escrito público, +1 si tiene métricas, -1 si es solo discurso */
 window.PROBLEMS = [
     { id: 1, short: 'Indecisión', label: 'Indecisión por puntos en común y diferencias radicales',
-      scores: { paloma: 7, cepeda: 7, tigre: 6 },
+      scores: { paloma: 6, cepeda: 6, tigre: 7 },
       positions: {
-        paloma: 'Promueve "seguridad total", inversión privada y reducción del Estado.',
-        cepeda: 'Promueve continuidad de reformas sociales y Estado estratégico.',
-        tigre:  'Propone seguridad implacable (megacárceles) y reducción del Estado en 40%.'
+        paloma: 'Propone "seguridad total" con inversión privada. Plan económico detallado.',
+        cepeda: 'Continuidad de reformas sociales con Estado estratégico. Propuestas en desarrollo.',
+        tigre:  'Seguridad implacable (10 megacárceles) + reducción Estado 40%. Plan numérico específico.'
       } },
     { id: 2, short: 'Ideales', label: 'Similitud de ideales políticos · Diferenciación',
-      scores: { paloma: 7, cepeda: 7, tigre: 8 },
-      positions: {
-        paloma: 'Derecha institucional: economía fraterna y reactivación de hidrocarburos.',
-        cepeda: 'Izquierda progresista: "austeridad republicana" y fortalecimiento público.',
-        tigre:  'Derecha radical: flexibilización laboral total y gestión 100% técnica.'
-      } },
-    { id: 3, short: 'Polarización', label: 'Polarización creada alrededor de los candidatos',
-      scores: { paloma: 6, cepeda: 8, tigre: 3 },
-      positions: {
-        paloma: 'Oposición institucional firme contra el gobierno actual.',
-        cepeda: 'Llama a "acuerdo nacional" bajo parámetros progresistas.',
-        tigre:  'Discurso frontal y vehemente contra la ideología progresista.'
-      } },
-    { id: 4, short: 'Desinformación', label: 'Desinformación logística y bases de datos',
       scores: { paloma: 7, cepeda: 6, tigre: 8 },
       positions: {
-        paloma: 'Modernización tecnológica del Estado.',
-        cepeda: 'Veedurías populares en todos los procesos.',
-        tigre:  'Uso de Blockchain e IA para el control estatal.'
+        paloma: 'Derecha institucional: economía fraterna, hidrocarburos, bonos escolares. Programa publicado.',
+        cepeda: 'Izquierda progresista: austeridad republicana, fortalecimiento público. En construcción.',
+        tigre:  'Derecha radical: reducción Estado 40%, flexibilización laboral, blockchain/IA. 13 "milagros" documentados.'
+      } },
+    { id: 3, short: 'Polarización', label: 'Polarización creada alrededor de los candidatos',
+      scores: { paloma: 6, cepeda: 6, tigre: 5 },
+      positions: {
+        paloma: 'Oposición institucional. Discurso moderado pero firme.',
+        cepeda: 'Llama a "acuerdo nacional" pero mantiene línea progresista.',
+        tigre:  'Discurso confrontacional. Rechaza ambos polos tradicionales.'
+      } },
+    { id: 4, short: 'Desinformación', label: 'Desinformación logística y bases de datos',
+      scores: { paloma: 6, cepeda: 5, tigre: 7 },
+      positions: {
+        paloma: 'Modernización tecnológica del Estado. Sin detalles técnicos públicos.',
+        cepeda: 'Veedurías populares. Enfoque en participación ciudadana.',
+        tigre:  'Blockchain + IA para control estatal. Propuesta técnica específica con tecnología nombrada.'
       } },
     { id: 5, short: 'Abstención', label: 'Problema de abstención electoral',
-      scores: { paloma: 6, cepeda: 8, tigre: 7 },
+      scores: { paloma: 6, cepeda: 7, tigre: 6 },
       positions: {
-        paloma: 'Apela al voto conservador frente al "riesgo populista".',
-        cepeda: 'Movilización masiva en calles y bases sociales.',
-        tigre:  'Promete meritocracia y llama a los "sisis" (sí estudian, sí trabajan).'
+        paloma: 'Apela al voto conservador tradicional. Estrategia convencional.',
+        cepeda: 'Movilización masiva en calles y bases sociales. Historial de movilización.',
+        tigre:  'Llama a los "sisis" (sí estudian, sí trabajan). Segmento específico no tradicional.'
       } },
     { id: 6, short: 'Encuestas', label: 'Falta de encuestas reales',
-      scores: { paloma: 5, cepeda: 6, tigre: 5 },
+      scores: { paloma: 5, cepeda: 5, tigre: 5 },
       positions: {
-        paloma: 'Confía en consultas interpartidistas y su partido.',
-        cepeda: 'Basa su éxito en el respaldo orgánico.',
-        tigre:  'Minimiza las encuestas, apela a redes sociales.'
+        paloma: 'Confía en consultas interpartidistas. Sin encuestas propias públicas.',
+        cepeda: 'Basa éxito en respaldo orgánico. Sin encuestas propias públicas.',
+        tigre:  'Minimiza encuestas, apela a redes. Sin encuestas propias públicas.'
       } },
     { id: 7, short: 'Debate', label: 'Falta de debate público',
-      scores: { paloma: 7, cepeda: 9, tigre: 8 },
+      scores: { paloma: 6, cepeda: 7, tigre: 8 },
       positions: {
-        paloma: 'Discusión técnica en el legislativo.',
-        cepeda: 'Debate en plaza pública defendiendo políticas.',
-        tigre:  'Exige debates frontales y directos.'
+        paloma: 'Discusión técnica en legislativo. Participación institucional.',
+        cepeda: 'Debate en plaza pública. Historial de debates.',
+        tigre:  'Exige debates frontales directamente. Activamente los solicita.'
       } },
     { id: 8, short: 'Respeto', label: 'Ataques personales y falta de respeto',
-      scores: { paloma: 7, cepeda: 10, tigre: 3 },
+      scores: { paloma: 6, cepeda: 7, tigre: 4 },
       positions: {
-        paloma: 'Crítica centrada en el modelo económico institucional.',
-        cepeda: 'Compromiso con un debate pacífico de ideas.',
-        tigre:  'Discurso duro y lenguaje bélico ("seguridad implacable").'
+        paloma: 'Crítica centrada en modelo económico. Tono institucional.',
+        cepeda: 'Compromiso con debate pacífico de ideas. Tono moderado.',
+        tigre:  'Discurso duro, lenguaje bélico. Menos enfocado en formas.'
       } },
     { id: 9, short: 'Oposición', label: 'Ataques en frentes de oposición',
-      scores: { paloma: 8, cepeda: 6, tigre: 6 },
+      scores: { paloma: 7, cepeda: 6, tigre: 7 },
       positions: {
-        paloma: 'Lidera la oposición formal al actual gobierno.',
-        cepeda: 'Defensa de los avances del Pacto Histórico.',
-        tigre:  'Promete choque institucional para erradicar corrientes tradicionales.'
+        paloma: 'Lidera oposición formal al gobierno. Rol institucional definido.',
+        cepeda: 'Defensa de avances del Pacto Histórico. Posición de gobierno.',
+        tigre:  'Promete choque institucional. Oposición a todo el establishment.'
       } },
     { id: 10, short: 'Corrupción', label: 'Votos falsos, garantías y corrupción',
-      scores: { paloma: 7, cepeda: 8, tigre: 6 },
+      scores: { paloma: 6, cepeda: 7, tigre: 7 },
       positions: {
-        paloma: 'Aplicación estricta de la ley.',
-        cepeda: 'Sistema Nacional contra la Macrocorrupción.',
-        tigre:  'Bloque de búsqueda presidencial contra políticos corruptos.'
+        paloma: 'Aplicación estricta de la ley. Enfoque legal tradicional.',
+        cepeda: 'Sistema Nacional contra Macrocorrupción. Propuesta estructural específica.',
+        tigre:  'Bloque de búsqueda contra corruptos. Propuesta operativa concreta.'
       } }
 ];
 

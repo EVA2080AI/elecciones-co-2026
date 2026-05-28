@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="./css/components.css">
     <link rel="stylesheet" href="./css/sections.css">
     <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="./css/visual-enhancements.css">
 
     <!-- Chart.js no se necesita en home (sin <canvas>). Lo cargan analisis/noticias/dashboard. -->
 </head>
@@ -373,48 +374,9 @@
 <script src="./js/charts.js"></script>
 <script src="./js/calculator.js"></script>
 <script src="./js/news.js"></script>
-<script src="./js/secrets.local.js"></script>
-<script src="./js/gemini.js"></script>
 <script src="./js/chatbot.js"></script>
 <script src="./js/main.js"></script>
 <script>
-const AI_VERDICT_CACHE_KEY = 'ai_verdict_cache'; // Placeholder - actual key in secrets.local.js
-const AI_VERDICT_TTL_MS = 30 * 60 * 1000; // 30 min — el verdicto no necesita refresco minuto a minuto
-
-function applyVerdict(v) {
-    if (!v) return;
-    const $ = id => document.getElementById(id);
-    if (v.panorama)   $('verdict-panorama').textContent = v.panorama;
-    if (v.factores)   $('verdict-factores').textContent = v.factores;
-    if (v.proyeccion) $('verdict-proyeccion').textContent = v.proyeccion;
-    $('verdict-meta').style.display = 'block';
-    $('verdict-time').textContent = new Date(v._t || Date.now()).toLocaleTimeString('es-CO', { hour:'2-digit', minute:'2-digit' });
-}
-
-async function refreshAiVerdict() {
-    /* Cache */
-    try {
-        const raw = sessionStorage.getItem(AI_VERDICT_CACHE_KEY);
-        if (raw) {
-            const obj = JSON.parse(raw);
-            if (Date.now() - obj._t < AI_VERDICT_TTL_MS) { applyVerdict(obj); return; }
-        }
-    } catch {}
-    if (!window.geminiVerdict || !window.SECRETS?.GEMINI_API_KEY) return;
-    if (!window.state || !state.newsItems?.length) return;
-    try {
-        const v = await geminiVerdict(state.newsItems, {
-            idoneidad: window.IDONEIDAD?.pct || {}
-        });
-        v._t = Date.now();
-        sessionStorage.setItem(AI_VERDICT_CACHE_KEY, JSON.stringify(v));
-        applyVerdict(v);
-    } catch (e) {
-        console.warn('Gemini verdict fail:', e.message);
-        /* fallback se queda con el copy hard-coded — no roto */
-    }
-}
-
 window.pageInit = function () {
     /* Solo mostrar 5 noticias en home y limitar altura */
     const orig = window.renderNews;
@@ -422,11 +384,7 @@ window.pageInit = function () {
         orig();
         const list = document.getElementById('timelineList');
         if (list) Array.from(list.children).slice(5).forEach(li => li.remove());
-        /* Cuando ya hay noticias, recalcula el verdicto IA */
-        refreshAiVerdict();
     };
-    /* Si el cache es válido, aplícalo de inmediato (sin esperar al feed) */
-    refreshAiVerdict();
 };
 </script>
 </body>

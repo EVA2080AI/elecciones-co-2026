@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Calculadora de Afinidad · Elecciones Presidenciales Colombia 2026</title>
-    <meta name="description" content="Ajusta la importancia de cada inquietud ciudadana y obtén tu afinidad técnica personal con cada candidato a la presidencia 2026. Cálculo local, sin enviar datos.">
+    <meta name="description" content="Calculadora electoral simple y visual. Responde 10 preguntas clave y descubre qué candidato se alinea con tus prioridades.">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#003893">
-    <meta name="google-site-verification" content="JAsClEr0GB8K-33n_wmkLkP-TVci0RHSeBiCw-uOekg">
     <link rel="canonical" href="https://eleccionespresidenciales2026.com/calculadora.html">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Calculadora de Afinidad · Colombia 2026">
-    <meta property="og:description" content="Calcula qué candidato se alinea más con tus prioridades personales.">
+    <meta property="og:description" content="Descubre qué candidato se alinea con tus prioridades en 2 minutos.">
     <meta property="og:image" content="https://eleccionespresidenciales2026.com/assets/og-image.svg">
 
     <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
@@ -26,6 +25,409 @@
     <link rel="stylesheet" href="./css/components.css">
     <link rel="stylesheet" href="./css/sections.css">
     <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="./css/visual-enhancements.css">
+
+    <style>
+    /* CALCULADORA MEJORADA · UI 2026 */
+    .calc-v2-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px 5%;
+    }
+
+    .calc-intro {
+        background: linear-gradient(135deg, rgba(0,56,147,0.08) 0%, rgba(59,130,246,0.08) 100%);
+        border: 1px solid rgba(0,56,147,0.15);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 28px;
+        text-align: center;
+    }
+
+    .calc-intro h2 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--primary);
+        margin: 0 0 12px 0;
+    }
+
+    .calc-intro p {
+        font-size: 15px;
+        color: var(--text-light);
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    .calc-progress {
+        background: var(--bar-bg);
+        border-radius: 12px;
+        height: 8px;
+        margin: 24px 0;
+        overflow: hidden;
+    }
+
+    .calc-progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--co-yellow), var(--co-blue), var(--co-red));
+        width: 0%;
+        transition: width 0.4s ease;
+    }
+
+    .calc-progress-text {
+        font-size: 12px;
+        color: var(--text-light);
+        text-align: right;
+        margin-top: 6px;
+        font-weight: 600;
+    }
+
+    .question-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .question-card.active {
+        border-color: var(--highlight);
+        box-shadow: 0 8px 24px rgba(59,130,246,0.15);
+    }
+
+    .question-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+
+    .question-number {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--highlight), var(--co-blue));
+        color: #fff;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+    }
+
+    .question-title {
+        flex: 1;
+    }
+
+    .question-title h3 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--primary);
+        margin: 0 0 6px 0;
+        line-height: 1.3;
+    }
+
+    .question-title p {
+        font-size: 13.5px;
+        color: var(--text-light);
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    .slider-v2 {
+        position: relative;
+        margin: 24px 0 16px 0;
+    }
+
+    .slider-v2 input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 8px;
+        border-radius: 4px;
+        background: linear-gradient(to right,
+            #e2e8f0 0%,
+            #fef3c7 25%,
+            #fde68a 50%,
+            #f59e0b 75%,
+            #ef4444 100%);
+        outline: none;
+        cursor: pointer;
+    }
+
+    .slider-v2 input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #fff;
+        border: 4px solid var(--highlight);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        cursor: pointer;
+        transition: transform 0.15s ease;
+    }
+
+    .slider-v2 input[type="range"]::-webkit-slider-thumb:hover {
+        transform: scale(1.1);
+    }
+
+    .slider-v2 input[type="range"]::-moz-range-thumb {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #fff;
+        border: 4px solid var(--highlight);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        cursor: pointer;
+    }
+
+    .slider-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 12px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .slider-value-display {
+        text-align: center;
+        margin-top: 16px;
+    }
+
+    .slider-value-number {
+        font-family: 'Outfit', sans-serif;
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--highlight);
+        line-height: 1;
+    }
+
+    .slider-value-label {
+        font-size: 13px;
+        color: var(--text-light);
+        margin-top: 4px;
+        font-weight: 600;
+    }
+
+    .results-section {
+        background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(168,85,247,0.06) 100%);
+        border: 1px solid rgba(59,130,246,0.15);
+        border-radius: 20px;
+        padding: 32px;
+        margin-top: 40px;
+        display: none;
+    }
+
+    .results-section.visible {
+        display: block;
+        animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .results-header {
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    .results-header h3 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--primary);
+        margin: 0 0 8px 0;
+    }
+
+    .results-header p {
+        font-size: 14px;
+        color: var(--text-light);
+        margin: 0;
+    }
+
+    .result-candidate-card {
+        background: var(--card-bg);
+        border: 2px solid transparent;
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 16px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .result-candidate-card.winner {
+        border-color: var(--success);
+        background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, var(--card-bg) 100%);
+    }
+
+    .result-candidate-card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 6px;
+        height: 100%;
+        background: var(--ccolor);
+    }
+
+    .result-candidate-card.winner::after {
+        content: '✓ MAYOR AFINIDAD';
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: var(--success);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 800;
+        padding: 4px 10px;
+        border-radius: 12px;
+        letter-spacing: 0.5px;
+    }
+
+    .result-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 16px;
+    }
+
+    .result-avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: var(--ccolor);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        color: #fff;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+
+    .result-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .result-name {
+        flex: 1;
+    }
+
+    .result-name h4 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--primary);
+        margin: 0 0 4px 0;
+    }
+
+    .result-name p {
+        font-size: 12px;
+        color: var(--text-light);
+        margin: 0;
+    }
+
+    .result-percentage {
+        font-family: 'Outfit', sans-serif;
+        font-size: 36px;
+        font-weight: 800;
+        color: var(--ccolor);
+        line-height: 1;
+    }
+
+    .result-bar-container {
+        background: var(--bar-bg);
+        border-radius: 10px;
+        height: 12px;
+        overflow: hidden;
+        margin-top: 12px;
+    }
+
+    .result-bar-fill {
+        height: 100%;
+        background: var(--ccolor);
+        width: 0%;
+        transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .calc-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
+        flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+        background: transparent;
+        border: 2px solid var(--divider);
+        color: var(--text);
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-secondary:hover {
+        border-color: var(--highlight);
+        background: var(--bar-bg);
+    }
+
+    .empty-state-v2 {
+        text-align: center;
+        padding: 40px 20px;
+        background: var(--bar-bg);
+        border-radius: 16px;
+        margin: 20px 0;
+    }
+
+    .empty-state-v2 svg {
+        color: var(--highlight);
+        margin-bottom: 16px;
+    }
+
+    .empty-state-v2 h4 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--primary);
+        margin: 0 0 8px 0;
+    }
+
+    .empty-state-v2 p {
+        font-size: 14px;
+        color: var(--text-light);
+        margin: 0;
+        line-height: 1.6;
+    }
+    </style>
 </head>
 
 <body data-page="calculadora">
@@ -38,139 +440,76 @@
         <nav class="breadcrumb" aria-label="Ruta">
             <a href="./index.html">Inicio</a>
             <span class="sep">/</span>
-            <span class="current">Calculadora de Afinidad</span>
+            <span class="current">Calculadora</span>
         </nav>
-        <h1>Calculadora de Afinidad Personal</h1>
+        <h1>Calculadora Electoral</h1>
         <p class="lead">
-            Asigna la importancia que <strong>tú</strong> le das a cada una de las 10 inquietudes ciudadanas. La calculadora multiplica tu prioridad personal por el puntaje técnico de cada candidato en esa inquietud, y muestra tu afinidad calculada.
+            Responde 10 preguntas sobre tus prioridades y descubre qué candidato se alinea con tu visión para Colombia.
         </p>
     </div>
 </section>
 
 <div id="layout-disclaimer"></div>
 
-<main id="main" style="max-width:1400px;margin:0 auto;padding:30px 5% 0 5%;">
+<main id="main">
 
-    <!-- INSTRUCCIONES Y ESCALA -->
-    <div class="callout info">
-        <div class="callout-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></svg>
+    <div class="calc-v2-container">
+
+        <!-- INTRO -->
+        <div class="calc-intro">
+            <h2>🗳️ Tu Voto, Tu Decisión</h2>
+            <p>Mueve los sliders según qué tan importante es cada tema <strong>para ti</strong>. Al final verás tu afinidad con cada candidato.</p>
         </div>
-        <div>
-            <strong>Cómo usar la calculadora</strong>
-            <ol style="margin:8px 0 0 18px;padding:0;font-size:13.5px;line-height:1.6;">
-                <li>Mira la lista de 10 inquietudes ciudadanas.</li>
-                <li>Mueve cada slider según qué tan importante es <em>para ti</em>.</li>
-                <li>El resultado se actualiza automáticamente.</li>
-            </ol>
+
+        <!-- PROGRESS BAR -->
+        <div class="calc-progress">
+            <div class="calc-progress-bar" id="progressBar"></div>
+            <div class="calc-progress-text" id="progressText">0 de 10 completadas</div>
         </div>
-    </div>
 
-    <!-- ESCALA VISUAL -->
-    <div class="scale-legend" aria-hidden="true">
-        <div class="scale-label">Escala de prioridad:</div>
-        <div class="scale-track">
-            <span class="scale-stop"><strong>1</strong><small>Menos<br>importante</small></span>
-            <span class="scale-stop"><strong>3</strong><small>Poco<br>relevante</small></span>
-            <span class="scale-stop"><strong>5</strong><small>Importante</small></span>
-            <span class="scale-stop"><strong>7</strong><small>Muy<br>importante</small></span>
-            <span class="scale-stop"><strong>10</strong><small>Más<br>importante</small></span>
+        <!-- QUESTIONS -->
+        <div id="questionsContainer"></div>
+
+        <!-- EMPTY STATE -->
+        <div class="empty-state-v2" id="emptyState">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <h4>Comienza a responder</h4>
+            <p>Mueve al menos un slider para ver tus resultados en tiempo real.</p>
         </div>
-    </div>
 
-    <div id="calc" class="section">
-        <h2>
-            Pondera tus prioridades
-            <span class="section-hint">Los sliders inician en <strong>5</strong> (importante). Ajusta los que más te interesen.</span>
-        </h2>
-
-        <details class="nlp-calc" id="nlpDetails">
-            <summary>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
-                <strong>¿Prefieres describir lo que te importa en tus propias palabras?</strong>
-                <span style="font-size:12.5px;color:var(--text-light);">La IA ajusta los sliders por ti.</span>
-            </summary>
-            <div class="nlp-body">
-                <p style="font-size:13px;color:var(--text-light);margin:6px 0 10px 0;">
-                    Escribe en una o dos frases qué buscas en un presidente. Ejemplo: <em>"Me importa la seguridad, la educación pública y que no haya corrupción. La economía me interesa menos."</em>
-                </p>
-                <textarea id="nlpInput" rows="3" placeholder="Describe en tus palabras qué te importa…" aria-label="Describe tus prioridades en lenguaje natural" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--card-border);background:var(--bar-bg);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;resize:vertical;"></textarea>
-                <div style="display:flex;gap:10px;margin-top:10px;align-items:center;flex-wrap:wrap;">
-                    <button type="button" id="nlpApply" class="btn-primary">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        Ajustar sliders con IA
-                    </button>
-                    <span id="nlpStatus" style="font-size:12.5px;color:var(--text-light);"></span>
-                </div>
+        <!-- RESULTS -->
+        <div class="results-section" id="resultsSection">
+            <div class="results-header">
+                <h3>Tus Resultados</h3>
+                <p>Basado en tus prioridades, esta es tu afinidad con cada candidato</p>
             </div>
-        </details>
 
-        <div class="calc-grid">
-            <div class="sliders" id="slidersContainer"></div>
-            <div class="calc-results" id="calcResults">
-                <h3>Tu afinidad calculada</h3>
+            <div id="resultsContainer"></div>
 
-                <!-- Estado vacío: aparece cuando todos los sliders están en 0 -->
-                <div class="calc-empty" id="calcEmpty">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    <p><strong>Mueve al menos un slider para empezar.</strong></p>
-                    <p style="font-size:12.5px;">Asigna prioridad <strong>1 (menos importante)</strong> a <strong>10 (más importante)</strong> a las inquietudes que más te importen. La calculadora cruzará tus prioridades con las propuestas oficiales de cada candidato.</p>
-                </div>
-
-                <div class="result-bar"><div class="result-fill" style="background: var(--c-paloma);" id="fill-paloma"></div>
-                    <div class="result-row">
-                        <span class="result-name">Paloma Valencia<span class="winner-tag" id="tag-paloma" style="display:none">MAYOR AFINIDAD</span></span>
-                        <span class="result-pct" id="pct-paloma">—</span>
-                    </div>
-                </div>
-                <div class="result-bar"><div class="result-fill" style="background: var(--c-cepeda);" id="fill-cepeda"></div>
-                    <div class="result-row">
-                        <span class="result-name">Iván Cepeda<span class="winner-tag" id="tag-cepeda" style="display:none">MAYOR AFINIDAD</span></span>
-                        <span class="result-pct" id="pct-cepeda">—</span>
-                    </div>
-                </div>
-                <div class="result-bar"><div class="result-fill" style="background: var(--c-tigre);" id="fill-tigre"></div>
-                    <div class="result-row">
-                        <span class="result-name">A. de la Espriella<span class="winner-tag" id="tag-tigre" style="display:none">MAYOR AFINIDAD</span></span>
-                        <span class="result-pct" id="pct-tigre">—</span>
-                    </div>
-                </div>
-
-                <div class="calc-methodology">
-                    <details>
-                        <summary>¿Cómo se calcula?</summary>
-                        <p>Para cada inquietud, cada candidato obtiene una <strong>fracción</strong> de los puntos disponibles (según qué tan directa es su propuesta). La calculadora multiplica esa fracción por <strong>tu prioridad personal</strong> y suma todo.</p>
-                        <p style="font-size:12.5px;color:var(--text-light);">Esto significa que <strong>tú</strong> defines qué pesa, no la matriz. Si nunca priorizas una inquietud, no afecta el resultado.</p>
-                    </details>
-                </div>
-
-                <div class="calc-actions">
-                    <button class="reset-btn" id="resetSliders">Reiniciar</button>
-                    <button class="share-btn" id="shareResults">Compartir resultado</button>
-                </div>
+            <div class="calc-actions">
+                <button class="btn-secondary" onclick="window.resetCalculator()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                    Reiniciar
+                </button>
+                <button class="btn-secondary" onclick="window.shareResults()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                    Compartir
+                </button>
             </div>
         </div>
-    </div>
 
-    <div class="callout warn" style="margin-top:30px;">
-        <div class="callout-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r=".5" fill="currentColor"/></svg>
-        </div>
-        <div>
-            <strong>Recuerda:</strong> esta es una <em>afinidad técnica</em> con la matriz de propuestas. NO es una predicción ni una recomendación de voto. Antes de votar, lee los planes de gobierno oficiales y consulta múltiples fuentes.
-        </div>
     </div>
 
 </main>
 
 <div class="cta-band">
     <div class="cta-text">
-        <h3>¿Quieres entender por qué te dio ese resultado?</h3>
-        <p>Ve la matriz completa con las posturas oficiales de cada candidato sobre cada inquietud, y descubre dónde difieren.</p>
+        <h3>¿Quieres entender el porqué?</h3>
+        <p>Revisa la matriz completa con las posturas de cada candidato en las 10 inquietudes.</p>
     </div>
     <a class="btn-primary" href="./analisis.html#matriz">
         Ver matriz completa
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
 </div>
 
@@ -182,87 +521,226 @@
 <script src="./js/utils.js"></script>
 <script src="./js/layout.js"></script>
 <script src="./js/render.js"></script>
-<script src="./js/calculator.js"></script>
 <script src="./js/gemini.js"></script>
 <script src="./js/chatbot.js"></script>
 <script src="./js/main.js"></script>
 <script>
-async function applyNLPWeights() {
-    const inputEl = document.getElementById('nlpInput');
-    const statusEl = document.getElementById('nlpStatus');
-    const btnEl = document.getElementById('nlpApply');
-    const txt = (inputEl?.value || '').trim();
-    if (!txt) { statusEl.textContent = 'Escribe primero qué te importa.'; return; }
-    if (txt.length < 12) { statusEl.textContent = 'Sé un poco más específico (al menos una frase completa).'; return; }
-    if (!window.geminiGenerate) {
-        statusEl.textContent = 'Función IA no disponible — ajusta los sliders manualmente.';
-        return;
-    }
-    btnEl.disabled = true;
-    statusEl.textContent = 'Analizando con IA…';
+/* =========================================
+   CALCULADORA V2 · Simple, visual, sin sesgos
+   ========================================= */
 
-    const problemsList = PROBLEMS.map(p => `${p.id}. ${p.label} (${p.short})`).join('\n');
-    const prompt = `Eres un clasificador de prioridades ciudadanas. El usuario describe en lenguaje libre qué le importa para elegir presidente. Tu trabajo: asignar un peso de 0 (no importa) a 10 (crítico) a cada una de las 10 inquietudes oficiales del sitio.
+const state = {
+    weights: {},
+    answered: 0
+};
 
-Inquietudes (id 1-10):
-${problemsList}
+function initCalculator() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
 
-Reglas:
-- Devuelve EXCLUSIVAMENTE un JSON {"weights":{"1":n,"2":n,...,"10":n},"interpretation":"1 frase de cómo interpretaste al usuario"} sin texto extra.
-- Cada peso debe ser entero entre 0 y 10.
-- Si el usuario no menciona algo, asigna 5 (neutro/importante).
-- Si menciona algo como "no me importa" o "menos importante", baja a 1-3.
-- Si menciona algo como "crítico", "fundamental", "lo más importante", sube a 9-10.
+    container.innerHTML = window.PROBLEMS.map((p, i) => `
+        <article class="question-card" id="q${i}" data-idx="${i}">
+            <div class="question-header">
+                <div class="question-number">${i + 1}</div>
+                <div class="question-title">
+                    <h3>${p.label}</h3>
+                    <p>¿Qué tan importante es este tema para tu decisión de voto?</p>
+                </div>
+            </div>
+            <div class="slider-v2">
+                <input type="range" id="sl-${i}" min="0" max="10" step="1" value="0" data-idx="${i}" aria-label="Importancia: ${p.label}">
+                <div class="slider-labels">
+                    <span>No importante</span>
+                    <span>Neutral</span>
+                    <span>Muy importante</span>
+                </div>
+                <div class="slider-value-display">
+                    <div class="slider-value-number" id="vl-${i}">0</div>
+                    <div class="slider-value-label" id="lbl-${i}">Sin definir</div>
+                </div>
+            </div>
+        </article>
+    `).join('');
 
-Texto del usuario:
-"""
-${txt.slice(0, 2000)}
-"""`;
+    // Wire sliders
+    document.querySelectorAll('input[type=range]').forEach(inp => {
+        inp.addEventListener('input', handleSliderChange);
+    });
 
-    try {
-        const raw = await window.geminiGenerate(prompt, { temperature: 0.1, maxTokens: 500 });
-        const m = raw.match(/\{[\s\S]*\}/);
-        if (!m) throw new Error('Respuesta sin JSON');
-        const parsed = JSON.parse(m[0]);
-        const weights = parsed.weights || {};
-        let applied = 0;
-        PROBLEMS.forEach((p, i) => {
-            const v = parseInt(weights[String(p.id)], 10);
-            if (isNaN(v) || v < 0 || v > 10) return;
-            const inp = document.getElementById('sl-' + i);
-            if (!inp) return;
-            inp.value = v;
-            inp.style.setProperty('--fill', (v * 10) + '%');
-            document.getElementById('vl-' + i).textContent = v;
-            const ptag = document.getElementById('ptag-' + i);
-            if (ptag) {
-                const labels = ['sin definir','irrelevante','irrelevante','poco importante','poco importante','importante','importante','muy importante','muy importante','crítico','crítico'];
-                ptag.textContent = labels[v] || 'importante';
-                ptag.dataset.level = v === 0 ? 'none' : v <= 4 ? 'low' : v <= 7 ? 'mid' : 'high';
-            }
-            applied++;
-        });
-        if (applied === 0) throw new Error('Ningún peso válido recibido');
-        if (window.computeAffinity) computeAffinity();
-        statusEl.innerHTML = parsed.interpretation
-            ? `<strong>Interpretación IA:</strong> ${parsed.interpretation}`
-            : `${applied} prioridades ajustadas.`;
-        document.getElementById('calcResults')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    } catch (e) {
-        statusEl.textContent = 'No se pudo procesar con IA (cuota agotada o error de red). Ajusta los sliders manualmente.';
-        console.warn('NLP calc fail:', e);
-    } finally {
-        btnEl.disabled = false;
-    }
+    updateProgress();
 }
 
-window.pageInit = function () {
-    document.getElementById('nlpApply')?.addEventListener('click', applyNLPWeights);
-    /* Enter en textarea con Cmd/Ctrl */
-    document.getElementById('nlpInput')?.addEventListener('keydown', e => {
-        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') applyNLPWeights();
+function handleSliderChange(e) {
+    const idx = e.target.dataset.idx;
+    const value = parseInt(e.target.value, 10);
+    const card = document.getElementById(`q${idx}`);
+
+    // Update display
+    document.getElementById(`vl-${idx}`).textContent = value;
+    document.getElementById(`lbl-${idx}`).textContent = getLabel(value);
+
+    // Visual feedback
+    if (value > 0) {
+        card.classList.add('active');
+    } else {
+        card.classList.remove('active');
+    }
+
+    // Store weight
+    state.weights[idx] = value;
+
+    // Update progress
+    state.answered = Object.values(state.weights).filter(v => v > 0).length;
+    updateProgress();
+
+    // Calculate results
+    calculateResults();
+}
+
+function getLabel(v) {
+    if (v === 0) return 'Sin definir';
+    if (v <= 3) return 'Poco importante';
+    if (v <= 6) return 'Importante';
+    if (v <= 8) return 'Muy importante';
+    return 'Crítico';
+}
+
+function updateProgress() {
+    const pct = (state.answered / 10) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressText').textContent = `${state.answered} de 10 completadas`;
+}
+
+function calculateResults() {
+    const totalWeight = Object.values(state.weights).reduce((a, b) => a + b, 0);
+
+    if (totalWeight === 0) {
+        document.getElementById('emptyState').style.display = 'block';
+        document.getElementById('resultsSection').classList.remove('visible');
+        return;
+    }
+
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('resultsSection').classList.add('visible');
+
+    // Calculate affinity per candidate
+    const affinity = {};
+    window.CAND_KEYS.forEach(k => {
+        let score = 0;
+        window.PROBLEMS.forEach((p, i) => {
+            const weight = state.weights[i] || 0;
+            if (weight > 0) {
+                // Normalize score per problem (0-10 scale)
+                const maxScore = Math.max(p.scores.paloma, p.scores.cepeda, p.scores.tigre);
+                score += weight * (p.scores[k] / maxScore);
+            }
+        });
+        affinity[k] = score;
     });
+
+    // Normalize to percentages
+    const totalAffinity = Object.values(affinity).reduce((a, b) => a + b, 0) || 1;
+    const percentages = {};
+    window.CAND_KEYS.forEach(k => {
+        percentages[k] = (affinity[k] / totalAffinity) * 100;
+    });
+
+    // Find winner
+    const winner = Object.entries(percentages).sort((a, b) => b[1] - a[1])[0][0];
+
+    // Render results
+    renderResults(percentages, winner);
+}
+
+function renderResults(percentages, winner) {
+    const container = document.getElementById('resultsContainer');
+    if (!container) return;
+
+    container.innerHTML = window.CAND_KEYS.map(k => {
+        const c = window.CANDIDATES[k];
+        const pct = percentages[k];
+        const isWinner = k === winner;
+
+        return `
+        <div class="result-candidate-card${isWinner ? ' winner' : ''}" style="--ccolor: ${c.color}">
+            <div class="result-header">
+                <div class="result-avatar">
+                    ${c.photo ? `<img src="${c.photo}" alt="" onerror="this.style.display='none';this.parentNode.textContent='${c.initials}'">` : c.initials}
+                </div>
+                <div class="result-name">
+                    <h4>${c.name}</h4>
+                    <p>${c.party}</p>
+                </div>
+                <div class="result-percentage">${pct.toFixed(1)}%</div>
+            </div>
+            <div class="result-bar-container">
+                <div class="result-bar-fill" style="width: ${pct}%; background: ${c.color}"></div>
+            </div>
+        </div>
+        `;
+    }).join('');
+}
+
+window.resetCalculator = function() {
+    state.weights = {};
+    state.answered = 0;
+
+    document.querySelectorAll('input[type=range]').forEach(inp => {
+        inp.value = 0;
+        const idx = inp.dataset.idx;
+        document.getElementById(`vl-${idx}`).textContent = '0';
+        document.getElementById(`lbl-${idx}`).textContent = 'Sin definir';
+        document.getElementById(`q${idx}`).classList.remove('active');
+    });
+
+    updateProgress();
+    calculateResults();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 };
+
+window.shareResults = async function() {
+    const resultsEl = document.getElementById('resultsContainer');
+    if (!resultsEl || resultsEl.querySelectorAll('.result-candidate-card').length === 0) {
+        showToast('Primero completa la calculadora');
+        return;
+    }
+
+    const text = window.CAND_KEYS.map(k => {
+        const card = resultsEl.querySelector(`[style*="--ccolor: ${window.CANDIDATES[k].color}"]`);
+        if (!card) return '';
+        const pct = card.querySelector('.result-percentage').textContent;
+        return `${window.CANDIDATES[k].short}: ${pct}`;
+    }).join('\n');
+
+    const url = window.location.href;
+    const shareText = `Mi afinidad electoral · Colombia 2026\n\n${text}\n\nCalcula la tuya: ${url}`;
+
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'Mi afinidad electoral · Colombia 2026',
+                text: shareText
+            });
+            return;
+        } catch (e) { /* cancelled */ }
+    }
+
+    if (navigator.clipboard) {
+        try {
+            await navigator.clipboard.writeText(shareText);
+            showToast('Resultados copiados al portapapeles');
+        } catch {
+            showToast('Copia manualmente: ' + url);
+        }
+    }
+};
+
+// Initialize on load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCalculator);
+} else {
+    initCalculator();
+}
 </script>
 </body>
 </html>

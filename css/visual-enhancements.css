@@ -1,0 +1,241 @@
+/* =========================================
+   VISUAL ENHANCEMENTS · Elementos visuales adicionales
+   ========================================= */
+
+/* Hero background con imagen sutil de Colombia */
+.hero {
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><radialGradient id="g1" cx="20%25" cy="0%25" r="50%25"><stop offset="0%25" stop-color="%23fcd116" stop-opacity="0.15"/><stop offset="100%25" stop-color="transparent"/></radialGradient><radialGradient id="g2" cx="80%25" cy="100%25" r="50%25"><stop offset="0%25" stop-color="%23ce1126" stop-opacity="0.15"/><stop offset="100%25" stop-color="transparent"/></radialGradient></defs><rect fill="url(%23g1)" width="1200" height="600"/><rect fill="url(%23g2)" width="1200" height="600"/></svg>')
+        no-repeat center center;
+    background-size: cover;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Animación sutil para los números/porcentajes */
+@keyframes numberCount {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.kpi-value,
+.result-percentage,
+.hero-stat .value {
+    animation: numberCount 0.6s ease-out;
+}
+
+/* Gradient borders para cards destacados */
+.candidate-card,
+.feature-card,
+.section {
+    position: relative;
+}
+
+/* Efecto de brillo en hover para botones */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255,255,255,0.3) 50%,
+        transparent 70%
+    );
+    transform: rotate(45deg);
+    transition: transform 0.6s ease;
+    opacity: 0;
+}
+
+.btn-primary:hover::after {
+    transform: rotate(45deg) translate(30%, 30%);
+    opacity: 1;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Sombras más sofisticadas */
+.candidate-card,
+.feature-card,
+.section,
+.candidate-card-mini {
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.05),
+        0 10px 15px -3px rgba(0, 0, 0, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+body.dark .candidate-card,
+body.dark .feature-card,
+body.dark .section,
+body.dark .candidate-card-mini {
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.3),
+        0 10px 15px -3px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Badge de "NUEVO" o "EN VIVO" */
+.live-badge,
+.ai-badge {
+    position: relative;
+    overflow: hidden;
+}
+
+.live-badge::before,
+.ai-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+    );
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Micro-interacciones en sliders */
+input[type="range"] {
+    position: relative;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(59,130,246,0.5);
+}
+
+input[type="range"]:active::-moz-range-thumb {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(59,130,246,0.5);
+}
+
+/* Efecto de pulse para elementos importantes */
+@keyframes subtlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.candidate-card:hover,
+.feature-card:hover {
+    animation: subtlePulse 0.3s ease-in-out;
+}
+
+/* Gradientes animados para fondos */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.cta-band {
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+}
+
+/* Tooltip styling mejorado */
+[title] {
+    position: relative;
+    cursor: help;
+}
+
+/* Scrollbars personalizados más elegantes */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.05);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--co-blue), var(--highlight));
+    border-radius: 10px;
+    border: 2px solid rgba(0,0,0,0.05);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--highlight), var(--co-blue));
+}
+
+body.dark ::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+}
+
+body.dark ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--highlight), var(--co-blue));
+    border-color: rgba(255,255,255,0.1);
+}
+
+/* Loading skeletons más realistas */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--bar-bg) 0%,
+        color-mix(in srgb, var(--bar-bg) 80%, #fff) 25%,
+        color-mix(in srgb, var(--bar-bg) 90%, #fff) 50%,
+        var(--bar-bg) 75%,
+        var(--bar-bg) 100%
+    );
+    background-size: 300% 100%;
+}
+
+/* Efecto de glassmorphism mejorado */
+.navbar,
+.chat-panel,
+.candidate-card-mini,
+.hero-stat {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* Focus rings más visibles y accesibles */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--highlight);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.2);
+}
+
+/* Transiciones suaves en todo */
+* {
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Excluir elementos que no necesitan transición */
+.chart-container *,
+.timeline *,
+.skeleton * {
+    transition-property: none;
+}

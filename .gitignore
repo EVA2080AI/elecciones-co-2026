@@ -31,3 +31,4 @@ Hoja de cálculo sin título.xlsx
 # Screenshots de auditoría visual (locales, no se commitean)
 m-*.png
 .playwright-mcp/
+.vercel
