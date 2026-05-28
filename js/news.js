@@ -158,6 +158,25 @@ function hydrateNewsFromCacheOrFallback() {
 }
 window.hydrateNewsFromCacheOrFallback = hydrateNewsFromCacheOrFallback;
 
+/* Intenta /api/news primero (Vercel edge, instantáneo).
+   Si no existe (GH Pages) o falla, devolvemos null y caemos al RSS directo. */
+let NEWS_USE_PROXY = null;
+async function fetchNewsViaProxy() {
+    try {
+        const r = await fetch('/api/news', { headers: { 'Accept': 'application/json' } });
+        if (r.status === 404 || r.status === 405) { NEWS_USE_PROXY = false; return null; }
+        if (!r.ok) return null;
+        const data = await r.json();
+        if (!Array.isArray(data.items)) return null;
+        NEWS_USE_PROXY = true;
+        return data.items;
+    } catch (e) {
+        /* Error de red: probablemente local sin Vercel. No reintentar. */
+        NEWS_USE_PROXY = false;
+        return null;
+    }
+}
+
 async function fetchLiveNews() {
     const timelineList = document.getElementById('timelineList');
     const updateInfo = document.getElementById('lastUpdate');
@@ -171,8 +190,18 @@ async function fetchLiveNews() {
         updateInfo.textContent = 'Sincronizando…';
     }
 
-    const results = await Promise.all(NEWS_SOURCES.map(fetchSource));
-    let all = results.flat();
+    /* Vía 1: proxy serverless (cacheado en edge → milisegundos) */
+    let all;
+    if (NEWS_USE_PROXY !== false) {
+        const proxyItems = await fetchNewsViaProxy();
+        if (proxyItems && proxyItems.length) all = proxyItems;
+    }
+
+    /* Vía 2 (fallback): fetch directo desde el cliente con proxies CORS */
+    if (!all) {
+        const results = await Promise.all(NEWS_SOURCES.map(fetchSource));
+        all = results.flat();
+    }
 
     /* Deduplicate by title hash */
     const seen = new Set();

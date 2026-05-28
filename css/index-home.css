@@ -51,7 +51,7 @@
 .candidate-photo-wrapper {
     position: relative;
     width: 100%;
-    padding-top: 120%; /* Aspect ratio 5:6 */
+    aspect-ratio: 1 / 1;  /* Cuadrado para evitar estiramiento de fotos 400x400 */
     overflow: hidden;
     background: linear-gradient(135deg, var(--ccolor) 0%, color-mix(in srgb, var(--ccolor) 70%, #000) 100%);
 }
@@ -63,6 +63,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 25%;  /* enfoca la cara, no el cuerpo */
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
