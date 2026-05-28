@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="./css/components.css">
     <link rel="stylesheet" href="./css/sections.css">
     <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="./css/visual-enhancements.css">
+    <link rel="stylesheet" href="./css/news-hub.css">
+    <link rel="stylesheet" href="./css/pixel-perfect.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 </head>
@@ -35,16 +38,21 @@
 <a href="#main" class="skip-link">Saltar al contenido</a>
 <div id="layout-nav"></div>
 
-<section class="page-hero">
+<section class="page-hero news-hero">
     <div class="page-hero-inner">
         <nav class="breadcrumb" aria-label="Ruta">
             <a href="./index.html">Inicio</a>
             <span class="sep">/</span>
             <span class="current">Minuto a Minuto</span>
         </nav>
-        <h1>Minuto a Minuto · Pulso en Vivo</h1>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+            <h1 style="margin:0;">Minuto a Minuto</h1>
+            <span class="live-indicator">
+                En Vivo
+            </span>
+        </div>
         <p class="lead">
-            Pulso informativo en tiempo real desde <strong>7 fuentes</strong>: El Tiempo, Semana, Caracol Noticias y Google News. Análisis de sentimiento, menciones por candidato y tendencias del debate. <strong>Auto-refresco cada 2 minutos.</strong>
+            Cobertura informativa en tiempo real sobre las <strong>Elecciones Presidenciales Colombia 2026</strong> desde 7 fuentes oficiales. Análisis de sentimiento, menciones por candidato y tendencias del debate. <strong>Actualización automática cada 2 minutos.</strong>
         </p>
     </div>
 </section>
@@ -55,9 +63,22 @@
 
     <div class="col-left">
 
+        <!-- Stats resumen -->
+        <div class="news-stats-grid">
+            <div class="news-stat-card">
+                <div class="news-stat-value" id="statTotal">0</div>
+                <div class="news-stat-label">Noticias Totales</div>
+            </div>
+            <div class="news-stat-card">
+                <div class="news-stat-value" id="statSources">7</div>
+                <div class="news-stat-label">Fuentes Indexadas</div>
+            </div>
+        </div>
+
         <div id="noticias" class="section">
             <h2>
-                Feed agregado
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:8px;"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+                Feed en Vivo
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <span id="lastUpdate" class="update-info">Actualizando…</span>
                     <button id="refreshBtn" class="refresh-btn" title="Actualizar feed" aria-label="Actualizar noticias">
@@ -195,10 +216,32 @@ function renderCandidatesSocial() {
     }).join('');
 }
 
+/* Update news stats dynamically */
+function updateNewsStats() {
+    const totalEl = document.getElementById('statTotal');
+    if (!totalEl || !window.state) return;
+    
+    const total = window.state.newsItems?.length || 0;
+    totalEl.textContent = total;
+    
+    // Animate the number
+    totalEl.style.animation = 'numberCount 0.4s ease-out';
+    setTimeout(() => {
+        totalEl.style.animation = '';
+    }, 400);
+}
+
 /* Initialize on page load */
 function initNoticiasExtras() {
     renderCandidatesSocial();
     if (window.renderYouTubeFeed) renderYouTubeFeed();
+    
+    // Update stats after news fetch
+    const originalRenderNews = window.renderNews;
+    window.renderNews = function() {
+        if (originalRenderNews) originalRenderNews();
+        setTimeout(updateNewsStats, 100);
+    };
 }
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initNoticiasExtras);

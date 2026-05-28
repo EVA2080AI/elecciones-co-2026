@@ -64,6 +64,46 @@ function initTheme() {
     });
 }
 
+/* Header scroll effect */
+function initHeaderScroll() {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+    
+    let lastScroll = 0;
+    
+    function handleScroll() {
+        const currentScroll = window.pageYOffset;
+        
+        // Add scrolled class when scrolled down
+        if (currentScroll > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        
+        // Hide/show on scroll direction
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            navbar.style.transform = 'translateY(-100%)';
+        } else {
+            navbar.style.transform = 'translateY(0)';
+        }
+        
+        lastScroll = currentScroll;
+    }
+    
+    // Throttle scroll events
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+}
+
 function injectStructuredData() {
     const isHome = document.body.dataset.page === 'inicio';
     const schemas = [];
@@ -166,9 +206,12 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(tickRelativeTime, 30000);
     }
 
-    /* 9. Candidate slider (home page) */
+    /* 9. Header scroll effect */
+    initHeaderScroll();
+
+    /* 10. Candidate slider (home page) */
     initCandidateSlider();
 
-    /* 10. Page-specific hook (each page can define window.pageInit) */
+    /* 11. Page-specific hook (each page can define window.pageInit) */
     if (typeof window.pageInit === 'function') window.pageInit();
 });

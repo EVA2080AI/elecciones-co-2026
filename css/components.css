@@ -2,49 +2,165 @@
    COMPONENTS · navbar, buttons, badges, toast, chatbot
    ========================================= */
 
-/* NAVBAR */
+/* NAVBAR · Header mejorado 2026 */
 .navbar {
-    background: rgba(15, 23, 42, 0.92);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    padding: 12px 5%;
+    background: linear-gradient(
+        180deg,
+        rgba(15, 23, 42, 0.98) 0%,
+        rgba(15, 23, 42, 0.92) 100%
+    );
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    padding: 14px 5%;
     position: sticky; top: 0; z-index: 1000;
     display: flex; align-items: center; gap: 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
     flex-wrap: wrap;
+    box-shadow: 
+        0 4px 24px rgba(0,0,0,0.3),
+        inset 0 -1px 0 rgba(255,255,255,0.05);
+    transition: all 0.3s ease;
 }
+
+/* Efecto de línea de colores Colombia en el top */
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--co-yellow) 0%,
+        var(--co-yellow) 33%,
+        var(--co-blue) 33%,
+        var(--co-blue) 66%,
+        var(--co-red) 66%,
+        var(--co-red) 100%
+    );
+    box-shadow: 0 2px 8px rgba(252,209,22,0.4);
+}
+
+/* Navbar se eleva al hacer scroll */
+.navbar.scrolled {
+    padding: 10px 5%;
+    box-shadow: 
+        0 8px 32px rgba(0,0,0,0.4),
+        inset 0 -1px 0 rgba(255,255,255,0.05);
+}
+
 .navbar .brand {
     display: inline-flex; align-items: center; gap: 10px;
     color: #fff; text-decoration: none;
     font-family: 'Outfit', sans-serif; font-weight: 800;
     font-size: 14px; letter-spacing: -0.2px;
+    position: relative;
+    transition: all 0.3s ease;
 }
-.navbar .brand svg { width: 130px; height: 32px; color: #fff; flex-shrink: 0; }
+
+.navbar .brand svg { 
+    width: 130px; height: 32px; color: #fff; flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.navbar .brand:hover {
+    transform: scale(1.02);
+}
+
 .navbar .nav-links {
     display: flex; gap: 4px; flex-wrap: wrap; flex: 1;
     justify-content: center;
 }
+
 .navbar .nav-links a {
-    font-family: 'Outfit', sans-serif; color: rgba(255,255,255,0.78);
-    text-decoration: none; font-weight: 600; font-size: 12.5px;
-    padding: 7px 12px; border-radius: 18px;
-    transition: all 0.25s ease; white-space: nowrap;
+    font-family: 'Outfit', sans-serif; color: rgba(255,255,255,0.85);
+    text-decoration: none; font-weight: 600; font-size: 13px;
+    padding: 8px 14px; border-radius: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
 }
+
+/* Efecto de brillo en hover */
+.navbar .nav-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.15),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.navbar .nav-links a:hover::before {
+    left: 100%;
+}
+
 .navbar .nav-links a:hover,
 .navbar .nav-links a:focus-visible {
-    color: #fff; background: var(--highlight);
+    color: #fff; background: rgba(59,130,246,0.25);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+    box-shadow: 
+        0 4px 16px rgba(59,130,246,0.4),
+        inset 0 0 0 1px rgba(59,130,246,0.3);
     outline: none;
 }
-.nav-actions { display: flex; gap: 8px; align-items: center; }
-.theme-toggle {
-    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
-    color: #fff; width: 36px; height: 36px; border-radius: 50%;
-    cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
-    transition: all 0.3s ease;
+
+/* Estado activo más visible */
+.navbar .nav-links a.active {
+    background: rgba(59,130,246,0.3);
+    color: #fff;
+    box-shadow: 
+        0 2px 12px rgba(59,130,246,0.3),
+        inset 0 0 0 1px rgba(59,130,246,0.5);
 }
-.theme-toggle:hover { background: rgba(255,255,255,0.2); transform: rotate(20deg); }
+
+.nav-actions { display: flex; gap: 8px; align-items: center; }
+
+.theme-toggle {
+    background: rgba(255,255,255,0.12); 
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; width: 38px; height: 38px; border-radius: 50%;
+    cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.2) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.theme-toggle:hover::before {
+    opacity: 1;
+}
+
+.theme-toggle:hover { 
+    background: rgba(255,255,255,0.25); 
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 4px 16px rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.3);
+}
 
 /* HERO */
 .hero {
@@ -107,15 +223,58 @@ body.dark .hero {
 .hero-logo {
     width: 104px;
     height: 104px;
-    background: #fff;
+    background: linear-gradient(
+        135deg,
+        #fff 0%,
+        rgba(255,255,255,0.95) 100%
+    );
     border-radius: 50%;
-    box-shadow: 0 18px 40px rgba(0,56,147,0.25);
+    box-shadow: 
+        0 18px 40px rgba(0,56,147,0.25),
+        0 0 0 8px rgba(255,255,255,0.1),
+        inset 0 2px 8px rgba(255,255,255,0.8);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
-.hero-logo svg { width: 88px; height: 88px; }
+
+.hero-logo::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(252,209,22,0.15) 0%,
+        transparent 70%
+    );
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero-logo:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 24px 56px rgba(0,56,147,0.35),
+        0 0 0 12px rgba(255,255,255,0.15),
+        inset 0 2px 8px rgba(255,255,255,0.8);
+}
+
+.hero-logo svg { 
+    width: 88px; height: 88px;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+}
 .hero-eyebrow {
     display: inline-flex;
     align-items: center;

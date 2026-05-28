@@ -1,0 +1,390 @@
+/* =========================================
+   PIXEL PERFECT · Mejoras generales de UI/UX
+   ========================================= */
+
+/* Spacing consistente en todas las secciones */
+.section {
+    scroll-margin-top: 120px;
+}
+
+/* Títulos con mejor jerarquía visual */
+h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hero de página interno mejorado */
+.page-hero {
+    position: relative;
+    padding: 72px 5% 48px 5%;
+    overflow: hidden;
+}
+
+.page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--bg-gradient) 100%
+    );
+    pointer-events: none;
+}
+
+/* Breadcrumbs mejorados */
+.breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0,0,0,0.05);
+    padding: 8px 16px;
+    border-radius: 24px;
+    margin-bottom: 16px;
+}
+
+body.dark .breadcrumb {
+    background: rgba(255,255,255,0.08);
+}
+
+.breadcrumb a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+    color: var(--highlight);
+}
+
+.breadcrumb .sep {
+    opacity: 0.4;
+}
+
+/* CTA buttons mejorados */
+.btn-primary,
+.btn-ghost,
+.btn-secondary {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.btn-primary::after,
+.btn-ghost::after,
+.btn-secondary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at center,
+        rgba(255,255,255,0.2) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover::after,
+.btn-ghost:hover::after,
+.btn-secondary:hover::after {
+    opacity: 1;
+    transform: scale(1.5);
+}
+
+/* Cards con hover effects mejorados */
+.candidate-card,
+.feature-card,
+.position-card,
+.channel-card {
+    will-change: transform, box-shadow;
+}
+
+/* Smooth scroll para toda la página */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+/* Focus visible mejorado para accesibilidad */
+:focus-visible {
+    outline: 3px solid var(--highlight);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--highlight);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.2);
+}
+
+/* Selection color personalizado */
+::selection {
+    background: rgba(59, 130, 246, 0.3);
+    color: var(--primary);
+}
+
+body.dark ::selection {
+    background: rgba(59, 130, 246, 0.4);
+    color: #f1f5f9;
+}
+
+/* Imágenes con lazy loading visual */
+img {
+    background: linear-gradient(
+        90deg,
+        var(--bar-bg) 0%,
+        color-mix(in srgb, var(--bar-bg) 80%, #fff) 50%,
+        var(--bar-bg) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+img.loaded {
+    background: none;
+    animation: none;
+}
+
+/* Tablas con mejor styling */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+}
+
+th:first-child {
+    border-top-left-radius: 12px;
+}
+
+th:last-child {
+    border-top-right-radius: 12px;
+}
+
+/* Inputs con mejor styling */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+textarea {
+    transition: all 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+    transform: translateY(-1px);
+    box-shadow: 
+        0 4px 12px rgba(59,130,246,0.15),
+        0 0 0 3px rgba(59,130,246,0.1);
+}
+
+/* Divider mejorado */
+.divider {
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--divider) 20%,
+        var(--divider) 80%,
+        transparent 100%
+    );
+    margin: 32px 0;
+}
+
+/* Badges y tags */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-primary {
+    background: rgba(59,130,246,0.15);
+    color: var(--highlight);
+    border: 1px solid rgba(59,130,246,0.3);
+}
+
+.badge-success {
+    background: rgba(16,185,129,0.15);
+    color: var(--success);
+    border: 1px solid rgba(16,185,129,0.3);
+}
+
+.badge-warning {
+    background: rgba(245,158,11,0.15);
+    color: var(--warning);
+    border: 1px solid rgba(245,158,11,0.3);
+}
+
+.badge-danger {
+    background: rgba(239,68,68,0.15);
+    color: var(--danger);
+    border: 1px solid rgba(239,68,68,0.3);
+}
+
+/* Tooltips nativos mejorados */
+[title] {
+    position: relative;
+}
+
+/* Progress bars animadas */
+.progress-bar {
+    height: 8px;
+    background: var(--bar-bg);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        var(--co-yellow) 0%,
+        var(--co-blue) 50%,
+        var(--co-red) 100%
+    );
+    transform: translateX(-100%);
+    animation: progress-shimmer 2s infinite;
+}
+
+@keyframes progress-shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Avatar images con fallback */
+.avatar,
+.candidate-avatar,
+.result-avatar {
+    position: relative;
+    overflow: hidden;
+}
+
+.avatar::before,
+.candidate-avatar::before,
+.result-avatar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.1) 0%,
+        transparent 100%
+    );
+    pointer-events: none;
+}
+
+/* Loading states */
+.loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Error states */
+.error-state {
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    color: var(--danger);
+}
+
+/* Success states */
+.success-state {
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.3);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    color: var(--success);
+}
+
+/* Animaciones de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section,
+.feature-card,
+.candidate-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .chat-fab,
+    .chat-panel,
+    .back-to-top,
+    .refresh-btn,
+    .theme-toggle {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    a {
+        text-decoration: underline;
+    }
+}
