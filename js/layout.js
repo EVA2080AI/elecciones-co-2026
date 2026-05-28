@@ -114,29 +114,26 @@ function buildSubmenuHTML(item, prefix) {
     if (!item.submenu) return '';
     const sm = item.submenu;
     const items = sm.items || [];
-    /* Lista vertical simple — sin iconos de card. Cada item es una línea
-       con label (semibold) y descripción al lado/debajo. */
-    const list = items.map(it => {
+    /* Grid de tarjetas estilo Gaspar - 4 columnas con iconos */
+    const cols = items.map(it => {
+        const iconSvg = MEGAMENU_ICONS[it.icon] || MEGAMENU_ICONS.users;
         const badge = it.badge ? `<span class="megamenu-badge">${it.badge}</span>` : '';
         return `
-            <li>
-                <a href="${prefix}${it.href}" class="megamenu-link">
-                    <span class="megamenu-link-label">
-                        ${it.label}${badge}
-                    </span>
-                    ${it.desc ? `<span class="megamenu-link-desc">${it.desc}</span>` : ''}
+            <div class="megamenu-col">
+                <a href="${prefix}${it.href}" class="megamenu-col-link">
+                    <div class="megamenu-icon">${iconSvg}</div>
+                    <div class="megamenu-text">
+                        <span class="megamenu-title">${it.label}${badge}</span>
+                        ${it.desc ? `<span class="megamenu-desc">${it.desc}</span>` : ''}
+                    </div>
                 </a>
-            </li>
+            </div>
         `;
     }).join('');
     return `
         <div class="megamenu" id="megamenu-${item.id}" role="menu" aria-label="${sm.title}">
             <div class="megamenu-inner">
-                <div class="megamenu-head">
-                    <span class="megamenu-eyebrow">${sm.title}</span>
-                    ${sm.subtitle ? `<p class="megamenu-subtitle">${sm.subtitle}</p>` : ''}
-                </div>
-                <ul class="megamenu-list" role="menu">${list}</ul>
+                <div class="megamenu-cols">${cols}</div>
                 <div class="megamenu-foot">
                     <a class="megamenu-cta" href="${prefix}${item.href}">
                         Ver toda la sección
@@ -168,21 +165,20 @@ function renderNavbar() {
     }).join('');
     root.innerHTML = `
     <nav class="navbar" aria-label="Navegación principal">
-        <a class="brand" href="${prefix}index.html" aria-label="Elecciones Presidenciales Colombia 2026 - Ir al inicio">
-            <span class="brand-flag" aria-hidden="true">
-                <svg viewBox="0 0 44 44" width="44" height="44" role="img" aria-label="Bandera de Colombia">
-                    <defs><clipPath id="brandflag-mask"><circle cx="22" cy="22" r="20"/></clipPath></defs>
-                    <circle cx="22" cy="22" r="21" fill="#fff" stroke="rgba(15,23,42,0.10)" stroke-width="1"/>
-                    <g clip-path="url(#brandflag-mask)">
-                        <rect x="2"  y="2"  width="40" height="20" fill="#fcd116"/>
-                        <rect x="2"  y="22" width="40" height="10" fill="#003893"/>
-                        <rect x="2"  y="32" width="40" height="10" fill="#ce1126"/>
-                    </g>
+        <a class="brand" href="${prefix}index.html" aria-label="Elecciones Presidenciales Colombia 2026 — Ir al inicio">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 44 44" width="44" height="44">
+                    <!-- Boleta de votación marcada — azul institucional + check amarillo.
+                         Sin bandera de Colombia, sin negro. -->
+                    <circle cx="22" cy="22" r="20" fill="#003893"/>
+                    <path d="M13 22.5 l 6 5.5 l 12 -12"
+                          fill="none" stroke="#fcd116"
+                          stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </span>
             <span class="brand-text">
                 <span class="brand-title">Elecciones Presidenciales</span>
-                <span class="brand-sub">Colombia 2026</span>
+                <span class="brand-sub">Colombia · 2026</span>
             </span>
         </a>
         <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
@@ -196,6 +192,34 @@ function renderNavbar() {
         </div>
     </nav>
     <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>`;
+
+    /* Mega-menu accesibilidad — hover ya lo cubre el CSS, pero teclado
+       requiere mantener aria-expanded sincronizado + cierre con ESC. */
+    document.querySelectorAll('.nav-item.has-mega').forEach(item => {
+        const trigger = item.querySelector(':scope > a');
+        const panel = item.querySelector(':scope > .megamenu');
+        if (!trigger || !panel) return;
+        trigger.setAttribute('aria-expanded', 'false');
+        const setOpen = (open) => {
+            trigger.setAttribute('aria-expanded', String(open));
+            item.classList.toggle('is-open', open);
+        };
+        item.addEventListener('mouseenter', () => setOpen(true));
+        item.addEventListener('mouseleave', () => setOpen(false));
+        item.addEventListener('focusin',    () => setOpen(true));
+        item.addEventListener('focusout', e => {
+            if (!item.contains(e.relatedTarget)) setOpen(false);
+        });
+        /* En desktop: ENTER en el trigger abre el panel y enfoca primer item */
+        trigger.addEventListener('keydown', e => {
+            if (window.matchMedia('(min-width: 901px)').matches &&
+                (e.key === 'ArrowDown' || e.key === 'Enter')) {
+                e.preventDefault();
+                setOpen(true);
+                panel.querySelector('a')?.focus();
+            }
+        });
+    });
 
     /* Hamburger interactions */
     const burger = document.getElementById('navBurger');

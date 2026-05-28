@@ -18,6 +18,17 @@
     <link rel="stylesheet" href="./css/responsive.css">
 
     <style>
+        /* Asegurar que el footer se vea correctamente */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+
         .sitemap-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -400,6 +411,7 @@
     </main>
 
     <div id="layout-foot"></div>
+    <div id="layout-chat"></div>
 
     <script src="./js/data.js"></script>
     <script src="./js/layout.js"></script>
