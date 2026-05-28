@@ -330,9 +330,9 @@ function renderChatbot() {
         </header>
         <div class="chat-body" id="chatBody"></div>
         <div class="chat-suggestions">
-            <button class="sg">¿Quién es Paloma Valencia?</button>
-            <button class="sg">¿Quién es Iván Cepeda?</button>
-            <button class="sg">Comparar candidatos</button>
+            <button class="sg">¿Qué propone Paloma sobre seguridad?</button>
+            <button class="sg">¿Qué propone Cepeda sobre economía?</button>
+            <button class="sg">Comparar propuestas de los 3 candidatos</button>
         </div>
         <div class="chat-input-row">
             <input type="text" id="chatInput" placeholder="Escribe tu pregunta sobre candidatos, propuestas..." aria-label="Mensaje al asistente">

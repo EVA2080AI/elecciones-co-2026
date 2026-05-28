@@ -51,26 +51,103 @@ function buildKnowledgeBase() {
             source: c.name
         });
 
+        // Indexar propuestas principales con más contexto
         c.proposals.forEach((p, i) => {
             chatKnowledge.push({
-                type: 'proposal',
-                tags: [...c.keywords, 'propuesta', 'propuestas', 'plan', 'gobierno'],
-                text: `Propuesta de ${c.name}: ${p}.`,
-                source: c.name
+                type: 'proposal-main',
+                tags: [...c.keywords, 'propuesta', 'propuestas', 'plan', 'gobierno', 'promesa', 'promesas', 'eje', 'ejes'],
+                text: `${c.name} propone: ${p}.`,
+                source: `Propuestas principales · ${c.name}`
+            });
+        });
+
+        // Indexar resumen de todas las propuestas
+        const allProposals = c.proposals.join('; ');
+        chatKnowledge.push({
+            type: 'proposal-summary',
+            tags: [...c.keywords, 'propuesta', 'propuestas', 'plan', 'gobierno', 'todas las propuestas'],
+            text: `Las 3 propuestas principales de ${c.name} son: ${allProposals}.`,
+            source: `Resumen de propuestas · ${c.name}`
+        });
+    });
+
+    /* Positions per problem - indexar con más tags descriptivos */
+    PROBLEMS.forEach(p => {
+        CAND_KEYS.forEach(k => {
+            const c = CANDIDATES[k];
+            const problemWords = p.label.toLowerCase().split(' ').filter(w => w.length > 3);
+            const positionText = p.positions[k];
+
+            chatKnowledge.push({
+                type: 'position',
+                tags: [
+                    ...c.keywords,
+                    p.short.toLowerCase(),
+                    p.label.toLowerCase(),
+                    ...problemWords,
+                    'qué piensa', 'qué dice', 'postura', 'posición', 'opinión',
+                    'cómo va a', 'cómo piensa', 'cómo propone',
+                    'enfoque', 'estrategia', 'solución', 'medida'
+                ],
+                text: `Sobre "${p.label}": ${c.name} plantea que ${positionText}. Puntaje técnico: ${p.scores[k]}/10.`,
+                source: `${c.name} · ${p.short}`
             });
         });
     });
 
-    /* Positions per problem */
+    // Indexar comparaciones entre candidatos por inquietud
     PROBLEMS.forEach(p => {
+        const positionTexts = CAND_KEYS.map(k => {
+            const c = CANDIDATES[k];
+            return `${c.name}: ${p.positions[k]} (${p.scores[k]}/10)`;
+        }).join(' | ');
+
+        chatKnowledge.push({
+            type: 'comparison',
+            tags: [
+                p.short.toLowerCase(),
+                p.label.toLowerCase(),
+                'comparar', 'comparación', 'diferencias', 'coinciden', 'discrepan',
+                'quién propone mejor', 'quién tiene mejor', 'mejor propuesta',
+                'contraste', 'versus', 'vs'
+            ],
+            text: `Comparación sobre "${p.label}": ${positionTexts}.`,
+            source: `Comparativa · ${p.short}`
+        });
+    });
+
+    // Indexar por temas generales (mapeo de inquietudes a temas comunes)
+    const TEMAS_MAP = {
+        'seguridad': ['Indecisión', 'Respeto', 'Oposición'],
+        'economía': ['Indecisión', 'Ideales'],
+        'empleo': ['Ideales'],
+        'salud': ['Indecisión', 'Ideales'],
+        'educación': ['Indecisión'],
+        'corrupción': ['Corrupción', 'Desinformación'],
+        'transparencia': ['Desinformación', 'Corrupción', 'Debate'],
+        'paz': ['Polarización', 'Respeto'],
+        'debates': ['Debate'],
+        'voto': ['Abstención', 'Encuestas'],
+        'democracia': ['Polarización', 'Respeto', 'Debate']
+    };
+
+    Object.entries(TEMAS_MAP).forEach(([tema, problemasRelacionados]) => {
         CAND_KEYS.forEach(k => {
             const c = CANDIDATES[k];
-            chatKnowledge.push({
-                type: 'position',
-                tags: [...c.keywords, p.short.toLowerCase(), p.label.toLowerCase()],
-                text: `Sobre "${p.label}": ${c.name} — ${p.positions[k]} (puntaje técnico ${p.scores[k]}/10).`,
-                source: `${c.name} · ${p.short}`
-            });
+            const posicionesTema = problemasRelacionados.map(pr => {
+                const prob = PROBLEMS.find(p => p.short === pr);
+                if (prob) return prob.positions[k];
+                return null;
+            }).filter(Boolean);
+
+            if (posicionesTema.length > 0) {
+                chatKnowledge.push({
+                    type: 'tema-general',
+                    tags: [...c.keywords, tema, 'tema', 'tema de', 'sobre el tema de'],
+                    text: `${c.name} sobre ${tema}: ${posicionesTema.join('. ')}.`,
+                    source: `Temas generales · ${c.name}`
+                });
+            }
         });
     });
 
@@ -151,30 +228,90 @@ function score(entry, terms) {
 }
 
 function searchKB(query) {
-    const terms = query.toLowerCase()
+    const normalizedQuery = query.toLowerCase()
         .replace(/[¿¡?!.,;]/g, ' ')
+        .replace(/qué propone|que propone|qué dice|que dice|qué piensa|que piensa/g, 'propuesta');
+
+    const terms = normalizedQuery
         .split(/\s+/)
-        .filter(t => t.length >= 3 && !STOPWORDS.has(t));
+        .filter(t => t.length >= 2 && !STOPWORDS.has(t));
+
     if (terms.length === 0) return [];
+
+    // Buscar candidato específico
+    const candidateMatch = terms.find(t =>
+        ['paloma', 'valencia', 'cepeda', 'ivan', 'iván', 'tigre', 'espriella', 'abelardo'].includes(t)
+    );
+
     const scored = chatKnowledge
-        .map(e => ({ e, s: score(e, terms) }))
+        .map(e => {
+            let s = score(e, terms);
+            // Boost para resultados del candidato mencionado
+            if (candidateMatch && e.tags.includes(candidateMatch)) {
+                s *= 1.5;
+            }
+            // Boost para propuestas específicas
+            if (e.type === 'proposal-main' || e.type === 'position') {
+                s *= 1.2;
+            }
+            return { e, s };
+        })
         .filter(x => x.s > 0)
         .sort((a, b) => b.s - a.s)
-        .slice(0, 4)
+        .slice(0, 5)
         .map(x => x.e);
+
     return scored;
 }
 
 function buildAnswer(query, results) {
     if (results.length === 0) {
         return {
-            text: 'No encontré una respuesta específica en mi base de conocimiento. Te sugiero probar con preguntas como: "¿Qué propone Paloma sobre seguridad?", "¿Quién es Cepeda?", "¿Cómo se calcula la afinidad?", o "Últimas noticias".',
+            text: 'No encontré información específica sobre eso. **Prueba preguntar:**\n\n' +
+                  '• "¿Qué propone Paloma sobre seguridad?"\n' +
+                  '• "¿Qué dice Cepeda sobre economía?"\n' +
+                  '• "¿Qué propone el Tigre sobre corrupción?"\n' +
+                  '• "Compara las propuestas de los 3"\n' +
+                  '• "¿Quién es [candidato]?"\n\n' +
+                  'Tengo indexadas todas las propuestas oficiales de los candidatos.',
             source: null
         };
     }
-    const lines = results.map(r => `• ${r.text}`).join('\n\n');
+
+    // Agrupar resultados por tipo para presentación más clara
+    const byType = {};
+    results.forEach(r => {
+        if (!byType[r.type]) byType[r.type] = [];
+        byType[r.type].push(r);
+    });
+
+    // Construir respuesta ordenada por relevancia
+    let lines = [];
+
+    // Priorizar propuestas y posiciones
+    if (byType['proposal-main']) {
+        byType['proposal-main'].forEach(r => lines.push(`• ${r.text}`));
+    }
+    if (byType['position']) {
+        byType['position'].forEach(r => lines.push(`• ${r.text}`));
+    }
+    if (byType['tema-general']) {
+        byType['tema-general'].forEach(r => lines.push(`• ${r.text}`));
+    }
+    if (byType['comparison']) {
+        byType['comparison'].forEach(r => lines.push(`📊 ${r.text}`));
+    }
+    if (byType['candidate-bio']) {
+        byType['candidate-bio'].forEach(r => lines.push(`👤 ${r.text}`));
+    }
+
+    // Si no se llenó con los prioritarios, usar todos los resultados
+    if (lines.length === 0) {
+        lines = results.map(r => `• ${r.text}`);
+    }
+
     const sources = [...new Set(results.map(r => r.source))].slice(0, 3).join(' · ');
-    return { text: lines, source: sources };
+    return { text: lines.join('\n\n'), source: sources };
 }
 
 function addMessage(role, text, source, isAI = false) {
@@ -295,8 +432,15 @@ function initChatbot() {
             const body = document.getElementById('chatBody');
             if (body && body.children.length === 0) {
                 addMessage('bot',
-                    `¡Hola! Soy el asistente de Elecciones Presidenciales Colombia 2026. Puedo responder sobre el contexto del sitio, los candidatos (Paloma Valencia, Iván Cepeda, Abelardo de la Espriella), sus propuestas, las 10 inquietudes ciudadanas y las últimas noticias del feed.`,
-                    'Asistente neutral del sitio'
+                    `👋 **¡Hola! Soy el Asistente Electoral 2026**\n\n` +
+                    `Puedo ayudarte con:\n\n` +
+                    `• **Propuestas de candidatos** — Pregunta "¿Qué propone Paloma sobre seguridad?" o "¿Qué dice Cepeda sobre economía?"\n` +
+                    `• **Comparaciones** — "Compara las propuestas de los 3 candidatos"\n` +
+                    `• **Biografías** — "¿Quién es el Tigre?" o "¿De dónde es Cepeda?"\n` +
+                    `• **Temas específicos** — Seguridad, economía, educación, corrupción, etc.\n` +
+                    `• **Noticias recientes** — "¿Qué noticias hay hoy?"\n\n` +
+                    `Toda la información viene de los planes de gobierno oficiales de cada candidato.`,
+                    'Asistente Electoral'
                 );
             }
             setTimeout(() => input?.focus(), 200);
