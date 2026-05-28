@@ -284,6 +284,19 @@
     .cdetail-stats > div { flex-direction: row; align-items: baseline; gap: 8px; }
 }
 
+/* Global Mobile Overflow Safeguard */
+@media (max-width: 900px) {
+    html, body {
+        overflow-x: hidden !important;
+        width: 100%;
+        position: relative;
+    }
+    .hero, .ai-verdict-section, .main-container {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
