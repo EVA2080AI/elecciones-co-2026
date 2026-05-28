@@ -16,9 +16,9 @@ const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
 
 function corsOK(req) {
     const origin = req.headers.origin || '';
+    /* Same-origin requests no envían Origin header — son seguras por definición. */
+    if (!origin) return '*';
     const allowed = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
-    /* Si no se configuró ALLOWED_ORIGINS, permitimos sólo same-host del request.
-       Para producción es importante que ALLOWED_ORIGINS esté seteado explícitamente. */
     if (!allowed.length) return origin;
     return allowed.includes(origin) ? origin : null;
 }

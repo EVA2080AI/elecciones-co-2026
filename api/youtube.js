@@ -12,6 +12,8 @@ const YT_BASE = 'https://www.googleapis.com/youtube/v3/search';
 
 function corsOK(req) {
     const origin = req.headers.origin || '';
+    /* Same-origin requests no envían Origin header — son seguras por definición. */
+    if (!origin) return '*';
     const allowed = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
     if (!allowed.length) return origin;
     return allowed.includes(origin) ? origin : null;

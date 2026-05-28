@@ -29,8 +29,11 @@ const FETCH_TIMEOUT  = 9000;
 
 function corsOK(req) {
     const origin = req.headers.origin || '';
+    /* Same-origin requests no envían Origin header — son seguras por definición
+       (vienen del mismo dominio que aloja la función). */
+    if (!origin) return '*';
     const allowed = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
-    if (!allowed.length) return origin || '*';
+    if (!allowed.length) return origin;
     return allowed.includes(origin) ? origin : null;
 }
 
