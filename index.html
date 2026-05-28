@@ -44,207 +44,39 @@
 <a href="#main" class="skip-link">Saltar al contenido</a>
 <div id="layout-nav"></div>
 
-<!-- HERO BANNER SLIDER -->
-<section id="hero" class="hero" aria-label="Encabezado principal">
-    <div class="hero-carousel" id="mainHeroSlider">
-        
-        <!-- Slide 1: General (Original) -->
-        <div class="hero-slide active">
-            <div class="hero-inner">
-                <div class="hero-content">
-                    <div class="hero-logo-wrapper">
-                        <div class="hero-logo">
-                            <svg viewBox="0 0 56 56" aria-hidden="true">
-                                <clipPath id="heroflag"><circle cx="28" cy="28" r="22"/></clipPath>
-                                <circle cx="28" cy="28" r="23" fill="#fff" stroke="rgba(0,0,0,0.08)"/>
-                                <g clip-path="url(#heroflag)">
-                                    <rect x="6"  y="6"  width="44" height="22" fill="#fcd116"/>
-                                    <rect x="6"  y="28" width="44" height="11" fill="#003893"/>
-                                    <rect x="6"  y="39" width="44" height="11" fill="#ce1126"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <span class="hero-eyebrow">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-                            Colombia · 31 de Mayo de 2026
-                        </span>
-                    </div>
-                    
-                    <h1>
-                        Elecciones Presidenciales
-                        <span class="accent">Colombia 2026</span>
-                    </h1>
-                    
-                    <p class="hero-lead">
-                        <strong>Por primera vez en Colombia, la inteligencia artificial se pone al servicio de los ciudadanos.</strong> Compara propuestas, calcula tu afinidad y sigue las noticias en vivo.
-                    </p>
-                    
-                    <div class="hero-cta">
-                        <a class="btn-primary" href="./calculadora.html">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                            Calcular mi afinidad
-                        </a>
-                        <a class="btn-ghost" href="./candidatos.html">
-                            Ver candidatos
-                        </a>
-                    </div>
-                </div>
-
-                <aside class="hero-aside" aria-label="Candidatos y seguimiento en vivo">
-                    <!-- Slider de candidatos con FOTOS REALES -->
-                    <div class="candidate-slider">
-                        <div class="candidate-slide active" data-candidate="paloma">
-                            <div class="candidate-card-mini" style="--ccolor: #3b82f6;">
-                                <div class="candidate-avatar candidate-avatar-photo">
-                                    <img src="./assets/foto-paloma.jpg" alt="Paloma Valencia" loading="eager" fetchpriority="high"/>
-                                    <div class="candidate-initials">PV</div>
-                                </div>
-                                <div class="candidate-mini-info">
-                                    <span class="candidate-party">Centro Democrático</span>
-                                    <h3 class="candidate-mini-name">Paloma Valencia</h3>
-                                    <p class="candidate-slogan">"Orden, firmeza y corazón"</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="candidate-slide" data-candidate="cepeda">
-                            <div class="candidate-card-mini" style="--ccolor: #a855f7;">
-                                <div class="candidate-avatar candidate-avatar-photo">
-                                    <img src="./assets/foto-cepeda.jpg" alt="Iván Cepeda" loading="eager" fetchpriority="high"/>
-                                    <div class="candidate-initials">IC</div>
-                                </div>
-                                <div class="candidate-mini-info">
-                                    <span class="candidate-party">Pacto Histórico</span>
-                                    <h3 class="candidate-mini-name">Iván Cepeda</h3>
-                                    <p class="candidate-slogan">"El poder de la verdad"</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="candidate-slide" data-candidate="tigre">
-                            <div class="candidate-card-mini" style="--ccolor: #ef4444;">
-                                <div class="candidate-avatar candidate-avatar-photo">
-                                    <img src="./assets/foto-tigre.jpg" alt="Abelardo de la Espriella" loading="eager" fetchpriority="high"/>
-                                    <div class="candidate-initials">AT</div>
-                                </div>
-                                <div class="candidate-mini-info">
-                                    <span class="candidate-party">Independiente</span>
-                                    <h3 class="candidate-mini-name">A. de la Espriella</h3>
-                                    <p class="candidate-slogan">"13 milagros para Colombia"</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="candidate-slider-controls">
-                            <button class="slider-dot active" data-slide="0" aria-label="Ver Paloma Valencia"></button>
-                            <button class="slider-dot" data-slide="1" aria-label="Ver Iván Cepeda"></button>
-                            <button class="slider-dot" data-slide="2" aria-label="Ver Abelardo de la Espriella"></button>
-                        </div>
-                    </div>
-                </aside>
+<!-- HERO PRINCIPAL · mismo sistema que las páginas internas -->
+<section class="page-hero hero-home" aria-label="Encabezado principal">
+    <div class="page-hero-inner">
+        <div class="page-hero-text">
+            <span class="page-hero-eyebrow">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                Colombia · 31 de mayo de 2026
+            </span>
+            <h1>Elecciones Presidenciales <em>Colombia 2026</em></h1>
+            <p class="lead">
+                <strong>Por primera vez en Colombia la inteligencia artificial se pone al servicio de los ciudadanos.</strong> Compara propuestas, calcula tu afinidad y sigue las noticias en vivo — todo en un solo lugar, imparcial y abierto.
+            </p>
+            <div class="hero-cta" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;">
+                <a class="btn-primary" href="./calculadora.html">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                    Calcular mi afinidad
+                </a>
+                <a class="btn-ghost" href="./candidatos.html">Ver candidatos</a>
+            </div>
+            <div class="page-hero-meta">
+                <div class="page-hero-meta-item"><span class="k">Candidatos</span><span class="v">3</span></div>
+                <div class="page-hero-meta-item"><span class="k">Inquietudes</span><span class="v">10</span></div>
+                <div class="page-hero-meta-item"><span class="k">Fuentes en vivo</span><span class="v">7</span></div>
+                <div class="page-hero-meta-item"><span class="k">Datos abiertos</span><span class="v">JSON<small> · CSV</small></span></div>
             </div>
         </div>
-
-        <!-- Slide 2: Análisis Cuantitativo -->
-        <div class="hero-slide">
-            <div class="hero-inner slide-layout-alt">
-                <div class="hero-content">
-                    <span class="hero-eyebrow" style="color: var(--co-blue);">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                        Datos Objetivos
-                    </span>
-                    <h1>
-                        Análisis <br/>
-                        <span class="accent">Cuantitativo</span>
-                    </h1>
-                    <p class="hero-lead">
-                        Más allá de los discursos. Compara la solidez de las propuestas a través de radares, gráficos de intención de voto y análisis estructural de los planes de gobierno.
-                    </p>
-                    <div class="hero-cta">
-                        <a class="btn-secondary" href="./analisis.html">Explorar datos</a>
-                    </div>
-                </div>
-                <aside class="hero-aside center-aside">
-                    <div class="slide-graphic card-elevation">
-                        <svg width="160" height="160" viewBox="0 0 24 24" fill="none" stroke="var(--co-blue)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="float-anim"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
-                    </div>
-                </aside>
+        <div class="page-hero-visual">
+            <div class="hero-visual-trio" aria-hidden="true">
+                <div class="face" style="--c: #3b82f6;"><img src="./assets/foto-paloma.jpg" alt=""></div>
+                <div class="face" style="--c: #a855f7;"><img src="./assets/foto-cepeda.jpg" alt=""></div>
+                <div class="face" style="--c: #ef4444;"><img src="./assets/foto-tigre.jpg" alt=""></div>
             </div>
         </div>
-
-        <!-- Slide 3: Calculadora de Afinidad -->
-        <div class="hero-slide">
-            <div class="hero-inner slide-layout-alt">
-                <div class="hero-content">
-                    <span class="hero-eyebrow" style="color: var(--co-yellow);">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                        Alineación Técnica
-                    </span>
-                    <h1>
-                        Calculadora de <br/>
-                        <span class="accent" style="color: #d97706;">Afinidad</span>
-                    </h1>
-                    <p class="hero-lead">
-                        Configura el peso de las 10 problemáticas ciudadanas según lo que más te importa y descubre científicamente qué propuesta se ajusta más a tu visión de país.
-                    </p>
-                    <div class="hero-cta">
-                        <a class="btn-primary" style="background: var(--co-yellow); color: #000;" href="./calculadora.html">Iniciar Calculadora</a>
-                    </div>
-                </div>
-                <aside class="hero-aside center-aside">
-                    <div class="slide-graphic card-elevation">
-                        <svg width="160" height="160" viewBox="0 0 24 24" fill="none" stroke="var(--co-yellow)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="pulse-anim"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
-                    </div>
-                </aside>
-            </div>
-        </div>
-
-        <!-- Slide 4: Noticias en Vivo -->
-        <div class="hero-slide">
-            <div class="hero-inner slide-layout-alt">
-                <div class="hero-content">
-                    <span class="hero-eyebrow" style="color: var(--co-red);">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        Tiempo Real
-                    </span>
-                    <h1>
-                        Pulso de <br/>
-                        <span class="accent" style="color: var(--co-red);">Noticias en Vivo</span>
-                    </h1>
-                    <p class="hero-lead">
-                        Sigue el minuto a minuto de la contienda con nuestro feed integrado de CNN, Caracol, RCN y más. Monitorea el tono y el momentum de cada candidato.
-                    </p>
-                    <div class="hero-cta">
-                        <a class="btn-ghost" href="./noticias.html">Ver noticias de hoy</a>
-                    </div>
-                </div>
-                <aside class="hero-aside center-aside">
-                     <div class="hero-stat card-elevation" style="margin-top: 0;">
-                        <div class="live-badge">
-                            <span class="pulse-dot"></span>
-                            SEGUIMIENTO EN VIVO
-                        </div>
-                        <div class="hero-stat-grid">
-                            <div><div class="label">Candidatos</div><div class="value">3</div><div class="sub">Activos</div></div>
-                            <div><div class="label">Medios</div><div class="value">6</div><div class="sub">CNN, RCN...</div></div>
-                            <div><div class="label">Refresco</div><div class="value">2m</div><div class="sub">Automático</div></div>
-                            <div><div class="label">Feed</div><div class="value">IA</div><div class="sub">Filtrado</div></div>
-                        </div>
-                    </div>
-                </aside>
-            </div>
-        </div>
-        
-        <!-- Controles Globales del Slider -->
-        <div class="main-slider-nav">
-            <button class="nav-arrow prev" aria-label="Anterior banner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-            <div class="nav-dots">
-                <button class="main-dot active" data-slide="0"></button>
-                <button class="main-dot" data-slide="1"></button>
-                <button class="main-dot" data-slide="2"></button>
-                <button class="main-dot" data-slide="3"></button>
-            </div>
-            <button class="nav-arrow next" aria-label="Siguiente banner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
-        </div>
-
     </div>
 </section>
 

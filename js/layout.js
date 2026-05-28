@@ -72,16 +72,8 @@ const NAV_ITEMS = [
       }
     },
 
-    { id: 'datos', href: 'datos.html', label: 'Datos',
-      submenu: {
-          title: 'Datos',
-          items: [
-              { label: 'Matriz completa',      href: 'datos.html#dlJson',      desc: 'Descarga datos en JSON y CSV',      icon: 'download' },
-              { label: 'Metodología',        href: 'datos.html#metodologia', desc: 'Cómo se asignan los puntajes',     icon: 'fileText' },
-              { label: 'Licencia CC BY 4.0',  href: 'datos.html#licencia',    desc: 'Usa los datos libremente',         icon: 'scale' }
-          ]
-      }
-    },
+    /* "Datos" se accede desde el footer y desde el menú interno de análisis —
+       no aparece en el navbar para mantenerlo más limpio. */
 
     { id: 'faq', href: 'faq.html', label: 'FAQ' }
 ];
@@ -299,6 +291,7 @@ function renderFooter() {
                     <li><a href="${prefix}denuncias.html">Reportar irregularidades</a></li>
                     <li><a href="${prefix}datos.html">Datos abiertos (JSON · CSV)</a></li>
                     <li><a href="${prefix}faq.html">Preguntas frecuentes</a></li>
+                    <li><a href="${prefix}sitemap.html">Mapa del sitio</a></li>
                     <li><a href="https://www.registraduria.gov.co/" target="_blank" rel="noopener">Registraduría Nacional ↗</a></li>
                 </ul>
             </div>
