@@ -155,7 +155,7 @@ function renderFooter() {
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; 2026 · Elecciones Presidenciales Colombia · Herramienta cívica abierta · Última actualización del contenido: mayo 2026
+            &copy; ${new Date().getFullYear()} · Elecciones Presidenciales Colombia · Herramienta cívica abierta · Última actualización del contenido: ${new Date().toLocaleDateString('es-CO', { month: 'long', year: 'numeric' })}
             <br>
             <span style="opacity:0.6;font-size:11px;">No usa cookies de terceros · No guarda datos del usuario · Datos de fuentes públicas</span>
         </div>

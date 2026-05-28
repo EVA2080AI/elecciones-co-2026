@@ -7,6 +7,15 @@ let chartSolidez, chartRadar, chartPie, chartTime, chartHistory;
 const chartTextColor = () => getComputedStyle(document.body).getPropertyValue('--text').trim() || '#1e293b';
 const chartGrid      = () => getComputedStyle(document.body).getPropertyValue('--divider').trim() || '#e2e8f0';
 
+/* Build a chart only if its canvas exists on this page — otherwise Chart.js
+   logs "can't acquire context" and returns a broken instance that explodes
+   later when update() is called. */
+function makeChart(id, config) {
+    const el = document.getElementById(id);
+    if (!el) return null;
+    return new Chart(el, config);
+}
+
 function setupCharts() {
     if (!window.Chart) return;
     Chart.defaults.font.family = "'Inter', sans-serif";
@@ -14,7 +23,7 @@ function setupCharts() {
     Chart.defaults.plugins.legend.labels.usePointStyle = true;
     Chart.defaults.plugins.legend.labels.padding = 14;
 
-    chartSolidez = new Chart(document.getElementById('chartSolidez'), {
+    chartSolidez = makeChart('chartSolidez', {
         type: 'bar',
         data: {
             labels: CAND_KEYS.map(k => CANDIDATES[k].name),
@@ -39,7 +48,7 @@ function setupCharts() {
         }
     });
 
-    chartRadar = new Chart(document.getElementById('chartRadar'), {
+    chartRadar = makeChart('chartRadar', {
         type: 'radar',
         data: {
             labels: PROBLEMS.map(p => p.short),
@@ -75,7 +84,7 @@ function setupCharts() {
         }
     });
 
-    chartPie = new Chart(document.getElementById('chartPie'), {
+    chartPie = makeChart('chartPie', {
         type: 'doughnut',
         data: {
             labels: CAND_KEYS.map(k => CANDIDATES[k].name),
@@ -94,7 +103,7 @@ function setupCharts() {
         }
     });
 
-    chartTime = new Chart(document.getElementById('chartTime'), {
+    chartTime = makeChart('chartTime', {
         type: 'line',
         data: {
             labels: [],
@@ -116,7 +125,7 @@ function setupCharts() {
         }
     });
 
-    chartHistory = new Chart(document.getElementById('chartHistory'), {
+    chartHistory = makeChart('chartHistory', {
         type: 'line',
         data: {
             labels: POLL_HISTORY.map(p => p.m),
@@ -159,12 +168,12 @@ function applyThemeToCharts() {
 }
 
 function refreshSolidezChart() {
-    if (!chartSolidez) return;
+    if (!chartSolidez || !chartSolidez.canvas || !chartSolidez.canvas.isConnected) return;
     const v = CAND_KEYS.map(k =>
         Math.min(100, Math.max(0, CANDIDATES[k].baseSolidez + state.liveModifiers[k]))
     );
     chartSolidez.data.datasets[0].data = v;
-    chartSolidez.update();
+    try { chartSolidez.update(); } catch (e) { /* canvas torn down mid-update */ }
 
     document.querySelectorAll('[data-stat="solidez"]').forEach(el => {
         const k = el.dataset.cand;
@@ -174,7 +183,7 @@ function refreshSolidezChart() {
 }
 
 function buildTimeSeries(items) {
-    if (!chartTime) return;
+    if (!chartTime || !chartTime.canvas || !chartTime.canvas.isConnected) return;
     const buckets = {};
     items.forEach(it => {
         const cand = it._cand;
@@ -205,7 +214,7 @@ function buildTimeSeries(items) {
     CAND_KEYS.forEach((k, idx) => {
         chartTime.data.datasets[idx].data = sorted.map(b => buckets[b][k]);
     });
-    chartTime.update();
+    try { chartTime.update(); } catch (e) { /* canvas torn down mid-update */ }
 }
 
 window.setupCharts = setupCharts;

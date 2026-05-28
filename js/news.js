@@ -54,22 +54,30 @@ async function fetchViaAllorigins(src) {
 }
 
 async function fetchSource(src) {
+    /* Try declared proxy first, then fall back to the other one.
+       Public CORS proxies break frequently; cross-fallback dramatically
+       improves real-world reliability. */
+    const primary = src.proxy === 'allorigins-raw' ? fetchViaAllorigins : fetchViaRss2Json;
+    const backup  = src.proxy === 'allorigins-raw' ? fetchViaRss2Json  : fetchViaAllorigins;
+    let items;
     try {
-        const items = src.proxy === 'allorigins-raw'
-            ? await fetchViaAllorigins(src)
-            : await fetchViaRss2Json(src);
-        return items.slice(0, MAX_PER_SOURCE).map(it => ({
-            title: stripHtml(it.title),
-            link: it.link,
-            pubDate: it.pubDate || new Date().toISOString(),
-            source: src.name,
-            sourceId: src.id,
-            description: stripHtml(it.description || '').slice(0, 240)
-        }));
-    } catch (e) {
-        console.warn(`RSS fail ${src.id}:`, e.message);
-        return [];
+        items = await primary(src);
+    } catch (e1) {
+        try {
+            items = await backup(src);
+        } catch (e2) {
+            console.warn(`RSS fail ${src.id}: ${e1.message} / ${e2.message}`);
+            return [];
+        }
     }
+    return items.slice(0, MAX_PER_SOURCE).map(it => ({
+        title: stripHtml(it.title),
+        link: it.link,
+        pubDate: it.pubDate || new Date().toISOString(),
+        source: src.name,
+        sourceId: src.id,
+        description: stripHtml(it.description || '').slice(0, 240)
+    }));
 }
 
 async function fetchLiveNews() {
@@ -114,6 +122,9 @@ async function fetchLiveNews() {
             </li>`;
             document.getElementById('retryFeedBtn')?.addEventListener('click', fetchLiveNews);
         }
+        /* still reset secondary widgets so they don't keep stale data */
+        state.newsItems = [];
+        processNews();
         return;
     }
 

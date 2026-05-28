@@ -226,6 +226,13 @@ function initChatbot() {
         }
     });
     close?.addEventListener('click', () => panel.classList.remove('open'));
+    /* ESC closes the panel when it's open */
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && panel.classList.contains('open')) {
+            panel.classList.remove('open');
+            fab.focus();
+        }
+    });
 
     const submit = () => {
         const v = input.value.trim();

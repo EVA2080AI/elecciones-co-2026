@@ -26,7 +26,7 @@ function renderCandidateCards() {
             <div class="cand-stats">
                 <div class="stat-pill"><div class="v" data-cand="${k}" data-stat="solidez">${c.baseSolidez}</div><div class="l">Solidez</div></div>
                 <div class="stat-pill"><div class="v" data-cand="${k}" data-stat="idoneidad">${idn}%</div><div class="l">Idoneidad</div></div>
-                <div class="stat-pill"><div class="v" data-cand="${k}" data-stat="wins">${wins}/10</div><div class="l">Ganadas</div></div>
+                <div class="stat-pill"><div class="v" data-cand="${k}" data-stat="wins">${wins}/10</div><div class="l">Lideradas</div></div>
             </div>
             <div class="cand-stats" style="margin-top:8px;">
                 <div class="stat-pill"><div class="v" data-cand="${k}" data-stat="menciones">0</div><div class="l">Menciones</div></div>
@@ -253,15 +253,27 @@ function buildWordCloud(items) {
 
 /* KPI updates */
 function updateKPIs() {
-    document.getElementById('kpi-leader').textContent = CANDIDATES[LEADER_KEY].short;
+    /* KPIs only exist on home/dashboard; processNews calls this unconditionally,
+       so we early-out on pages that don't render the KPI block. */
+    const leader = document.getElementById('kpi-leader');
+    if (!leader) return;
+    leader.textContent = CANDIDATES[LEADER_KEY].short;
     document.getElementById('kpi-leader-sub').textContent =
         `${IDONEIDAD.pct[LEADER_KEY].toFixed(1)}% idoneidad técnica · ${WIN_COUNTS[LEADER_KEY]}/10 problemas`;
 
+    /* Feed-dependent KPIs: show "—" placeholder if the feed never delivered
+       items, instead of stamping a literal 0 / "+0" that looks like real data. */
+    const feedEmpty = !state.newsItems || state.newsItems.length === 0;
     const totalMentions = CAND_KEYS.reduce((s, k) => s + state.mentions[k], 0);
     const mEl = document.getElementById('kpi-mentions');
-    animateValue(mEl, parseInt(mEl.textContent) || 0, totalMentions);
-    document.getElementById('kpi-mentions-sub').textContent =
-        `${state.mentions.paloma} P · ${state.mentions.cepeda} C · ${state.mentions.tigre} T`;
+    if (feedEmpty) {
+        mEl.textContent = '—';
+    } else {
+        animateValue(mEl, parseInt(mEl.textContent) || 0, totalMentions);
+    }
+    document.getElementById('kpi-mentions-sub').textContent = feedEmpty
+        ? 'Esperando datos del feed'
+        : `${state.mentions.paloma} P · ${state.mentions.cepeda} C · ${state.mentions.tigre} T`;
 
     const totals = CAND_KEYS.reduce((acc, k) => {
         acc.pos += state.sentiment[k].pos;
@@ -269,16 +281,23 @@ function updateKPIs() {
         return acc;
     }, { pos: 0, neg: 0 });
     const tt = totals.pos + totals.neg;
-    const score = tt === 0 ? 0 : Math.round((totals.pos / tt) * 100 - 50);
-    document.getElementById('kpi-sentiment').textContent = (score >= 0 ? '+' : '') + score;
-    document.getElementById('kpi-sentiment-sub').innerHTML =
-        score > 5 ? '<span class="trend-up">Tono favorable</span>' :
-        score < -5 ? '<span class="trend-down">Tono adverso</span>' : 'Tono equilibrado';
+    const kpiSent = document.getElementById('kpi-sentiment');
+    const kpiSentSub = document.getElementById('kpi-sentiment-sub');
+    if (feedEmpty || tt === 0) {
+        kpiSent.textContent = '—';
+        kpiSentSub.innerHTML = 'Esperando datos del feed';
+    } else {
+        const score = Math.round((totals.pos / tt) * 100 - 50);
+        kpiSent.textContent = (score >= 0 ? '+' : '') + score;
+        kpiSentSub.innerHTML =
+            score > 5 ? '<span class="trend-up">Tono favorable</span>' :
+            score < -5 ? '<span class="trend-down">Tono adverso</span>' : 'Tono equilibrado';
+    }
 
     const ent = Object.entries(state.mentions).sort((a, b) => b[1] - a[1]);
     const kpiMo = document.getElementById('kpiMomentum');
     kpiMo.classList.remove('tone-paloma', 'tone-cepeda', 'tone-tigre');
-    if (ent[0][1] > 0) {
+    if (!feedEmpty && ent[0][1] > 0) {
         const top = ent[0][0];
         document.getElementById('kpi-momentum').textContent = CANDIDATES[top].short;
         document.getElementById('kpi-momentum-sub').textContent = `${ent[0][1]} menciones en feed`;
@@ -290,9 +309,10 @@ function updateKPIs() {
 }
 
 function updateMentionPills() {
+    const feedEmpty = !state.newsItems || state.newsItems.length === 0;
     document.querySelectorAll('[data-stat="menciones"]').forEach(el => {
         const k = el.dataset.cand;
-        el.textContent = state.mentions[k];
+        el.textContent = feedEmpty ? '—' : state.mentions[k];
     });
 }
 

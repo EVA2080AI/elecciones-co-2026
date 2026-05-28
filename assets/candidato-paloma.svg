@@ -18,11 +18,8 @@
     <circle cx="100" cy="100" r="50"/>
     <circle cx="100" cy="100" r="80"/>
   </g>
-  <!-- Initials block -->
-  <g transform="translate(100,108)">
-    <text text-anchor="middle" font-family="Outfit, sans-serif" font-weight="800" font-size="68" fill="#fff" letter-spacing="-3">PV</text>
+  <!-- Initials block (centered, no name strip — avatar is round-cropped in UI) -->
+  <g transform="translate(100,125)">
+    <text text-anchor="middle" font-family="Outfit, sans-serif" font-weight="800" font-size="82" fill="#fff" letter-spacing="-4">PV</text>
   </g>
-  <!-- Name strip -->
-  <rect x="0" y="170" width="200" height="30" fill="rgba(0,0,0,0.35)"/>
-  <text x="100" y="190" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="700" font-size="13" fill="#fff" letter-spacing="0.5">PALOMA VALENCIA</text>
 </svg>
