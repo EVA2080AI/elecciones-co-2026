@@ -2,71 +2,123 @@
    PIXEL PERFECT · Mejoras generales de UI/UX
    ========================================= */
 
-/* Spacing consistente en todas las secciones */
-.section {
-    scroll-margin-top: 120px;
+/* =============================================
+   GLOBAL FIXES: overflow, box-model, font
+   ============================================= */
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
-/* Títulos con mejor jerarquía visual */
-h1, h2, h3, h4, h5, h6 {
+body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Hero de página interno mejorado */
-.page-hero {
-    position: relative;
-    padding: 72px 5% 48px 5%;
-    overflow: hidden;
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
 }
 
-.page-hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
+/* Heading anti-aliasing */
+h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+}
+
+/* =============================================
+   FIX: img shimmer animation conflict
+   — Remove animation from ALL images; only apply
+     shimmer to skeleton placeholders.
+   ============================================= */
+img {
+    background: none !important;
+    animation: none !important;
+    display: block;
+}
+
+/* Skeleton placeholders only */
+.skeleton, .skel-line {
     background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        var(--bg-gradient) 100%
-    );
-    pointer-events: none;
+        90deg,
+        var(--bar-bg) 0%,
+        color-mix(in srgb, var(--bar-bg) 80%, #fff) 50%,
+        var(--bar-bg) 100%
+    ) !important;
+    background-size: 200% 100% !important;
+    animation: shimmer 1.5s infinite !important;
+    border-radius: 6px;
 }
 
-/* Breadcrumbs mejorados */
-.breadcrumb {
+@keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* =============================================
+   FIX: Hero section — allow carousel z-index
+   ============================================= */
+.hero {
+    position: relative;
+    overflow: visible;
+}
+
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    min-height: 520px;
+}
+
+/* =============================================
+   FIX: Section scroll margin
+   ============================================= */
+.section {
+    scroll-margin-top: 90px;
+}
+
+/* =============================================
+   FIX: card-elevation utility (used in slider slides)
+   ============================================= */
+.card-elevation {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.08);
+}
+
+/* =============================================
+   FIX: btn-secondary style (missing definition)
+   ============================================= */
+.btn-secondary {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    background: rgba(0,0,0,0.05);
-    padding: 8px 16px;
-    border-radius: 24px;
-    margin-bottom: 16px;
-}
-
-body.dark .breadcrumb {
-    background: rgba(255,255,255,0.08);
-}
-
-.breadcrumb a {
-    color: var(--text-light);
+    gap: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 13px 22px;
+    border-radius: 12px;
     text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s ease;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--co-blue), #1d4ed8);
+    color: #fff;
+    border: none;
+    box-shadow: 0 8px 20px rgba(0,56,147,0.28);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0,56,147,0.38);
 }
 
-.breadcrumb a:hover {
-    color: var(--highlight);
-}
-
-.breadcrumb .sep {
-    opacity: 0.4;
-}
-
-/* CTA buttons mejorados */
+/* =============================================
+   FIX: CTA buttons ripple effect
+   ============================================= */
 .btn-primary,
 .btn-ghost,
 .btn-secondary {
@@ -89,6 +141,7 @@ body.dark .breadcrumb {
     opacity: 0;
     transform: scale(0.5);
     transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
 }
 
 .btn-primary:hover::after,
@@ -98,11 +151,16 @@ body.dark .breadcrumb {
     transform: scale(1.5);
 }
 
-/* Cards con hover effects mejorados */
+/* =============================================
+   FIX: Cards will-change (GPU compositing)
+   ============================================= */
 .candidate-card,
 .feature-card,
 .position-card,
-.channel-card {
+.channel-card,
+.candidate-visual-card,
+.ai-stat-card,
+.kpi {
     will-change: transform, box-shadow;
 }
 

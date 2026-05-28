@@ -45,6 +45,66 @@ function initCandidateSlider() {
     startAuto();
 }
 
+/* Main Hero Banner Slider (4 banners) */
+function initHeroSlider() {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.main-dot');
+    const prevBtn = document.querySelector('.nav-arrow.prev');
+    const nextBtn = document.querySelector('.nav-arrow.next');
+    
+    if (!slides.length || !dots.length) return;
+
+    let current = 0;
+    let slideInterval;
+    const intervalTime = 6000; // 6 seconds
+
+    function showSlide(n) {
+        slides.forEach(s => s.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active'));
+        
+        slides[n].classList.add('active');
+        dots[n].classList.add('active');
+        current = n;
+    }
+
+    function nextSlide() {
+        showSlide((current + 1) % slides.length);
+    }
+
+    function prevSlide() {
+        showSlide((current - 1 + slides.length) % slides.length);
+    }
+
+    function startSlider() {
+        slideInterval = setInterval(nextSlide, intervalTime);
+    }
+
+    function resetSlider() {
+        clearInterval(slideInterval);
+        startSlider();
+    }
+
+    // Event Listeners
+    if(nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetSlider(); });
+    if(prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetSlider(); });
+
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+            showSlide(i);
+            resetSlider();
+        });
+    });
+
+    // Pause on hover
+    const carouselContainer = document.querySelector('.hero-carousel');
+    if(carouselContainer) {
+        carouselContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
+        carouselContainer.addEventListener('mouseleave', startSlider);
+    }
+
+    startSlider();
+}
+
 function initTheme() {
     if (localStorage.getItem('dashTheme') === 'dark') document.body.classList.add('dark');
     const btn = document.getElementById('themeToggle');
@@ -211,6 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* 10. Candidate slider (home page) */
     initCandidateSlider();
+    initHeroSlider();
 
     /* 11. Page-specific hook (each page can define window.pageInit) */
     if (typeof window.pageInit === 'function') window.pageInit();
