@@ -26,7 +26,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/components.css">
@@ -96,7 +96,7 @@
                         <div class="candidate-slide active" data-candidate="paloma">
                             <div class="candidate-card-mini" style="--ccolor: #3b82f6;">
                                 <div class="candidate-avatar candidate-avatar-photo">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Paloma_Valencia_2020.jpg/440px-Paloma_Valencia_2020.jpg" alt="Paloma Valencia" loading="eager" fetchpriority="high"/>
+                                    <img src="./assets/foto-paloma.jpg" alt="Paloma Valencia" loading="eager" fetchpriority="high"/>
                                     <div class="candidate-initials">PV</div>
                                 </div>
                                 <div class="candidate-mini-info">
@@ -109,7 +109,7 @@
                         <div class="candidate-slide" data-candidate="cepeda">
                             <div class="candidate-card-mini" style="--ccolor: #a855f7;">
                                 <div class="candidate-avatar candidate-avatar-photo">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Iv%C3%A1n_Cepeda_2018.jpg/440px-Iv%C3%A1n_Cepeda_2018.jpg" alt="Iván Cepeda" loading="eager" fetchpriority="high"/>
+                                    <img src="./assets/foto-cepeda.jpg" alt="Iván Cepeda" loading="eager" fetchpriority="high"/>
                                     <div class="candidate-initials">IC</div>
                                 </div>
                                 <div class="candidate-mini-info">
@@ -122,7 +122,7 @@
                         <div class="candidate-slide" data-candidate="tigre">
                             <div class="candidate-card-mini" style="--ccolor: #ef4444;">
                                 <div class="candidate-avatar candidate-avatar-photo">
-                                    <img src="https://www.abelardodelaespriella.com/wp-content/uploads/2023/08/abelardo-de-la-espriella-foto-perfil.jpg" alt="Abelardo de la Espriella" loading="eager" fetchpriority="high"/>
+                                    <img src="./assets/foto-tigre.jpg" alt="Abelardo de la Espriella" loading="eager" fetchpriority="high"/>
                                     <div class="candidate-initials">AT</div>
                                 </div>
                                 <div class="candidate-mini-info">
@@ -180,7 +180,7 @@
                     </span>
                     <h1>
                         Calculadora de <br/>
-                        <span class="accent" style="background: linear-gradient(90deg, #f59e0b, #d97706); -webkit-background-clip: text; color: transparent;">Afinidad</span>
+                        <span class="accent" style="color: #d97706;">Afinidad</span>
                     </h1>
                     <p class="hero-lead">
                         Configura el peso de las 10 problemáticas ciudadanas según lo que más te importa y descubre científicamente qué propuesta se ajusta más a tu visión de país.
@@ -207,7 +207,7 @@
                     </span>
                     <h1>
                         Pulso de <br/>
-                        <span class="accent" style="background: linear-gradient(90deg, #ef4444, #b91c1c); -webkit-background-clip: text; color: transparent;">Noticias en Vivo</span>
+                        <span class="accent" style="color: var(--co-red);">Noticias en Vivo</span>
                     </h1>
                     <p class="hero-lead">
                         Sigue el minuto a minuto de la contienda con nuestro feed integrado de CNN, Caracol, RCN y más. Monitorea el tono y el momentum de cada candidato.
@@ -386,12 +386,6 @@
             <span class="kpi-value" id="kpi-mentions">0</span>
             <span class="kpi-sub" id="kpi-mentions-sub">Total últimas noticias</span>
         </div>
-        <div class="kpi tone-warning">
-            <div class="kpi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-            <span class="kpi-label">Tono mediático <abbr title="Estimación heurística por palabras clave, no análisis profesional de sentimiento">(estim.)</abbr></span>
-            <span class="kpi-value" id="kpi-sentiment">—</span>
-            <span class="kpi-sub" id="kpi-sentiment-sub">Heurística por keywords</span>
-        </div>
         <div class="kpi" id="kpiMomentum">
             <div class="kpi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
             <span class="kpi-label">Mayor momentum</span>
@@ -412,7 +406,7 @@
     <section class="candidates-visual-grid" aria-label="Perfiles de candidatos con fotos">
         <a href="./candidato/paloma.html" class="candidate-visual-card" style="--ccolor: #3b82f6;">
             <div class="candidate-photo-wrapper">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Paloma_Valencia_2020.jpg/440px-Paloma_Valencia_2020.jpg" alt="Paloma Valencia" loading="lazy"/>
+                <img src="./assets/foto-paloma.jpg" alt="Paloma Valencia" loading="lazy"/>
                 <div class="candidate-overlay">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </div>
@@ -430,7 +424,7 @@
         
         <a href="./candidato/cepeda.html" class="candidate-visual-card" style="--ccolor: #a855f7;">
             <div class="candidate-photo-wrapper">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Iv%C3%A1n_Cepeda_2018.jpg/440px-Iv%C3%A1n_Cepeda_2018.jpg" alt="Iván Cepeda" loading="lazy"/>
+                <img src="./assets/foto-cepeda.jpg" alt="Iván Cepeda" loading="lazy"/>
                 <div class="candidate-overlay">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </div>
@@ -448,7 +442,7 @@
         
         <a href="./candidato/tigre.html" class="candidate-visual-card" style="--ccolor: #ef4444;">
             <div class="candidate-photo-wrapper">
-                <img src="https://www.abelardodelaespriella.com/wp-content/uploads/2023/08/abelardo-de-la-espriella-foto-perfil.jpg" alt="Abelardo de la Espriella" loading="lazy"/>
+                <img src="./assets/foto-tigre.jpg" alt="Abelardo de la Espriella" loading="lazy"/>
                 <div class="candidate-overlay">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </div>
@@ -468,26 +462,9 @@
     <!-- Grid original de perfiles (se mantiene para compatibilidad) -->
     <section id="perfiles" class="candidates-grid" aria-label="Perfiles de candidatos" style="display:none;"></section>
 
-    <!-- LATEST NEWS PREVIEW -->
-    <section class="section-strip" style="margin-top:36px;">
-        <h2>Últimas del minuto a minuto</h2>
-        <p class="section-strip-lead">5 titulares más recientes de medios indexados. <a href="./noticias.html" style="color:var(--highlight);font-weight:600;">Ver feed completo →</a></p>
-    </section>
-    <section style="max-width:1400px;margin:0 auto 36px auto;padding:0 5%;">
-        <div class="section">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-                <span id="lastUpdate" class="update-info">Actualizando…</span>
-                <button id="refreshBtn" class="refresh-btn" title="Actualizar feed" aria-label="Actualizar noticias">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-                </button>
-            </div>
-            <ul class="timeline" id="timelineList" style="max-height:none;">
-                <li class="skel-item"><div class="skel-line w40 skeleton"></div><div class="skel-line w80 skeleton"></div></li>
-                <li class="skel-item"><div class="skel-line w40 skeleton"></div><div class="skel-line w80 skeleton"></div></li>
-                <li class="skel-item"><div class="skel-line w40 skeleton"></div><div class="skel-line w80 skeleton"></div></li>
-            </ul>
-        </div>
-    </section>
+    <!-- Sección "Minuto a minuto" removida del home — vive en /noticias.html con
+         su propia UX y datos. El home se concentra en presentar candidatos +
+         calculadora como CTA principal. -->
 
     <!-- CTA BAND -->
     <div class="cta-band" role="region" aria-label="Llamado a la acción">

@@ -19,12 +19,12 @@
 }
 .kpi:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,0.06); }
 .kpi-label {
-    font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600;
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
     letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-light);
     display: flex; align-items: center; gap: 8px;
 }
 .kpi-value {
-    font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 800;
+    font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 800;
     color: var(--primary); letter-spacing: -0.5px; line-height: 1.1;
 }
 .kpi-sub { font-size: 12px; color: var(--text-light); font-weight: 500; }
@@ -65,7 +65,7 @@
 .avatar {
     width: 56px; height: 56px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 20px;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 800; font-size: 20px;
     color: #fff;
     background: linear-gradient(135deg, var(--ccolor) 0%,
         color-mix(in srgb, var(--ccolor) 60%, #000) 100%);
@@ -80,14 +80,14 @@
     display: block;
 }
 .cand-name {
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700;
     font-size: 18px; color: var(--primary); margin: 0;
 }
 .cand-party { font-size: 12px; color: var(--text-light); margin-top: 2px; }
 .cand-slogan { font-style: italic; font-size: 13px; color: var(--text-light); margin: 6px 0 12px 0; line-height: 1.4; }
 .cand-stats { display: flex; gap: 12px; margin-top: 12px; }
 .stat-pill { flex: 1; background: var(--bar-bg); border-radius: 10px; padding: 8px 10px; text-align: center; }
-.stat-pill .v { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 16px; color: var(--primary); }
+.stat-pill .v { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 16px; color: var(--primary); }
 .stat-pill .l { font-size: 10px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
 .proposals { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
 .proposal { font-size: 12.5px; color: var(--text); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
@@ -115,7 +115,7 @@
 }
 .section:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(0, 0, 0, 0.06); }
 .section h2 {
-    font-family: 'Outfit', sans-serif; color: var(--primary);
+    font-family: 'Source Serif 4', Georgia, serif; color: var(--primary);
     margin: 0 0 22px 0;
     display: flex; justify-content: space-between; align-items: center;
     font-size: 22px; font-weight: 700; gap: 10px; flex-wrap: wrap;
@@ -131,7 +131,7 @@
 
 .chip-row { display: flex; gap: 6px; flex-wrap: wrap; }
 .chip {
-    font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600;
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
     padding: 6px 12px; border-radius: 16px;
     background: var(--bar-bg); color: var(--text-light);
     border: none; cursor: pointer; transition: all 0.2s ease;
@@ -157,12 +157,12 @@
 }
 .slider-row input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.2); }
 .slider-row .val {
-    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 13px;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 13px;
     color: var(--primary); min-width: 26px; text-align: center;
 }
 .calc-results { display: flex; flex-direction: column; gap: 12px; }
 .calc-results h3 {
-    font-family: 'Outfit', sans-serif; font-size: 15px; margin: 0 0 4px 0;
+    font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; margin: 0 0 4px 0;
     color: var(--text-light); text-transform: uppercase; letter-spacing: 0.6px;
     font-weight: 600;
 }
@@ -176,11 +176,11 @@
 }
 .result-row { position: relative; display: flex; justify-content: space-between; align-items: center; }
 .result-name {
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700;
     color: var(--primary); font-size: 15px;
 }
 .result-pct {
-    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 24px;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 800; font-size: 24px;
     color: var(--primary);
 }
 .winner-tag {
@@ -193,7 +193,7 @@
 .reset-btn, .share-btn {
     background: transparent; border: 1px solid var(--divider);
     color: var(--text-light); padding: 8px 14px; border-radius: 10px;
-    font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 12px;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 12px;
     cursor: pointer; transition: all 0.2s ease;
 }
 .reset-btn:hover, .share-btn:hover { background: var(--bar-bg); color: var(--primary); }
@@ -208,7 +208,7 @@
     margin-bottom: 18px;
 }
 .scale-label {
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700;
     font-size: 11px; letter-spacing: 0.6px; text-transform: uppercase;
     color: var(--text-light); margin-bottom: 10px;
 }
@@ -232,7 +232,7 @@ body.dark .scale-track {
     flex: 1; min-width: 0;
 }
 .scale-stop strong {
-    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 16px;
+    font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px;
     color: var(--primary);
     background: var(--card-bg);
     padding: 2px 8px; border-radius: 6px;
@@ -269,7 +269,7 @@ body.dark .scale-stop small { background: rgba(15,23,42,0.7); color: #f1f5f9; }
 /* Priority tag al lado del slider */
 .priority-tag {
     grid-column: 1 / -1;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 10.5px;
     font-weight: 700;
     text-transform: uppercase;
@@ -304,7 +304,7 @@ body.dark .scale-stop small { background: rgba(15,23,42,0.7); color: #f1f5f9; }
     font-size: 12.5px;
 }
 .calc-methodology summary {
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700;
     color: var(--text-light); cursor: pointer;
     list-style: none;
     display: flex; align-items: center; gap: 6px;
@@ -316,14 +316,14 @@ body.dark .scale-stop small { background: rgba(15,23,42,0.7); color: #f1f5f9; }
 /* COMPARATOR */
 .cmp-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 18px; }
 .cmp-controls select {
-    font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14px;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 14px;
     background: var(--bar-bg); color: var(--primary);
     border: 1px solid var(--divider); border-radius: 10px;
     padding: 10px 14px; cursor: pointer; outline: none;
     transition: border-color 0.2s ease;
 }
 .cmp-controls select:focus { border-color: var(--highlight); }
-.cmp-vs { font-family: 'Outfit', sans-serif; font-weight: 800; color: var(--text-light); font-size: 14px; }
+.cmp-vs { font-family: 'Inter', sans-serif; font-weight: 800; color: var(--text-light); font-size: 14px; }
 .cmp-summary {
     display: grid; grid-template-columns: 1fr auto 1fr;
     gap: 14px; align-items: center;
@@ -331,9 +331,9 @@ body.dark .scale-stop small { background: rgba(15,23,42,0.7); color: #f1f5f9; }
     margin-bottom: 18px;
 }
 .cmp-side { text-align: center; }
-.cmp-side .num { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 32px; line-height: 1; }
+.cmp-side .num { font-family: 'Source Serif 4', Georgia, serif; font-weight: 800; font-size: 32px; line-height: 1; }
 .cmp-side .nm { font-size: 12px; color: var(--text-light); font-weight: 600; margin-top: 4px; }
-.cmp-divider { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-light); font-size: 14px; }
+.cmp-divider { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; color: var(--text-light); font-size: 14px; }
 .cmp-bar { height: 8px; background: var(--bar-bg); border-radius: 6px; margin-top: 12px; overflow: hidden; display: flex; }
 .cmp-bar .left, .cmp-bar .right { height: 100%; transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
 .cmp-rows { display: flex; flex-direction: column; gap: 8px; }
@@ -343,7 +343,7 @@ body.dark .scale-stop small { background: rgba(15,23,42,0.7); color: #f1f5f9; }
     border-radius: 12px; align-items: center;
 }
 .cmp-row .cmp-prob {
-    grid-column: 1 / -1; font-family: 'Outfit', sans-serif;
+    grid-column: 1 / -1; font-family: 'Source Serif 4', Georgia, serif;
     font-weight: 700; font-size: 13px; color: var(--text-light);
     margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.4px;
 }
@@ -358,20 +358,20 @@ body.dark .cmp-cell { background: rgba(255,255,255,0.03); }
     border-left: 3px solid var(--ccolor);
 }
 .cmp-score {
-    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 13px;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 800; font-size: 13px;
     color: var(--text-light); align-self: center; text-align: center;
 }
 .cmp-vs-mini {
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Inter', sans-serif; font-weight: 700;
     color: var(--text-light); font-size: 12px; text-align: center;
 }
 
 /* GAUGES */
 .gauges-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .gauge-card { background: var(--bar-bg); border-radius: 14px; padding: 16px; text-align: center; }
-.gauge-name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 13px; color: var(--primary); margin-bottom: 6px; }
+.gauge-name { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 13px; color: var(--primary); margin-bottom: 6px; }
 .gauge-arc { display: block; margin: 0 auto; }
-.gauge-value { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 22px; margin-top: -36px; color: var(--primary); }
+.gauge-value { font-family: 'Source Serif 4', Georgia, serif; font-weight: 800; font-size: 22px; margin-top: -36px; color: var(--primary); }
 .gauge-label {
     font-size: 11px; color: var(--text-light); margin-top: 4px;
     font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;
@@ -390,7 +390,7 @@ body.dark .cmp-cell { background: rgba(255,255,255,0.03); }
     padding: 10px 0; min-height: 180px;
 }
 .cloud .w {
-    display: inline-block; font-family: 'Outfit', sans-serif;
+    display: inline-block; font-family: 'Source Serif 4', Georgia, serif;
     font-weight: 700; line-height: 1.1;
     transition: transform 0.2s ease, color 0.2s ease; cursor: default;
 }
@@ -415,7 +415,7 @@ th, td {
 }
 th {
     background-color: var(--bar-bg); color: var(--primary);
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700;
     position: sticky; top: 0; z-index: 10; font-size: 13px;
 }
 tr:last-child td { border-bottom: none; }
@@ -426,7 +426,7 @@ tr:hover td { background-color: var(--bar-bg); }
 .matrix-cell .pos-text { color: var(--text); }
 .matrix-cell .score-badge {
     display: inline-block;
-    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 11px;
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 11px;
     background: var(--bar-bg); color: var(--text-light);
     padding: 2px 8px; border-radius: 10px; margin-top: 8px;
 }
@@ -472,7 +472,7 @@ tr:hover td { background-color: var(--bar-bg); }
     background: var(--card-bg); border-radius: 10px;
     text-align: center; border-left: 4px solid var(--ccolor);
 }
-.win-pill .n { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 22px; color: var(--primary); }
+.win-pill .n { font-family: 'Source Serif 4', Georgia, serif; font-weight: 800; font-size: 22px; color: var(--primary); }
 .win-pill .nm { font-size: 12px; color: var(--text-light); margin-top: 2px; font-weight: 600; }
 .win-pill .lb { font-size: 10px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
 
@@ -495,7 +495,7 @@ tr:hover td { background-color: var(--bar-bg); }
 .news-time {
     font-size: 11px; color: var(--text-light);
     font-weight: 600; margin-bottom: 6px;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Source Serif 4', Georgia, serif;
     text-transform: uppercase; letter-spacing: 0.5px;
 }
 .news-title {
@@ -541,7 +541,7 @@ tr:hover td { background-color: var(--bar-bg); }
 .ai-opinion h3 {
     margin-top: 0; color: var(--primary);
     display: flex; align-items: center; gap: 10px;
-    font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-size: 19px; font-weight: 700;
 }
 .ai-opinion p { margin: 8px 0; color: var(--text); }
 .ai-opinion strong { color: var(--primary); }
@@ -581,7 +581,7 @@ tr:hover td { background-color: var(--bar-bg); }
     color: #fff;
     padding: 8px 16px;
     border-radius: 30px;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Source Serif 4', Georgia, serif;
     font-weight: 700;
     font-size: 12px;
     letter-spacing: 0.8px;
@@ -589,7 +589,7 @@ tr:hover td { background-color: var(--bar-bg); }
     box-shadow: 0 4px 15px rgba(59,130,246,0.35);
 }
 .ai-verdict-header h2 {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Source Serif 4', Georgia, serif;
     font-size: 26px;
     font-weight: 800;
     color: var(--primary);
@@ -634,7 +634,7 @@ tr:hover td { background-color: var(--bar-bg); }
 }
 .ai-stat-card:hover { transform: translateY(-2px); }
 .ai-stat-value {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Source Serif 4', Georgia, serif;
     font-size: 32px;
     font-weight: 800;
     color: var(--highlight);
@@ -705,7 +705,7 @@ tr:hover td { background-color: var(--bar-bg); }
 .hist-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
 .hist-head .avatar { width: 48px; height: 48px; font-size: 17px; }
 .hist-name {
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700;
     font-size: 16px; color: var(--primary); margin: 0;
 }
 .hist-role {
@@ -722,7 +722,7 @@ tr:hover td { background-color: var(--bar-bg); }
 }
 .hist-meta > div { display: grid; grid-template-columns: 90px 1fr; gap: 8px; }
 .hist-meta dt {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Source Serif 4', Georgia, serif;
     font-size: 10.5px; font-weight: 700;
     color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px;
 }
@@ -731,7 +731,7 @@ tr:hover td { background-color: var(--bar-bg); }
 }
 .hist-section-title {
     display: flex; align-items: center; gap: 8px;
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700;
     font-size: 13px; color: var(--ccolor);
     text-transform: uppercase; letter-spacing: 0.5px;
     margin: 18px 0 10px 0;
@@ -761,7 +761,7 @@ tr:hover td { background-color: var(--bar-bg); }
 }
 .hist-year {
     display: inline-block;
-    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 800;
     color: var(--ccolor); font-size: 12px;
     margin-right: 8px;
     background: color-mix(in srgb, var(--ccolor) 14%, transparent);
@@ -797,7 +797,7 @@ tr:hover td { background-color: var(--bar-bg); }
 .cdetail-avatar {
     width: 110px; height: 110px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 800;
     font-size: 38px; color: #fff;
     background: linear-gradient(135deg, var(--ccolor) 0%,
         color-mix(in srgb, var(--ccolor) 60%, #000) 100%);
@@ -816,7 +816,7 @@ tr:hover td { background-color: var(--bar-bg); }
 }
 .cdetail-party {
     display: inline-block;
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700;
     font-size: 12px; letter-spacing: 0.8px; text-transform: uppercase;
     color: var(--ccolor);
     background: color-mix(in srgb, var(--ccolor) 14%, transparent);
@@ -824,7 +824,7 @@ tr:hover td { background-color: var(--bar-bg); }
     margin-bottom: 10px;
 }
 .cdetail-hero-inner h1 {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Source Serif 4', Georgia, serif;
     font-size: clamp(28px, 4vw, 42px);
     font-weight: 800; margin: 0; color: var(--primary);
     letter-spacing: -1px; line-height: 1.05;
@@ -840,7 +840,7 @@ tr:hover td { background-color: var(--bar-bg); }
     display: flex; flex-direction: column; gap: 2px;
 }
 .cdetail-stats .num {
-    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 800;
     font-size: 24px; color: var(--ccolor); line-height: 1;
 }
 .cdetail-stats .lab {
@@ -861,7 +861,7 @@ tr:hover td { background-color: var(--bar-bg); }
     padding: 26px;
 }
 .cdetail-card h2 {
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700;
     font-size: 20px; color: var(--primary);
     margin: 0 0 14px 0;
 }
@@ -904,14 +904,14 @@ ul.proposal-list li svg { color: var(--ccolor, var(--co-blue)); flex-shrink: 0; 
 }
 .position-num {
     flex-shrink: 0;
-    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 800;
     font-size: 13px; color: var(--ccolor);
     background: color-mix(in srgb, var(--ccolor) 14%, transparent);
     padding: 4px 8px; border-radius: 8px;
 }
 .position-card h3 {
     flex: 1;
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700;
     font-size: 14px; color: var(--primary); line-height: 1.3;
     margin: 0;
 }
@@ -936,7 +936,7 @@ ul.proposal-list li svg { color: var(--ccolor, var(--co-blue)); flex-shrink: 0; 
 }
 .position-meter span { display: block; height: 100%; transition: width 0.6s ease; }
 .position-score {
-    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 800;
     font-size: 12px; color: var(--ccolor);
     background: color-mix(in srgb, var(--ccolor) 14%, transparent);
     padding: 3px 9px; border-radius: 8px;
@@ -962,7 +962,7 @@ ul.proposal-list li svg { color: var(--ccolor, var(--co-blue)); flex-shrink: 0; 
     flex-shrink: 0;
 }
 .report-warning h3 {
-    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 800;
     font-size: 17px; color: var(--co-red); margin: 0 0 4px 0;
 }
 .report-warning p {
@@ -983,7 +983,7 @@ body.dark .report-warning h3 { color: #f87171; }
     font-size: 13.5px; line-height: 1.5;
 }
 .irregular-card .it {
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700;
     font-size: 13px; color: var(--co-red);
     margin-bottom: 4px;
 }
@@ -1021,7 +1021,7 @@ body.dark .report-warning h3 { color: #f87171; }
     flex-shrink: 0;
 }
 .channel-name {
-    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 800;
     font-size: 16px; color: var(--primary); margin: 0;
     line-height: 1.2;
 }
@@ -1118,7 +1118,7 @@ body.dark .faq-intro {
     outline-offset: -2px;
 }
 .faq-q {
-    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-family: 'Source Serif 4', Georgia, serif; font-weight: 700;
     font-size: 14.5px; color: var(--primary);
     line-height: 1.4;
 }
@@ -1201,7 +1201,7 @@ body.dark .faq-intro {
     flex: 1;
 }
 .yt-title {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Source Serif 4', Georgia, serif;
     font-size: 14px;
     font-weight: 700;
     line-height: 1.35;

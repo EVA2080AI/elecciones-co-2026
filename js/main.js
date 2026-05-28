@@ -124,45 +124,9 @@ function initTheme() {
     });
 }
 
-/* Header scroll effect */
-function initHeaderScroll() {
-    const navbar = document.querySelector('.navbar');
-    if (!navbar) return;
-    
-    let lastScroll = 0;
-    
-    function handleScroll() {
-        const currentScroll = window.pageYOffset;
-        
-        // Add scrolled class when scrolled down
-        if (currentScroll > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-        
-        // Hide/show on scroll direction
-        if (currentScroll > lastScroll && currentScroll > 100) {
-            navbar.style.transform = 'translateY(-100%)';
-        } else {
-            navbar.style.transform = 'translateY(0)';
-        }
-        
-        lastScroll = currentScroll;
-    }
-    
-    // Throttle scroll events
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                handleScroll();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true });
-}
+/* Navbar fija y sobria — sin auto-hide al scroll, sin clase scrolled.
+   La navegación que se mueve sola interrumpe la lectura. */
+function initHeaderScroll() { /* no-op */ }
 
 function injectStructuredData() {
     const isHome = document.body.dataset.page === 'inicio';
@@ -239,8 +203,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('kpi-leader')) safeCall(updateKPIs);
 
     /* 8. News feed — auto-refresh sólo cuando la pestaña está visible para
-       no gastar cuota de RSS / APIs externas cuando el usuario no está mirando. */
+       no gastar cuota de RSS / APIs externas cuando el usuario no está mirando.
+       PASO 8.0: hidratar instantáneamente desde cache/fallback para que el
+       usuario nunca vea esqueletos. Luego fetchLiveNews reemplaza con datos
+       frescos cuando lleguen. */
     if (document.getElementById('timelineList')) {
+        if (window.hydrateNewsFromCacheOrFallback) safeCall(hydrateNewsFromCacheOrFallback);
         document.getElementById('refreshBtn')?.addEventListener('click', fetchLiveNews);
         safeCall(fetchLiveNews);
         let newsTimer = null;

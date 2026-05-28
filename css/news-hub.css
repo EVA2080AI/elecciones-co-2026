@@ -111,7 +111,7 @@
 
 /* News title con mejor tipografía */
 .news-title {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Source Serif 4', Georgia, serif;
     font-size: 15.5px;
     font-weight: 700;
     line-height: 1.4;
@@ -192,7 +192,7 @@
 }
 
 .chip {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 12.5px;
     font-weight: 600;
     padding: 8px 14px;
@@ -359,7 +359,7 @@
 }
 
 .news-stat-value {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Source Serif 4', Georgia, serif;
     font-size: 32px;
     font-weight: 800;
     background: linear-gradient(
@@ -444,7 +444,7 @@
     color: #fff;
     padding: 6px 14px;
     border-radius: 20px;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Source Serif 4', Georgia, serif;
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;

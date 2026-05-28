@@ -14,8 +14,8 @@ window.CANDIDATES = {
         ideology: 'Derecha institucional',
         slogan: '"Orden, firmeza y corazón"',
         baseSolidez: 75,
-        /* Foto real desde internet (fallback a SVG si falla) */
-        photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Paloma_Valencia_2020.jpg/440px-Paloma_Valencia_2020.jpg',
+        /* Foto local 400×400 optimizada (Wikipedia Commons CC BY-SA, ver /datos.html) */
+        photo: './assets/foto-paloma.jpg',
         proposals: [
             'Seguridad total e inversión privada',
             'Reactivación de hidrocarburos',
@@ -34,7 +34,7 @@ window.CANDIDATES = {
         ideology: 'Izquierda progresista',
         slogan: '"El poder de la verdad"',
         baseSolidez: 78,
-        photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Iv%C3%A1n_Cepeda_2018.jpg/440px-Iv%C3%A1n_Cepeda_2018.jpg',
+        photo: './assets/foto-cepeda.jpg',
         proposals: [
             'Continuidad de reformas sociales',
             'Austeridad republicana y transición energética',
@@ -53,7 +53,7 @@ window.CANDIDATES = {
         ideology: 'Derecha radical',
         slogan: '"13 milagros para salvar a Colombia"',
         baseSolidez: 72,
-        photo: 'https://www.abelardodelaespriella.com/wp-content/uploads/2023/08/abelardo-de-la-espriella-foto-perfil.jpg',
+        photo: './assets/foto-tigre.jpg',
         proposals: [
             '10 megacárceles y seguridad implacable',
             'Reducción del Estado en 40%',

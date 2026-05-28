@@ -43,6 +43,9 @@ body.dark {
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Inter', sans-serif;
+    /* Body cómodo para lectura editorial — sube de 14-15px a 17px con interlineado generoso. */
+    font-size: 17px;
+    line-height: 1.65;
     margin: 0;
     background: var(--bg-gradient);
     color: var(--text);
@@ -50,7 +53,14 @@ body {
     flex-direction: column;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     transition: background 0.4s ease, color 0.4s ease;
+}
+/* Selección con acento Colombia (amarillo institucional) */
+::selection {
+    background: rgba(252, 209, 22, 0.4);
+    color: var(--primary);
 }
 
 /* Skip link for a11y */
