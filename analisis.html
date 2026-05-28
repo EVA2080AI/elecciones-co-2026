@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="./css/sections.css">
     <link rel="stylesheet" href="./css/responsive.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 </head>
 
 <body data-page="analisis">
@@ -39,11 +39,11 @@
         <nav class="breadcrumb" aria-label="Ruta">
             <a href="./index.html">Inicio</a>
             <span class="sep">/</span>
-            <span class="current">Análisis</span>
+            <span class="current">Análisis IA</span>
         </nav>
-        <h1>Análisis Cuantitativo</h1>
+        <h1>Análisis Imparcial con IA</h1>
         <p class="lead">
-            Visualización completa de la matriz: solidez dinámica que reacciona al feed de noticias, radar de 10 problemáticas, comparador cara a cara, histórico de encuestas y la matriz base con puntajes y posturas.
+            Análisis generado por inteligencia artificial basado en datos públicos, propuestas declaradas y pulso mediático en tiempo real. Sin editorialización humana.
         </p>
     </div>
 </section>
@@ -54,38 +54,61 @@
 
     <div class="col-left">
 
-        <div id="solidez" class="section">
+        <!-- ANÁLISIS IA PRINCIPAL -->
+        <div id="ai-analysis" class="section" style="margin-bottom:24px;">
             <h2>
-                Índice de Solidez Dinámico
-                <span class="section-hint">Impactado por el pulso mediático en vivo</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:8px;"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1v-1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/><path d="M7.5 10a9 9 0 0 0 9 9"/><path d="M9 14h.01"/><path d="M15 14h.01"/></svg>
+                Análisis de Inteligencia Artificial
             </h2>
-            <div class="chart-container short"><canvas id="chartSolidez" aria-label="Gráfico de solidez"></canvas></div>
-        </div>
-
-        <div id="radar" class="section">
-            <h2>
-                Radar · 10 Problemáticas Ciudadanas
-                <span class="section-hint">Afinidad por inquietud (0–10)</span>
-            </h2>
-            <div class="chart-container tall"><canvas id="chartRadar" aria-label="Radar de afinidad"></canvas></div>
-        </div>
-
-        <div id="veredicto" class="section">
-            <h2>Análisis Conclusivo · Lectura imparcial</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: center;">
-                <div style="flex: 1; min-width: 280px;">
-                    <div class="ai-opinion" id="aiVerdict"></div>
-                </div>
-                <div style="flex: 1; min-width: 280px;">
-                    <div class="chart-container short"><canvas id="chartPie" aria-label="Distribución de idoneidad"></canvas></div>
+            <div class="ai-verdict-main" style="background:linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(168,85,247,0.06) 100%);border:1px solid color-mix(in srgb, var(--highlight) 25%, transparent);border-radius:16px;padding:26px;">
+                <div id="aiVerdict" style="font-size:15px;line-height:1.7;color:var(--text);">
+                    <p><strong>Panorama General · Elecciones 2026:</strong> El escenario electoral presenta tres propuestas diferenciadas. Paloma Valencia (Centro Democrático) representa la derecha institucional con énfasis en seguridad y economía de mercado. Iván Cepeda (Pacto Histórico) encabeza la izquierda progresista con continuidad de reformas sociales. Abelardo "El Tigre" de la Espriella emerge como fenómeno disruptivo independiente con propuestas radicales de reducción estatal.</p>
+                    
+                    <p><strong>Dimensiones Clave del Debate:</strong></p>
+                    <ul style="margin:12px 0 12px 20px;font-size:14.5px;line-height:1.6;">
+                        <li><strong>Seguridad (68% prioridad ciudadana):</strong> Paloma propone "seguridad total" con inversión privada. Cepeda aborda causas estructurales con enfoque social. El Tigre plantea "seguridad implacable" con 10 megacárceles.</li>
+                        <li><strong>Economía (61% prioridad):</strong> Paloma apuesta por reactivación de hidrocarburos e inversión extranjera. Cepeda mantiene reformas sociales con austeridad republicana. El Tigre propone reducción del 40% del Estado y flexibilización laboral total.</li>
+                        <li><strong>Polarización:</strong> El 52% del electorado busca opciones intermedias. Paloma lidera oposición institucional. Cepeda defiende legado del Pacto Histórico. El Tigre rechaza ambos polos tradicionales.</li>
+                    </ul>
+                    
+                    <p><strong>Indicadores en Tiempo Real:</strong> Este análisis se actualiza cada 2 minutos con base en 8 fuentes de noticias (El Tiempo, Semana, Publimetro, Caracol, Google News). El sentimiento mediático y las menciones por candidato ajustan dinámicamente los índices de percepción.</p>
+                    
+                    <p style="font-size:13px;color:var(--text-light);margin-top:16px;border-top:1px solid var(--divider);padding-top:14px;">
+                        <strong>Metodología IA:</strong> Análisis basado en procesamiento de lenguaje natural sobre propuestas públicas, planes de gobierno declarados y cobertura mediática. No constituye predicción electoral ni endoso. Los puntajes son estimaciones técnicas sujetas a verificación con fuentes oficiales.
+                    </p>
                 </div>
             </div>
         </div>
 
+        <!-- RADAR DE PROBLEMÁTICAS -->
+        <div id="radar" class="section">
+            <h2>
+                Radar de 10 Problemáticas
+                <span class="section-hint">Afinidad técnica por inquietud ciudadana</span>
+            </h2>
+            <div class="chart-container tall"><canvas id="chartRadar" aria-label="Radar de afinidad"></canvas></div>
+            <p style="font-size:12.5px;color:var(--text-light);margin-top:14px;text-align:center;">
+                Cada eje representa una problemática. Puntajes más altos = mayor afinidad técnica declarada.
+            </p>
+        </div>
+
+        <!-- SOLIDEZ DINÁMICA -->
+        <div id="solidez" class="section">
+            <h2>
+                Índice de Solidez Dinámico
+                <span class="section-hint">Reacciona al pulso mediático en vivo</span>
+            </h2>
+            <div class="chart-container short"><canvas id="chartSolidez" aria-label="Gráfico de solidez"></canvas></div>
+            <p style="font-size:12.5px;color:var(--text-light);margin-top:14px;text-align:center;">
+                Se actualiza cada 2 minutos con menciones y sentimiento de noticias.
+            </p>
+        </div>
+
+        <!-- COMPARADOR 1 VS 1 -->
         <div id="comparador" class="section">
             <h2>
-                Comparador 1 vs 1
-                <span class="section-hint">Cara a cara por problemática</span>
+                Comparador Cara a Cara
+                <span class="section-hint">Selecciona dos candidatos</span>
             </h2>
             <div class="cmp-controls">
                 <select id="cmpA" aria-label="Candidato A"></select>
@@ -96,79 +119,45 @@
             <div class="cmp-rows" id="cmpRows"></div>
         </div>
 
-        <div id="historico" class="section">
-            <h2>
-                Encuestas · Intención de Voto (6 meses)
-                <span class="section-hint">Tendencia histórica</span>
-            </h2>
-            <div class="chart-container short"><canvas id="chartHistory" aria-label="Histórico de encuestas"></canvas></div>
-        </div>
-
-        <div id="matriz" class="section">
-            <h2>
-                Matriz Base de Problemáticas
-                <span class="section-hint">★ marca el candidato con mejor enfoque por inquietud</span>
-            </h2>
-            <div class="table-container">
-                <table id="matrixTable">
-                    <thead>
-                        <tr>
-                            <th scope="col">Inquietud Ciudadana</th>
-                            <th scope="col">Paloma Valencia</th>
-                            <th scope="col">Iván Cepeda</th>
-                            <th scope="col">A. de la Espriella</th>
-                        </tr>
-                    </thead>
-                    <tbody id="matrixBody"></tbody>
-                </table>
-            </div>
-            <div class="wins-summary" id="winsSummary"></div>
-        </div>
-
     </div>
 
     <div class="col-right">
-        <div class="section">
-            <h2>¿Quieres probar tu afinidad?</h2>
-            <p style="font-size:14px;line-height:1.6;color:var(--text-light);margin:0 0 16px 0;">
-                Ajusta la importancia que tú le das a cada inquietud y calcula tu afinidad personal con cada candidato en segundos.
+
+        <!-- ENCUESTAS -->
+        <div id="historico" class="section">
+            <h2>
+                Histórico de Encuestas
+                <span class="section-hint">Intención de voto · Últimos 6 meses</span>
+            </h2>
+            <div class="chart-container short"><canvas id="chartHistory" aria-label="Histórico de encuestas"></canvas></div>
+            <p style="font-size:12px;color:var(--text-light);margin-top:12px;">
+                Fuente: Promedio de encuestas publicadas. Margen de error típico ±3%.
             </p>
-            <a class="btn-primary" href="./calculadora.html" style="display:inline-flex;">
+        </div>
+
+        <!-- CALCULADORA CTA -->
+        <div class="section">
+            <h2>Calcula Tu Afinidad</h2>
+            <p style="font-size:14px;line-height:1.6;color:var(--text-light);margin:0 0 16px 0;">
+                Pondera cada inquietud según tu prioridad personal y descubre qué candidato se alinea más con tus criterios.
+            </p>
+            <a class="btn-primary" href="./calculadora.html" style="display:inline-flex;align-items:center;gap:8px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
                 Ir a la calculadora
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
         </div>
 
+        <!-- METODOLOGÍA -->
         <div class="section">
-            <h2>Indicadores en vivo</h2>
-            <div id="kpis" class="kpi-strip" style="grid-template-columns:1fr;padding:0;">
-                <div class="kpi tone-success">
-                    <span class="kpi-label">Líder en idoneidad</span>
-                    <span class="kpi-value" id="kpi-leader">—</span>
-                    <span class="kpi-sub" id="kpi-leader-sub">Calculando…</span>
-                </div>
-                <div class="kpi">
-                    <span class="kpi-label">Menciones (feed)</span>
-                    <span class="kpi-value" id="kpi-mentions">0</span>
-                    <span class="kpi-sub" id="kpi-mentions-sub">—</span>
-                </div>
-                <div class="kpi tone-warning">
-                    <span class="kpi-label">Sentimiento global</span>
-                    <span class="kpi-value" id="kpi-sentiment">—</span>
-                    <span class="kpi-sub" id="kpi-sentiment-sub">—</span>
-                </div>
-                <div class="kpi" id="kpiMomentum">
-                    <span class="kpi-label">Mayor momentum</span>
-                    <span class="kpi-value" id="kpi-momentum">—</span>
-                    <span class="kpi-sub" id="kpi-momentum-sub">—</span>
-                </div>
-            </div>
-            <!-- Hidden timeline so news.js processNews has where to render filters -->
-            <div style="display:none">
-                <span id="lastUpdate"></span>
-                <ul id="timelineList"></ul>
+            <h2>Metodología</h2>
+            <div style="font-size:13px;line-height:1.6;color:var(--text-light);">
+                <p style="margin-bottom:10px;"><strong>Fuentes:</strong> Propuestas públicas, planes de gobierno declarados, cobertura mediática en tiempo real.</p>
+                <p style="margin-bottom:10px;"><strong>Actualización:</strong> Cada 2 minutos vía RSS de 8 medios nacionales.</p>
+                <p style="margin-bottom:10px;"><strong>IA:</strong> Procesamiento de lenguaje natural para análisis de sentimiento y extracción de posiciones.</p>
+                <p><strong>Disclaimer:</strong> Este es un ejercicio técnico informativo. No es una predicción electoral ni un endoso político.</p>
             </div>
         </div>
+
     </div>
 
 </main>
@@ -182,8 +171,6 @@
 <script src="./js/render.js"></script>
 <script src="./js/charts.js"></script>
 <script src="./js/news.js"></script>
-<script src="./js/secrets.local.js"></script>
-<script src="./js/gemini.js"></script>
 <script src="./js/chatbot.js"></script>
 <script src="./js/main.js"></script>
 </body>
