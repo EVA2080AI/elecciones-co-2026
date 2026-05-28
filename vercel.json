@@ -1,4 +1,3 @@
-# Vercel Serverless Functions Configuration
 {
   "crons": []
 }
