@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="./css/sections.css">
     <link rel="stylesheet" href="./css/responsive.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 </head>
 
 <body data-page="noticias">
@@ -111,7 +111,10 @@
     <div class="col-right">
 
         <div id="sentiment" class="section">
-            <h2>Termómetro de sentimiento</h2>
+            <h2>Tono mediático estimado</h2>
+            <p style="font-size:12px;color:var(--text-light);margin:-6px 0 14px 0;line-height:1.5;">
+                Heurística simple basada en palabras clave de los titulares — <strong>no</strong> es análisis de sentimiento profesional. Útil como indicio, no como verdad.
+            </p>
             <div class="gauges-grid" id="gaugesGrid"></div>
         </div>
 

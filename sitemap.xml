@@ -83,4 +83,11 @@
         <priority>0.6</priority>
     </url>
 
+    <url>
+        <loc>https://eleccionespresidenciales2026.com/datos.html</loc>
+        <lastmod>2026-05-28</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
 </urlset>

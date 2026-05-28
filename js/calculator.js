@@ -12,18 +12,42 @@ function priorityLabel(v) {
     return 'crítico';
 }
 
+/* Valor inicial: 5 (importante) en todos. Esto produce un cálculo de
+   afinidad inmediato al abrir la calculadora y reduce la fricción de
+   tener que mover sliders antes de ver resultado. Si la URL trae query
+   params (?p1=7&p2=3...) los usamos en su lugar para permitir compartir. */
+function parseSlidersFromURL() {
+    const params = new URLSearchParams(location.search);
+    const vals = {};
+    PROBLEMS.forEach((_, i) => {
+        const v = params.get('p' + (i + 1));
+        if (v !== null) {
+            const n = parseInt(v, 10);
+            if (!isNaN(n) && n >= 0 && n <= 10) vals[i] = n;
+        }
+    });
+    return vals;
+}
+
 function buildSliders() {
     const c = document.getElementById('slidersContainer');
     if (!c) return;
-    c.innerHTML = PROBLEMS.map((p, i) => `
+    const fromURL = parseSlidersFromURL();
+    const hasShareLink = Object.keys(fromURL).length > 0;
+    c.innerHTML = PROBLEMS.map((p, i) => {
+        const initial = i in fromURL ? fromURL[i] : 5;
+        const pl = priorityLabel(initial);
+        const level = initial === 0 ? 'none' : initial <= 4 ? 'low' : initial <= 7 ? 'mid' : 'high';
+        return `
         <div class="slider-row" data-idx="${i}">
             <label for="sl-${i}">${p.id}. ${p.label}</label>
             <div class="controls">
-                <input type="range" id="sl-${i}" min="0" max="10" step="1" value="0" data-idx="${i}" aria-label="Importancia ${p.label}">
-                <span class="val" id="vl-${i}">0</span>
+                <input type="range" id="sl-${i}" min="0" max="10" step="1" value="${initial}" data-idx="${i}" style="--fill:${initial*10}%;" aria-label="Importancia ${p.label}">
+                <span class="val" id="vl-${i}">${initial}</span>
             </div>
-            <span class="priority-tag" id="ptag-${i}">sin definir</span>
-        </div>`).join('');
+            <span class="priority-tag" id="ptag-${i}" data-level="${level}">${pl}</span>
+        </div>`;
+    }).join('');
     c.querySelectorAll('input[type=range]').forEach(inp => {
         inp.addEventListener('input', e => {
             const v = parseInt(e.target.value, 10);
@@ -39,6 +63,7 @@ function buildSliders() {
             computeAffinity();
         });
     });
+    if (hasShareLink) showToast('Cargando preferencias desde el enlace compartido');
 }
 
 /* Calcula afinidad: normalizada por problema (cada inquietud contribuye
@@ -98,19 +123,52 @@ function resetSliders() {
         const ptag = document.getElementById('ptag-' + i);
         if (ptag) { ptag.textContent = 'sin definir'; ptag.dataset.level = 'none'; }
     });
+    /* limpia query params si venían de un enlace compartido */
+    if (location.search) history.replaceState(null, '', location.pathname);
     computeAffinity();
     showToast('Calculadora reiniciada');
 }
 
-function shareResults() {
-    if (!state.lastAffinity) return;
+function buildShareURL() {
+    const vals = PROBLEMS.map((_, i) =>
+        parseInt(document.getElementById('sl-' + i).value, 10)
+    );
+    const params = vals.map((v, i) => `p${i+1}=${v}`).join('&');
+    return `${location.origin}${location.pathname}?${params}`;
+}
+
+async function shareResults() {
+    if (!state.lastAffinity) {
+        showToast('Mueve al menos un slider antes de compartir');
+        return;
+    }
     const rel = state.lastAffinity;
     const lines = CAND_KEYS.map(k => `${CANDIDATES[k].name}: ${rel[k].toFixed(1)}%`).join('\n');
-    const text = `Mi afinidad electoral · Colombia 2026\n\n${lines}\n\nCalculado en Elecciones Presidenciales 2026.`;
+    const url = buildShareURL();
+    const text = `Mi afinidad electoral · Colombia 2026\n\n${lines}\n\nCalcula la tuya: ${url}`;
+
+    /* Si hay Web Share API (móvil), usar nativo. Si no, copiar URL al portapapeles. */
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'Mi afinidad electoral · Colombia 2026',
+                text: lines,
+                url
+            });
+            return;
+        } catch (e) {
+            /* user cancelled — fallthrough al clipboard */
+        }
+    }
     if (navigator.clipboard) {
-        navigator.clipboard.writeText(text).then(() => showToast('Resultado copiado al portapapeles'));
+        try {
+            await navigator.clipboard.writeText(text);
+            showToast('Enlace + resultado copiados al portapapeles');
+        } catch {
+            showToast('No se pudo copiar — copia el enlace manualmente');
+        }
     } else {
-        showToast('Clipboard no disponible');
+        prompt('Copia tu enlace personal:', url);
     }
 }
 

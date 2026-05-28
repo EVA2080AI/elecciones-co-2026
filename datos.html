@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Datos abiertos · Metodología y descarga · Colombia 2026</title>
+    <meta name="description" content="Matriz de afinidad descargable en JSON y CSV. Metodología, fuentes y trazabilidad de los puntajes técnicos del sitio Elecciones Presidenciales Colombia 2026.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#003893">
+    <meta name="google-site-verification" content="JAsClEr0GB8K-33n_wmkLkP-TVci0RHSeBiCw-uOekg">
+    <link rel="canonical" href="https://eleccionespresidenciales2026.com/datos.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Datos abiertos · Colombia 2026">
+    <meta property="og:description" content="Descarga la matriz cruda en JSON / CSV. Sin filtros editoriales.">
+    <meta property="og:image" content="https://eleccionespresidenciales2026.com/assets/og-image.svg">
+
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/sections.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+</head>
+
+<body data-page="datos">
+
+<a href="#main" class="skip-link">Saltar al contenido</a>
+<div id="layout-nav"></div>
+
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <nav class="breadcrumb" aria-label="Ruta">
+            <a href="./index.html">Inicio</a>
+            <span class="sep">/</span>
+            <span class="current">Datos abiertos</span>
+        </nav>
+        <h1>Datos abiertos · Metodología y descarga</h1>
+        <p class="lead">
+            Toda la matriz de inquietudes ciudadanas × candidatos se publica como dato abierto, sin filtros editoriales. Úsala para tu propio análisis, periodismo, investigación o aplicación.
+        </p>
+    </div>
+</section>
+
+<div id="layout-disclaimer"></div>
+
+<main id="main" style="padding: 40px 5%; max-width: 1100px; margin: 0 auto;">
+
+<article class="prose">
+
+<h2>Descarga directa</h2>
+<p>La matriz completa incluye los puntajes técnicos preliminares (0-10), las posturas declaradas por cada candidato y el cálculo de afinidad técnica derivado de la matriz. Histórico de encuestas también incluido.</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:22px 0;">
+    <button id="dlJson" class="data-card-btn" type="button">
+        <span class="data-card-icon">{ }</span>
+        <span class="data-card-label">Descargar JSON completo</span>
+        <span class="data-card-sub">candidatos, matriz, encuestas, fuentes</span>
+    </button>
+    <button id="dlCsv" class="data-card-btn" type="button">
+        <span class="data-card-icon">≡</span>
+        <span class="data-card-label">Descargar CSV (matriz)</span>
+        <span class="data-card-sub">10 inquietudes × 3 candidatos</span>
+    </button>
+    <button id="dlPolls" class="data-card-btn" type="button">
+        <span class="data-card-icon">📈</span>
+        <span class="data-card-label">Descargar histórico encuestas</span>
+        <span class="data-card-sub">6 meses · CSV</span>
+    </button>
+</div>
+
+<div class="callout warning" style="margin:18px 0;">
+    <div class="callout-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><circle cx="12" cy="16" r="0.5" fill="currentColor"/></svg>
+    </div>
+    <div>
+        <strong>Puntajes preliminares.</strong> Las cifras 0-10 se asignaron a partir del discurso público y propuestas declaradas por cada candidato. La cita textual del plan de gobierno oficial está <strong>pendiente</strong> para cada celda. El JSON descargado marca cada puntaje con <code>"pending": true</code> mientras esto se verifica.
+    </div>
+</div>
+
+<h2>Metodología</h2>
+
+<h3>1. Selección de inquietudes (10)</h3>
+<p>Las 10 inquietudes ciudadanas se identificaron cruzando encuestas de opinión pública sobre lo que más preocupa al electorado colombiano de cara a 2026 (indecisión, polarización, abstención, seguridad institucional, etc.). El listado completo está en <a href="./acerca.html#inquietudes">Acerca</a>.</p>
+
+<h3>2. Asignación de puntajes técnicos (0-10)</h3>
+<p>Cada celda se calificó observando:</p>
+<ul>
+    <li>Coherencia interna del discurso del candidato sobre esa inquietud.</li>
+    <li>Especificidad de la propuesta (instrumentos, plazos, presupuesto).</li>
+    <li>Antecedente legislativo o de gestión del candidato en el área.</li>
+</ul>
+<p>El puntaje <strong>no</strong> evalúa la deseabilidad ideológica de la propuesta — un 9/10 en "Encuestas reales" significa que el candidato tiene una postura clara y articulada sobre ese tema, no que estemos de acuerdo con ella.</p>
+
+<h3>3. Cálculo de afinidad personal</h3>
+<p>La calculadora de afinidad usa una <strong>normalización por inquietud</strong>: cada inquietud contribuye al puntaje final en proporción al peso que <em>tú</em> le asignas (0-10), multiplicado por la fracción que cada candidato obtiene sobre el total en esa inquietud específica. Esto evita el sesgo estructural de que el candidato con puntajes absolutos más altos siempre gane.</p>
+
+<pre style="background:var(--bar-bg);padding:14px;border-radius:8px;font-size:12.5px;overflow-x:auto;">
+shares[k] = Σ (peso_inquietud[i] × score[k][i] / total_scores[i])
+afinidad[k] = shares[k] / Σ shares  × 100%
+</pre>
+
+<h3>4. Sentimiento mediático</h3>
+<p>El "tono mediático" del feed de noticias <strong>no</strong> es análisis profesional de sentimiento. Es un conteo de palabras clave positivas y negativas en los titulares, con la heurística:</p>
+<pre style="background:var(--bar-bg);padding:14px;border-radius:8px;font-size:12.5px;overflow-x:auto;">
+score = ((pos / (pos + neg)) × 100) - 50
+</pre>
+<p>Sirve como indicio direccional, no como métrica de precisión.</p>
+
+<h2>Lo que NO hacemos</h2>
+<ul>
+    <li>No financiamos ninguna campaña ni recibimos dinero de candidatos o partidos.</li>
+    <li>No editamos titulares: las noticias aparecen tal cual vienen del medio.</li>
+    <li>No recomendamos por quién votar. La calculadora muestra afinidad, no prescripción.</li>
+    <li>No usamos cookies de terceros ni rastreo. No guardamos datos del usuario.</li>
+</ul>
+
+<h2>Licencia de uso</h2>
+<p>Los datos descargables se publican bajo <strong>CC BY 4.0</strong>. Puedes reutilizarlos en cualquier medio o aplicación, citando "Elecciones Presidenciales Colombia 2026 · eleccionespresidenciales2026.com".</p>
+
+</article>
+
+</main>
+
+<div id="layout-foot"></div>
+<div id="layout-chat"></div>
+
+<script src="./js/secrets.local.js"></script>
+<script src="./js/data.js"></script>
+<script src="./js/utils.js"></script>
+<script src="./js/layout.js"></script>
+<script src="./js/render.js"></script>
+<script src="./js/gemini.js"></script>
+<script src="./js/chatbot.js"></script>
+<script src="./js/main.js"></script>
+<script>
+function downloadBlob(filename, content, mime) {
+    const blob = new Blob([content], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function buildFullJSON() {
+    return {
+        meta: {
+            site: 'Elecciones Presidenciales Colombia 2026',
+            url: 'https://eleccionespresidenciales2026.com',
+            generated_at: new Date().toISOString(),
+            license: 'CC BY 4.0',
+            note: 'Puntajes técnicos preliminares; fuentes primarias pendientes de citar.'
+        },
+        candidates: window.CANDIDATES,
+        problems: window.PROBLEMS,
+        score_sources: window.SCORE_SOURCES,
+        polls_history: window.POLL_HISTORY
+    };
+}
+
+function buildMatrixCSV() {
+    const header = ['inquietud_id','inquietud','candidato','puntaje','postura','fuente_pendiente'];
+    const rows = [header.join(',')];
+    PROBLEMS.forEach(p => {
+        CAND_KEYS.forEach(k => {
+            const src = SCORE_SOURCES[k] || {};
+            const fields = [
+                p.id,
+                `"${p.label.replace(/"/g,'""')}"`,
+                CANDIDATES[k].name,
+                p.scores[k],
+                `"${(p.positions[k] || '').replace(/"/g,'""')}"`,
+                src.pending ? 'sí' : 'no'
+            ];
+            rows.push(fields.join(','));
+        });
+    });
+    return rows.join('\n');
+}
+
+function buildPollsCSV() {
+    const header = ['mes','paloma','cepeda','tigre'];
+    return [header.join(','), ...POLL_HISTORY.map(p =>
+        [p.m, p.paloma, p.cepeda, p.tigre].join(',')
+    )].join('\n');
+}
+
+window.pageInit = function () {
+    document.getElementById('dlJson')?.addEventListener('click', () =>
+        downloadBlob('elecciones-2026-matriz.json', JSON.stringify(buildFullJSON(), null, 2), 'application/json'));
+    document.getElementById('dlCsv')?.addEventListener('click', () =>
+        downloadBlob('elecciones-2026-matriz.csv', buildMatrixCSV(), 'text/csv'));
+    document.getElementById('dlPolls')?.addEventListener('click', () =>
+        downloadBlob('elecciones-2026-encuestas.csv', buildPollsCSV(), 'text/csv'));
+};
+</script>
+
+<style>
+.data-card-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+}
+.data-card-btn:hover {
+    transform: translateY(-3px);
+    border-color: var(--highlight);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.10);
+}
+.data-card-icon {
+    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 26px;
+    color: var(--highlight);
+}
+.data-card-label {
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px;
+    color: var(--primary);
+}
+.data-card-sub { font-size: 12px; color: var(--text-light); }
+</style>
+
+</body>
+</html>

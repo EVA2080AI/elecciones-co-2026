@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Paloma Valencia · Colombia 2026">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="78%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="flag" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"  stop-color="#fcd116"/><stop offset="50%" stop-color="#fcd116"/>
+      <stop offset="50%" stop-color="#003893"/><stop offset="75%" stop-color="#003893"/>
+      <stop offset="75%" stop-color="#ce1126"/><stop offset="100%" stop-color="#ce1126"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#halo)"/>
+  <rect x="0" y="0" width="1200" height="10" fill="url(#flag)"/>
+  <circle cx="920" cy="315" r="180" fill="#3b82f6" opacity="0.95"/>
+  <circle cx="920" cy="315" r="180" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  <text x="920" y="362" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="800" font-size="160" fill="#fff" letter-spacing="-6">PV</text>
+  <text x="80" y="190" font-family="Outfit, sans-serif" font-weight="700" font-size="22" letter-spacing="4" fill="#fcd116">CENTRO DEMOCRÁTICO · COLOMBIA 2026</text>
+  <text x="80" y="295" font-family="Outfit, sans-serif" font-weight="800" font-size="92" fill="#fff" letter-spacing="-2">Paloma Valencia</text>
+  <text x="80" y="365" font-family="Outfit, sans-serif" font-weight="400" font-size="32" fill="#cbd5e1" font-style="italic">"Orden, firmeza y corazón"</text>
+  <text x="80" y="450" font-family="Inter, sans-serif" font-weight="500" font-size="22" fill="#94a3b8">Perfil y propuestas en</text>
+  <text x="80" y="488" font-family="Outfit, sans-serif" font-weight="700" font-size="28" fill="#fff">eleccionespresidenciales2026.com</text>
+</svg>

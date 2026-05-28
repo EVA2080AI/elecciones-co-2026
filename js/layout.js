@@ -136,6 +136,7 @@ function renderFooter() {
                 <ul>
                     <li><a href="${prefix}noticias.html">Minuto a minuto</a></li>
                     <li><a href="${prefix}denuncias.html">Reportar irregularidades</a></li>
+                    <li><a href="${prefix}datos.html">Datos abiertos (JSON · CSV)</a></li>
                     <li><a href="${prefix}faq.html">Preguntas frecuentes</a></li>
                     <li><a href="https://www.registraduria.gov.co/" target="_blank" rel="noopener">Registraduría Nacional ↗</a></li>
                 </ul>
@@ -198,11 +199,50 @@ function renderChatbot() {
     <div class="toast" id="toast" role="status" aria-live="polite"></div>`;
 }
 
+/* Cuando el CTA-band o footer entran al viewport, replegamos los FABs
+   (chat y back-to-top) para no tapar el botón principal del usuario. */
+function setupFabCollisionAvoid() {
+    const fabs = [document.getElementById('chatFab'), document.getElementById('backToTop')].filter(Boolean);
+    if (!fabs.length || !('IntersectionObserver' in window)) return;
+    const targets = [
+        ...document.querySelectorAll('.cta-band'),
+        document.querySelector('footer')
+    ].filter(Boolean);
+    if (!targets.length) return;
+    let collisions = 0;
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { collisions += e.isIntersecting ? 1 : -1; });
+        collisions = Math.max(0, collisions);
+        fabs.forEach(f => f.classList.toggle('fab-tucked', collisions > 0));
+    }, { rootMargin: '0px 0px -80px 0px', threshold: 0.01 });
+    targets.forEach(t => io.observe(t));
+}
+
+function renderBackToTop() {
+    /* FAB "Volver arriba" inyectado en todas las páginas. Sólo aparece
+       cuando el usuario hace scroll > 600px. */
+    if (document.getElementById('backToTop')) return;
+    const btn = document.createElement('button');
+    btn.id = 'backToTop';
+    btn.className = 'back-to-top';
+    btn.setAttribute('aria-label', 'Volver al inicio de la página');
+    btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>`;
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    document.body.appendChild(btn);
+
+    const toggle = () => btn.classList.toggle('visible', window.scrollY > 600);
+    window.addEventListener('scroll', toggle, { passive: true });
+    toggle();
+}
+
 function renderLayout() {
     renderNavbar();
     renderDisclaimer();
     renderFooter();
     renderChatbot();
+    renderBackToTop();
+    /* DOMContentLoaded ya disparó cuando renderLayout corre desde main.js */
+    requestAnimationFrame(setupFabCollisionAvoid);
 }
 
 window.renderLayout = renderLayout;

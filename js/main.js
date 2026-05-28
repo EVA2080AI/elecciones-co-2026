@@ -49,9 +49,17 @@ function initTheme() {
     if (localStorage.getItem('dashTheme') === 'dark') document.body.classList.add('dark');
     const btn = document.getElementById('themeToggle');
     if (!btn) return;
+    /* aria-pressed comunica el estado del toggle a lectores de pantalla. */
+    const syncAria = () => {
+        const dark = document.body.classList.contains('dark');
+        btn.setAttribute('aria-pressed', String(dark));
+        btn.setAttribute('aria-label', dark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+    };
+    syncAria();
     btn.addEventListener('click', () => {
         document.body.classList.toggle('dark');
         localStorage.setItem('dashTheme', document.body.classList.contains('dark') ? 'dark' : 'light');
+        syncAria();
         if (window.applyThemeToCharts) applyThemeToCharts();
     });
 }
@@ -130,11 +138,31 @@ document.addEventListener('DOMContentLoaded', () => {
     /* 7. KPIs */
     if (document.getElementById('kpi-leader')) safeCall(updateKPIs);
 
-    /* 8. News feed */
+    /* 8. News feed — auto-refresh sólo cuando la pestaña está visible para
+       no gastar cuota de RSS / APIs externas cuando el usuario no está mirando. */
     if (document.getElementById('timelineList')) {
         document.getElementById('refreshBtn')?.addEventListener('click', fetchLiveNews);
         safeCall(fetchLiveNews);
-        setInterval(fetchLiveNews, window.REFRESH_MS || 120000);
+        let newsTimer = null;
+        const REFRESH_MS = window.REFRESH_MS || 120000;
+        function startNewsTimer() {
+            if (newsTimer) return;
+            newsTimer = setInterval(() => { if (!document.hidden) fetchLiveNews(); }, REFRESH_MS);
+        }
+        function stopNewsTimer() {
+            if (newsTimer) { clearInterval(newsTimer); newsTimer = null; }
+        }
+        startNewsTimer();
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopNewsTimer();
+            } else {
+                /* al volver, refresca de inmediato si han pasado >= REFRESH_MS */
+                const last = state?.lastFetchTime?.getTime?.() || 0;
+                if (Date.now() - last >= REFRESH_MS) fetchLiveNews();
+                startNewsTimer();
+            }
+        });
         setInterval(tickRelativeTime, 30000);
     }
 

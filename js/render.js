@@ -47,9 +47,16 @@ function renderMatrixTable() {
             const isWinner = ws.includes(k);
             const cls = isWinner ? 'matrix-cell winner' : 'matrix-cell';
             const style = `--ccolor: ${CANDIDATES[k].color}`;
+            const src = window.scoreSourceFor ? scoreSourceFor(k, p.id) : null;
+            const pending = src?.pending;
+            /* Tooltip nativo con la nota de fuente — útil hasta tener page de fuentes */
+            const tooltip = src ? (src.note || src.quote || 'Fuente: ' + (src.url || 'pendiente')) : '';
+            const badge = pending
+                ? `<span class="score-badge score-preliminary" title="${tooltip.replace(/"/g, '&quot;')}">${p.scores[k]}/10 <small>~</small></span>`
+                : `<span class="score-badge" title="${tooltip.replace(/"/g, '&quot;')}">${p.scores[k]}/10</span>`;
             return `<td class="${cls}" style="${style}">
                 <div class="pos-text">${p.positions[k]}</div>
-                <span class="score-badge">${p.scores[k]}/10</span>
+                ${badge}
             </td>`;
         }).join('');
         return `<tr>
@@ -111,39 +118,40 @@ function renderGauges() {
     }).join('');
 }
 
+/* A11y · cada chip filter es un tab anunciable. tablist está en el HTML. */
+function chip(label, datasetAttr, value, isActive) {
+    return `<button class="chip${isActive ? ' active' : ''}" role="tab" aria-selected="${isActive}" tabindex="${isActive ? '0' : '-1'}" data-${datasetAttr}="${value}">${label}</button>`;
+}
+function wireTabs(container, datasetAttr, onChange) {
+    container.querySelectorAll('.chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+            container.querySelectorAll('.chip').forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+                b.tabIndex = -1;
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            btn.tabIndex = 0;
+            onChange(btn.dataset[datasetAttr]);
+        });
+    });
+}
+
 function renderNewsFilters() {
     const f = document.getElementById('newsFilter');
     if (!f) return;
-    let html = '<button class="chip active" data-f="all">Todas</button>';
-    CAND_KEYS.forEach(k => {
-        html += `<button class="chip" data-f="${k}">${CANDIDATES[k].short}</button>`;
-    });
+    let html = chip('Todas', 'f', 'all', true);
+    CAND_KEYS.forEach(k => { html += chip(CANDIDATES[k].short, 'f', k, false); });
     f.innerHTML = html;
-    f.querySelectorAll('.chip').forEach(btn => {
-        btn.addEventListener('click', () => {
-            f.querySelectorAll('.chip').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            state.filter = btn.dataset.f;
-            if (window.renderNews) window.renderNews();
-        });
-    });
+    wireTabs(f, 'f', v => { state.filter = v; if (window.renderNews) window.renderNews(); });
 
-    /* Source filter row */
     const sf = document.getElementById('sourceFilter');
     if (sf) {
-        let html2 = '<button class="chip active" data-s="all">Todos los medios</button>';
-        NEWS_SOURCES.forEach(s => {
-            html2 += `<button class="chip" data-s="${s.id}">${s.name}</button>`;
-        });
+        let html2 = chip('Todos los medios', 's', 'all', true);
+        NEWS_SOURCES.forEach(s => { html2 += chip(s.name, 's', s.id, false); });
         sf.innerHTML = html2;
-        sf.querySelectorAll('.chip').forEach(btn => {
-            btn.addEventListener('click', () => {
-                sf.querySelectorAll('.chip').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                state.sourceFilter = btn.dataset.s;
-                if (window.renderNews) window.renderNews();
-            });
-        });
+        wireTabs(sf, 's', v => { state.sourceFilter = v; if (window.renderNews) window.renderNews(); });
     }
 }
 

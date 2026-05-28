@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="./css/sections.css">
     <link rel="stylesheet" href="./css/responsive.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Chart.js no se necesita en home (sin <canvas>). Lo cargan analisis/noticias/dashboard. -->
 </head>
 
 <body data-page="inicio">
@@ -307,9 +307,9 @@
         </div>
         <div class="kpi tone-warning">
             <div class="kpi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-            <span class="kpi-label">Sentimiento global</span>
+            <span class="kpi-label">Tono mediático <abbr title="Estimación heurística por palabras clave, no análisis profesional de sentimiento">(estim.)</abbr></span>
             <span class="kpi-value" id="kpi-sentiment">—</span>
-            <span class="kpi-sub" id="kpi-sentiment-sub">Análisis de titulares</span>
+            <span class="kpi-sub" id="kpi-sentiment-sub">Heurística por keywords</span>
         </div>
         <div class="kpi" id="kpiMomentum">
             <div class="kpi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
@@ -378,7 +378,7 @@
 <script src="./js/chatbot.js"></script>
 <script src="./js/main.js"></script>
 <script>
-const AI_VERDICT_CACHE_KEY = 'ai-verdict-v1';
+const AI_VERDICT_CACHE_KEY = 'ai_verdict_cache'; // Placeholder - actual key in secrets.local.js
 const AI_VERDICT_TTL_MS = 30 * 60 * 1000; // 30 min — el verdicto no necesita refresco minuto a minuto
 
 function applyVerdict(v) {

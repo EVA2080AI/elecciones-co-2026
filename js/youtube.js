@@ -6,6 +6,7 @@
 const YT_BASE = 'https://www.googleapis.com/youtube/v3/search';
 const YT_CACHE_KEY = 'yt-videos-cache-v1';
 const YT_CACHE_TTL_MS = 10 * 60 * 1000; // 10 min · ahorra cuota diaria
+let YT_USE_PROXY = null; // descubrimiento perezoso de /api/youtube
 
 /* Queries por candidato + global. Mantenemos consultas amplias en español
    para maximizar cobertura del ciclo electoral. */
@@ -55,7 +56,27 @@ async function ytFetch(query, key) {
     })).filter(v => v.id && v.url);
 }
 
+async function ytViaProxy(query) {
+    const r = await fetch(`/api/youtube?q=${encodeURIComponent(query)}`);
+    if (r.status === 404 || r.status === 405) { YT_USE_PROXY = false; throw new Error('proxy unavailable'); }
+    if (!r.ok) {
+        const t = await r.text().catch(() => '');
+        throw new Error(`proxy ${r.status}: ${t.slice(0,120)}`);
+    }
+    const data = await r.json();
+    YT_USE_PROXY = true;
+    return data.items || [];
+}
+
 async function ytFetchWithRotation(query) {
+    /* Proxy primero (esconde keys); si no existe, rotación directa cliente. */
+    if (YT_USE_PROXY !== false) {
+        try { return await ytViaProxy(query); }
+        catch (e) {
+            if (YT_USE_PROXY !== false) throw e;
+            /* proxy confirmado ausente → fall through al método directo */
+        }
+    }
     const keys = ytKeys();
     if (!keys.length) throw new Error('Sin YT API key');
     let lastErr;
@@ -64,7 +85,6 @@ async function ytFetchWithRotation(query) {
         catch (e) {
             lastErr = e;
             const m = e.message || '';
-            /* Si es 403 (quota) o 400, prueba la siguiente key; otro error → corta. */
             if (!/^YT (400|403)/.test(m)) throw e;
             console.warn('YT key falló, probando backup:', m);
         }

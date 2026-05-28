@@ -5,6 +5,10 @@
 
 const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
 const GEMINI_TIMEOUT_MS = 18000;
+/* Si el sitio está en Vercel, /api/gemini esconde la API key. En GitHub Pages
+   ese endpoint devuelve 404 y caemos al fetch directo con la key del cliente.
+   Cacheamos la detección por sesión para no reintentar. */
+let GEMINI_USE_PROXY = null; // null = sin probar, true/false = decidido
 
 function geminiKey() {
     return window.SECRETS?.GEMINI_API_KEY || null;
@@ -13,11 +17,42 @@ function geminiModel() {
     return window.SECRETS?.GEMINI_MODEL || 'gemini-2.0-flash';
 }
 
-/* Petición genérica con timeout. systemInstruction y generationConfig opcionales. */
-async function geminiGenerate(prompt, opts = {}) {
+async function geminiViaProxy(prompt, opts) {
+    const ctrl = new AbortController();
+    const tm = setTimeout(() => ctrl.abort(), GEMINI_TIMEOUT_MS);
+    try {
+        const r = await fetch('/api/gemini', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                prompt,
+                system: opts.system,
+                temperature: opts.temperature ?? 0.4,
+                topP: opts.topP ?? 0.9,
+                maxTokens: opts.maxTokens ?? 600
+            }),
+            signal: ctrl.signal
+        });
+        if (r.status === 404 || r.status === 405) {
+            GEMINI_USE_PROXY = false;
+            throw new Error('proxy unavailable');
+        }
+        if (!r.ok) {
+            const t = await r.text().catch(() => '');
+            throw new Error(`proxy ${r.status}: ${t.slice(0, 160)}`);
+        }
+        const data = await r.json();
+        if (!data.text) throw new Error('proxy: respuesta vacía');
+        GEMINI_USE_PROXY = true;
+        return data.text;
+    } finally {
+        clearTimeout(tm);
+    }
+}
+
+async function geminiDirect(prompt, opts) {
     const key = geminiKey();
     if (!key) throw new Error('Sin Gemini key');
-
     const body = {
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
         generationConfig: {
@@ -26,32 +61,47 @@ async function geminiGenerate(prompt, opts = {}) {
             maxOutputTokens: opts.maxTokens ?? 600
         }
     };
-    if (opts.system) {
-        body.systemInstruction = { parts: [{ text: opts.system }] };
-    }
-
+    if (opts.system) body.systemInstruction = { parts: [{ text: opts.system }] };
     const url = `${GEMINI_BASE}/${geminiModel()}:generateContent?key=${key}`;
     const ctrl = new AbortController();
     const tm = setTimeout(() => ctrl.abort(), GEMINI_TIMEOUT_MS);
-    let resp;
     try {
-        resp = await fetch(url, {
+        const resp = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
             signal: ctrl.signal
         });
+        if (!resp.ok) {
+            const t = await resp.text().catch(() => '');
+            throw new Error(`Gemini ${resp.status}: ${t.slice(0, 160)}`);
+        }
+        const data = await resp.json();
+        const txt = data?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('\n').trim();
+        if (!txt) throw new Error('Gemini: respuesta vacía');
+        return txt;
     } finally {
         clearTimeout(tm);
     }
-    if (!resp.ok) {
-        const t = await resp.text().catch(() => '');
-        throw new Error(`Gemini ${resp.status}: ${t.slice(0, 160)}`);
+}
+
+/* Estrategia: proxy primero (esconde la key); si no existe, fetch directo
+   con la key del cliente. Decisión cacheada para no reintentar cada llamada. */
+async function geminiGenerate(prompt, opts = {}) {
+    if (GEMINI_USE_PROXY !== false) {
+        try { return await geminiViaProxy(prompt, opts); }
+        catch (e) {
+            /* Si fue el descubrimiento (404) o un error transitorio del proxy,
+               intenta directo. Si el proxy SÍ existe pero devolvió error real
+               (429, 500), no caemos al directo para no consumir cuota dual. */
+            if (GEMINI_USE_PROXY === false) {
+                /* proxy confirmado ausente → directo */
+            } else {
+                throw e;
+            }
+        }
     }
-    const data = await resp.json();
-    const txt = data?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('\n').trim();
-    if (!txt) throw new Error('Gemini: respuesta vacía');
-    return txt;
+    return geminiDirect(prompt, opts);
 }
 
 /* ---------- Chatbot ---------- */

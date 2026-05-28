@@ -147,6 +147,32 @@ window.PROBLEMS = [
       } }
 ];
 
+/* =========================================
+   TRAZABILIDAD DE PUNTAJES · sources por inquietud × candidato
+   Cada entrada apunta a la fuente primaria (plan de gobierno, declaración,
+   debate) que sustenta el puntaje técnico. Si la fuente está pendiente,
+   `pending: true` y la UI lo marca explícitamente como "puntaje preliminar".
+
+   FORMATO: { url, page (opcional), quote, pending? }
+   ========================================= */
+window.SCORE_SOURCES = {
+    /* TODO: completar con URLs y citas textuales reales de los planes de
+       gobierno publicados. Mientras tanto, todos los puntajes se marcan como
+       preliminares en la UI para no sobre-vender precisión que no tenemos. */
+    paloma: { url: '', quote: '', pending: true,
+              note: 'Puntaje basado en discurso público y propuestas declaradas por la candidata. Fuente primaria del plan de gobierno pendiente de citar.' },
+    cepeda: { url: '', quote: '', pending: true,
+              note: 'Puntaje basado en discurso público y propuestas declaradas por el candidato. Fuente primaria del plan de gobierno pendiente de citar.' },
+    tigre:  { url: '', quote: '', pending: true,
+              note: 'Puntaje basado en discurso público y propuestas declaradas por el candidato. Fuente primaria del plan de gobierno pendiente de citar.' }
+};
+
+window.scoreSourceFor = function (candidateKey, problemId) {
+    /* Hook futuro: cuando se llene el dato real, se puede sobre-escribir
+       por inquietud específica. Por ahora devolvemos la genérica. */
+    return window.SCORE_SOURCES[candidateKey] || { pending: true, note: 'Sin fuente registrada' };
+};
+
 window.POLL_HISTORY = [
     { m: 'Dic 25', paloma: 22, cepeda: 18, tigre: 14 },
     { m: 'Ene 26', paloma: 24, cepeda: 21, tigre: 17 },

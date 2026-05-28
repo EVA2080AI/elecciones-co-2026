@@ -81,8 +81,30 @@
     <div id="calc" class="section">
         <h2>
             Pondera tus prioridades
-            <span class="section-hint">Los sliders inician en 0 (sin definir). Mueve los que te importen.</span>
+            <span class="section-hint">Los sliders inician en <strong>5</strong> (importante). Ajusta los que más te interesen.</span>
         </h2>
+
+        <details class="nlp-calc" id="nlpDetails">
+            <summary>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+                <strong>¿Prefieres describir lo que te importa en tus propias palabras?</strong>
+                <span style="font-size:12.5px;color:var(--text-light);">La IA ajusta los sliders por ti.</span>
+            </summary>
+            <div class="nlp-body">
+                <p style="font-size:13px;color:var(--text-light);margin:6px 0 10px 0;">
+                    Escribe en una o dos frases qué buscas en un presidente. Ejemplo: <em>"Me importa la seguridad, la educación pública y que no haya corrupción. La economía me interesa menos."</em>
+                </p>
+                <textarea id="nlpInput" rows="3" placeholder="Describe en tus palabras qué te importa…" aria-label="Describe tus prioridades en lenguaje natural" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--card-border);background:var(--bar-bg);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;resize:vertical;"></textarea>
+                <div style="display:flex;gap:10px;margin-top:10px;align-items:center;flex-wrap:wrap;">
+                    <button type="button" id="nlpApply" class="btn-primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Ajustar sliders con IA
+                    </button>
+                    <span id="nlpStatus" style="font-size:12.5px;color:var(--text-light);"></span>
+                </div>
+            </div>
+        </details>
+
         <div class="calc-grid">
             <div class="sliders" id="slidersContainer"></div>
             <div class="calc-results" id="calcResults">
@@ -124,7 +146,7 @@
 
                 <div class="calc-actions">
                     <button class="reset-btn" id="resetSliders">Reiniciar</button>
-                    <button class="share-btn" id="shareResults">Copiar resultado</button>
+                    <button class="share-btn" id="shareResults">Compartir resultado</button>
                 </div>
             </div>
         </div>
@@ -155,14 +177,92 @@
 <div id="layout-foot"></div>
 <div id="layout-chat"></div>
 
+<script src="./js/secrets.local.js"></script>
 <script src="./js/data.js"></script>
 <script src="./js/utils.js"></script>
 <script src="./js/layout.js"></script>
 <script src="./js/render.js"></script>
 <script src="./js/calculator.js"></script>
-<script src="./js/secrets.local.js"></script>
 <script src="./js/gemini.js"></script>
 <script src="./js/chatbot.js"></script>
 <script src="./js/main.js"></script>
+<script>
+async function applyNLPWeights() {
+    const inputEl = document.getElementById('nlpInput');
+    const statusEl = document.getElementById('nlpStatus');
+    const btnEl = document.getElementById('nlpApply');
+    const txt = (inputEl?.value || '').trim();
+    if (!txt) { statusEl.textContent = 'Escribe primero qué te importa.'; return; }
+    if (txt.length < 12) { statusEl.textContent = 'Sé un poco más específico (al menos una frase completa).'; return; }
+    if (!window.geminiGenerate) {
+        statusEl.textContent = 'Función IA no disponible — ajusta los sliders manualmente.';
+        return;
+    }
+    btnEl.disabled = true;
+    statusEl.textContent = 'Analizando con IA…';
+
+    const problemsList = PROBLEMS.map(p => `${p.id}. ${p.label} (${p.short})`).join('\n');
+    const prompt = `Eres un clasificador de prioridades ciudadanas. El usuario describe en lenguaje libre qué le importa para elegir presidente. Tu trabajo: asignar un peso de 0 (no importa) a 10 (crítico) a cada una de las 10 inquietudes oficiales del sitio.
+
+Inquietudes (id 1-10):
+${problemsList}
+
+Reglas:
+- Devuelve EXCLUSIVAMENTE un JSON {"weights":{"1":n,"2":n,...,"10":n},"interpretation":"1 frase de cómo interpretaste al usuario"} sin texto extra.
+- Cada peso debe ser entero entre 0 y 10.
+- Si el usuario no menciona algo, asigna 5 (neutro/importante).
+- Si menciona algo como "no me importa" o "menos importante", baja a 1-3.
+- Si menciona algo como "crítico", "fundamental", "lo más importante", sube a 9-10.
+
+Texto del usuario:
+"""
+${txt.slice(0, 2000)}
+"""`;
+
+    try {
+        const raw = await window.geminiGenerate(prompt, { temperature: 0.1, maxTokens: 500 });
+        const m = raw.match(/\{[\s\S]*\}/);
+        if (!m) throw new Error('Respuesta sin JSON');
+        const parsed = JSON.parse(m[0]);
+        const weights = parsed.weights || {};
+        let applied = 0;
+        PROBLEMS.forEach((p, i) => {
+            const v = parseInt(weights[String(p.id)], 10);
+            if (isNaN(v) || v < 0 || v > 10) return;
+            const inp = document.getElementById('sl-' + i);
+            if (!inp) return;
+            inp.value = v;
+            inp.style.setProperty('--fill', (v * 10) + '%');
+            document.getElementById('vl-' + i).textContent = v;
+            const ptag = document.getElementById('ptag-' + i);
+            if (ptag) {
+                const labels = ['sin definir','irrelevante','irrelevante','poco importante','poco importante','importante','importante','muy importante','muy importante','crítico','crítico'];
+                ptag.textContent = labels[v] || 'importante';
+                ptag.dataset.level = v === 0 ? 'none' : v <= 4 ? 'low' : v <= 7 ? 'mid' : 'high';
+            }
+            applied++;
+        });
+        if (applied === 0) throw new Error('Ningún peso válido recibido');
+        if (window.computeAffinity) computeAffinity();
+        statusEl.innerHTML = parsed.interpretation
+            ? `<strong>Interpretación IA:</strong> ${parsed.interpretation}`
+            : `${applied} prioridades ajustadas.`;
+        document.getElementById('calcResults')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (e) {
+        statusEl.textContent = 'No se pudo procesar con IA (cuota agotada o error de red). Ajusta los sliders manualmente.';
+        console.warn('NLP calc fail:', e);
+    } finally {
+        btnEl.disabled = false;
+    }
+}
+
+window.pageInit = function () {
+    document.getElementById('nlpApply')?.addEventListener('click', applyNLPWeights);
+    /* Enter en textarea con Cmd/Ctrl */
+    document.getElementById('nlpInput')?.addEventListener('keydown', e => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') applyNLPWeights();
+    });
+};
+</script>
 </body>
 </html>
