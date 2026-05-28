@@ -3,19 +3,19 @@
               matrix, gauges, cloud, news timeline
    ========================================= */
 
-/* KPI STRIP */
+/* KPI STRIP - más compacto */
 .kpi-strip {
-    padding: 24px 5% 10px 5%;
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    padding: 16px 5% 8px 5%;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
     max-width: 1600px; margin: 0 auto; width: 100%;
 }
 .kpi {
     background: var(--card-bg);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--card-border); border-radius: 16px;
-    padding: 20px 22px; display: flex; flex-direction: column; gap: 8px;
+    border: 1px solid var(--card-border); border-radius: 14px;
+    padding: 16px 18px; display: flex; flex-direction: column; gap: 6px;
     position: relative; overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .kpi:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,0.06); }
 .kpi-label {
@@ -24,7 +24,7 @@
     display: flex; align-items: center; gap: 8px;
 }
 .kpi-value {
-    font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 800;
+    font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 800;
     color: var(--primary); letter-spacing: -0.5px; line-height: 1.1;
 }
 .kpi-sub { font-size: 12px; color: var(--text-light); font-weight: 500; }
@@ -43,18 +43,18 @@
 .trend-up { color: var(--success); font-weight: 600; }
 .trend-down { color: var(--danger); font-weight: 600; }
 
-/* CANDIDATE CARDS */
+/* CANDIDATE CARDS - más compactas */
 .candidates-grid {
-    padding: 18px 5% 10px 5%;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    padding: 12px 5% 8px 5%;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
     max-width: 1600px; margin: 0 auto; width: 100%;
 }
 .candidate-card {
     background: var(--card-bg);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--card-border); border-radius: 18px;
-    padding: 22px; position: relative; overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--card-border); border-radius: 16px;
+    padding: 18px; position: relative; overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .candidate-card:hover { transform: translateY(-4px); box-shadow: 0 16px 44px rgba(0,0,0,0.08); }
 .candidate-card::before {
@@ -93,32 +93,32 @@
 .proposal { font-size: 12.5px; color: var(--text); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
 .proposal::before { content: '▸'; color: var(--ccolor); font-weight: 700; flex-shrink: 0; }
 
-/* MAIN GRID */
+/* MAIN GRID - gaps reducidos */
 .main-container {
     flex: 1;
-    display: flex; gap: 24px;
-    padding: 14px 5% 50px 5%;
+    display: flex; gap: 16px;
+    padding: 12px 5% 32px 5%;
     max-width: 1600px; margin: auto; width: 100%;
 }
-.col-left  { flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 24px; }
-.col-right { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 24px; }
+.col-left  { flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 16px; }
+.col-right { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 16px; }
 
-/* SECTION */
+/* SECTION - más compacto */
 .section {
     background: var(--card-bg);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    padding: 28px; border-radius: 20px;
+    padding: 20px; border-radius: 16px;
     border: 1px solid var(--card-border);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
-    scroll-margin-top: 100px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    scroll-margin-top: 80px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.section:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(0, 0, 0, 0.06); }
+.section:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); }
 .section h2 {
     font-family: 'Source Serif 4', Georgia, serif; color: var(--primary);
-    margin: 0 0 22px 0;
+    margin: 0 0 16px 0;
     display: flex; justify-content: space-between; align-items: center;
-    font-size: 22px; font-weight: 700; gap: 10px; flex-wrap: wrap;
+    font-size: 20px; font-weight: 700; gap: 8px; flex-wrap: wrap;
 }
 .section-hint {
     font-size: 13px; font-weight: 500; color: var(--text-light);
@@ -478,12 +478,12 @@ tr:hover td { background-color: var(--bar-bg); }
 .win-pill .nm { font-size: 12px; color: var(--text-light); margin-top: 2px; font-weight: 600; }
 .win-pill .lb { font-size: 10px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
 
-/* TIMELINE */
-.timeline { list-style: none; padding: 0; margin: 0; max-height: 700px; overflow-y: auto; padding-right: 8px; }
+/* TIMELINE - más compacta */
+.timeline { list-style: none; padding: 0; margin: 0; max-height: 600px; overflow-y: auto; padding-right: 8px; }
 .timeline-item {
     border-left: 2px solid var(--divider);
-    padding: 0 0 22px 22px; position: relative;
-    transition: all 0.3s ease;
+    padding: 0 0 16px 18px; position: relative;
+    transition: all 0.2s ease;
 }
 .timeline-item:hover { border-left-color: var(--highlight); }
 .timeline-item::before {
@@ -548,17 +548,17 @@ tr:hover td { background-color: var(--bar-bg); }
 .ai-opinion p { margin: 8px 0; color: var(--text); }
 .ai-opinion strong { color: var(--primary); }
 
-/* AI VERDICT SECTION (nuevo para home) */
+/* AI VERDICT SECTION - más compacta */
 .ai-verdict-section {
     max-width: 1400px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto 24px auto;
     padding: 0 5%;
 }
 .ai-verdict-container {
     background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(168,85,247,0.06) 100%);
     border: 1px solid color-mix(in srgb, var(--highlight) 25%, transparent);
-    border-radius: 20px;
-    padding: 32px;
+    border-radius: 16px;
+    padding: 20px 24px;
     position: relative;
     overflow: hidden;
 }
@@ -572,8 +572,8 @@ tr:hover td { background-color: var(--bar-bg); }
 .ai-verdict-header {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 24px;
+    gap: 12px;
+    margin-bottom: 16px;
 }
 .ai-badge {
     display: inline-flex;
@@ -592,11 +592,11 @@ tr:hover td { background-color: var(--bar-bg); }
 }
 .ai-verdict-header h2 {
     font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 800;
     color: var(--primary);
     margin: 0;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
 }
 .ai-verdict-content {
     display: grid;
