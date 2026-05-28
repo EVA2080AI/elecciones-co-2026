@@ -33,17 +33,40 @@
 <a href="#main" class="skip-link">Saltar al contenido</a>
 <div id="layout-nav"></div>
 
-<section class="page-hero">
+<section class="page-hero hero-datos">
     <div class="page-hero-inner">
-        <nav class="breadcrumb" aria-label="Ruta">
-            <a href="./index.html">Inicio</a>
-            <span class="sep">/</span>
-            <span class="current">Datos abiertos</span>
-        </nav>
-        <h1>Datos abiertos · Metodología y descarga</h1>
-        <p class="lead">
-            Toda la matriz de inquietudes ciudadanas × candidatos se publica como dato abierto, sin filtros editoriales. Úsala para tu propio análisis, periodismo, investigación o aplicación.
-        </p>
+        <div class="page-hero-text">
+            <nav class="breadcrumb" aria-label="Ruta">
+                <a href="./index.html">Inicio</a>
+                <span class="sep">/</span>
+                <span class="current">Datos abiertos</span>
+            </nav>
+            <span class="page-hero-eyebrow">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                CC BY 4.0
+            </span>
+            <h1>Datos <em>abiertos</em> · metodología y descarga</h1>
+            <p class="lead">
+                Toda la matriz de inquietudes ciudadanas × candidatos se publica como dato abierto, sin filtros editoriales. Úsala para tu propio análisis, periodismo, investigación o aplicación.
+            </p>
+            <div class="page-hero-meta">
+                <div class="page-hero-meta-item"><span class="k">Filas</span><span class="v">30</span></div>
+                <div class="page-hero-meta-item"><span class="k">Formatos</span><span class="v">JSON<small> + CSV</small></span></div>
+                <div class="page-hero-meta-item"><span class="k">Licencia</span><span class="v">CC BY 4.0</span></div>
+            </div>
+        </div>
+        <div class="page-hero-visual">
+<pre class="hero-visual-data" aria-hidden="true"><span class="comment">// matriz cruda</span>
+{
+  <span class="key">"inquietud"</span>: <span class="str">"Seguridad"</span>,
+  <span class="key">"scores"</span>: {
+    <span class="key">"paloma"</span>: <span class="num">8</span>,
+    <span class="key">"cepeda"</span>: <span class="num">6</span>,
+    <span class="key">"tigre"</span>:  <span class="num">9</span>
+  },
+  <span class="key">"source_pending"</span>: <span class="num">true</span>
+}</pre>
+        </div>
     </div>
 </section>
 

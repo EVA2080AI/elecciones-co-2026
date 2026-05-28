@@ -38,22 +38,41 @@
 <a href="#main" class="skip-link">Saltar al contenido</a>
 <div id="layout-nav"></div>
 
-<section class="page-hero news-hero">
+<section class="page-hero hero-noticias">
     <div class="page-hero-inner">
-        <nav class="breadcrumb" aria-label="Ruta">
-            <a href="./index.html">Inicio</a>
-            <span class="sep">/</span>
-            <span class="current">Minuto a Minuto</span>
-        </nav>
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
-            <h1 style="margin:0;">Minuto a Minuto</h1>
-            <span class="live-indicator">
-                En Vivo
+        <div class="page-hero-text">
+            <nav class="breadcrumb" aria-label="Ruta">
+                <a href="./index.html">Inicio</a>
+                <span class="sep">/</span>
+                <span class="current">Minuto a Minuto</span>
+            </nav>
+            <span class="page-hero-eyebrow">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                Pulso en vivo
             </span>
+            <h1>Minuto a minuto del <em>proceso electoral</em></h1>
+            <p class="lead">
+                Cobertura informativa en tiempo real desde 7 fuentes: El Tiempo, Semana, Caracol y Google News. Feed agregado, videos en YouTube y tendencias del debate. Actualización cada 2 minutos.
+            </p>
+            <div class="page-hero-meta">
+                <div class="page-hero-meta-item"><span class="k">Fuentes</span><span class="v">7</span></div>
+                <div class="page-hero-meta-item"><span class="k">Refresco</span><span class="v">2<small>min</small></span></div>
+                <div class="page-hero-meta-item"><span class="k">Filtros</span><span class="v">3<small> candidatos</small></span></div>
+            </div>
         </div>
-        <p class="lead">
-            Cobertura informativa en tiempo real sobre las <strong>Elecciones Presidenciales Colombia 2026</strong> desde 7 fuentes oficiales. Análisis de sentimiento, menciones por candidato y tendencias del debate. <strong>Actualización automática cada 2 minutos.</strong>
-        </p>
+        <div class="page-hero-visual">
+            <div class="hero-visual-live" aria-hidden="true">
+                <div class="pulse-row">
+                    <span class="pulse-dot"></span>
+                    <span class="live-label">En vivo · hoy</span>
+                </div>
+                <ul>
+                    <li>Cobertura del Tribunal Electoral sobre topes de campaña<span class="src">El Tiempo · hace 4 min</span></li>
+                    <li>Debate presidencial confirmado para el 18 de mayo<span class="src">Semana · hace 12 min</span></li>
+                    <li>Misiones de observación MOE despliegan 5 000 voluntarios<span class="src">Caracol · hace 28 min</span></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </section>
 
