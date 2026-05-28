@@ -15,147 +15,70 @@ const NAV_ITEMS = [
 
     { id: 'candidatos', href: 'candidatos.html', label: 'Candidatos',
       submenu: {
-          title: 'Los 3 candidatos a la Presidencia',
-          subtitle: 'Perfiles completos · biografía · propuestas · 10 inquietudes',
-          columns: [
-              {
-                  heading: 'Perfiles',
-                  items: [
-                      { label: 'Paloma Valencia',        href: 'candidato/paloma.html', desc: 'Centro Democrático · Derecha institucional',  color: '#3b82f6' },
-                      { label: 'Iván Cepeda',            href: 'candidato/cepeda.html', desc: 'Pacto Histórico · Izquierda progresista',       color: '#a855f7' },
-                      { label: 'A. de la Espriella',     href: 'candidato/tigre.html',  desc: 'Independiente · Derecha radical',                color: '#ef4444' }
-                  ]
-              },
-              {
-                  heading: 'Comparar',
-                  items: [
-                      { label: 'Vista general · todos',     href: 'candidatos.html',           desc: 'Tres perfiles uno al lado del otro' },
-                      { label: 'Comparador 1 vs 1',         href: 'analisis.html#comparador',  desc: 'Cara a cara por cada inquietud' },
-                      { label: 'Matriz base',               href: 'analisis.html#matriz',      desc: 'Tabla completa 10 × 3' }
-                  ]
-              }
+          title: 'Candidatos',
+          items: [
+              { label: 'Paloma Valencia',    href: 'candidato/paloma.html',   desc: 'Centro Democrático · Derecha institucional', icon: 'users' },
+              { label: 'Iván Cepeda',        href: 'candidato/cepeda.html',   desc: 'Pacto Histórico · Izquierda progresista',    icon: 'users' },
+              { label: 'Abelardo de la Espriella', href: 'candidato/tigre.html', desc: 'Independiente · Derecha radical',           icon: 'users' },
+              { label: 'Ver todos',          href: 'candidatos.html',         desc: 'Compara los tres perfiles lado a lado',       icon: 'usersCompare' }
           ]
       }
     },
 
     { id: 'analisis', href: 'analisis.html', label: 'Análisis',
       submenu: {
-          title: 'Análisis cuantitativo',
-          subtitle: 'Datos objetivos · gráficos · matriz de propuestas',
-          columns: [
-              {
-                  heading: 'Indicadores',
-                  items: [
-                      { label: 'Índice de solidez',     href: 'analisis.html#solidez',     desc: 'Solidez dinámica con feed' },
-                      { label: 'Radar 10 problemáticas', href: 'analisis.html#radar',     desc: 'Afinidad por inquietud' },
-                      { label: 'Histórico de encuestas', href: 'analisis.html#historico', desc: 'Intención de voto · 6 meses' }
-                  ]
-              },
-              {
-                  heading: 'Comparativa',
-                  items: [
-                      { label: 'Comparador 1 vs 1', href: 'analisis.html#comparador', desc: 'Cara a cara por temática' },
-                      { label: 'Matriz base',       href: 'analisis.html#matriz',     desc: '10 inquietudes × 3 candidatos' },
-                      { label: 'Veredicto IA',      href: 'analisis.html#veredicto',  desc: 'Lectura imparcial de la matriz' }
-                  ]
-              }
+          title: 'Análisis',
+          items: [
+              { label: 'Índice de solidez',       href: 'analisis.html#solidez',     desc: 'Solidez dinámica de propuestas',     icon: 'barChart' },
+              { label: 'Radar de afinidad',       href: 'analisis.html#radar',       desc: 'Visualiza coincidencias por tema',   icon: 'radar' },
+              { label: 'Comparador 1 vs 1',       href: 'analisis.html#comparador',  desc: 'Compara candidatos cara a cara',    icon: 'usersCompare' },
+              { label: 'Veredicto IA',            href: 'analisis.html#veredicto',   desc: 'Análisis imparcial de la IA',       icon: 'ai' }
           ]
       }
     },
 
     { id: 'calculadora', href: 'calculadora.html', label: 'Calculadora',
       submenu: {
-          title: 'Calculadora de afinidad personal',
-          subtitle: 'Pondera tus prioridades y descubre tu match en 60 segundos',
-          columns: [
-              {
-                  heading: 'Modos',
-                  items: [
-                      { label: 'Sliders manuales',         href: 'calculadora.html',           desc: '10 inquietudes ponderadas' },
-                      { label: 'Describir en mis palabras', href: 'calculadora.html#nlpInput', desc: 'IA mapea tu frase a pesos' }
-                  ]
-              },
-              {
-                  heading: 'Después',
-                  items: [
-                      { label: 'Compartir resultado', href: 'calculadora.html', desc: 'URL personal · Web Share' },
-                      { label: 'Ver matriz completa', href: 'analisis.html#matriz', desc: 'Entiende los puntajes' }
-                  ]
-              }
+          title: 'Calculadora',
+          items: [
+              { label: 'Modo sliders',      href: 'calculadora.html',          desc: 'Pondera 10 inquietudes manualmente', icon: 'calculator' },
+              { label: 'Describir con IA',  href: 'calculadora.html#nlpInput', desc: 'La IA interpreta tus prioridades',   icon: 'ai', badge: 'Nuevo' },
+              { label: 'Ver matriz',        href: 'analisis.html#matriz',       desc: 'Entiende cómo se calculan los puntajes', icon: 'barChart' }
           ]
       }
     },
 
     { id: 'noticias', href: 'noticias.html', label: 'Minuto a Minuto',
       submenu: {
-          title: 'Pulso en vivo del proceso electoral',
-          subtitle: '7 fuentes RSS + YouTube · refresco cada 2 min',
-          columns: [
-              {
-                  heading: 'Feed',
-                  items: [
-                      { label: 'Feed agregado',     href: 'noticias.html#noticias', desc: 'Titulares de medios colombianos' },
-                      { label: 'Videos YouTube',    href: 'noticias.html#youtube',  desc: 'Cobertura audiovisual' },
-                      { label: 'Menciones en el tiempo', href: 'noticias.html#mentions', desc: 'Distribución horaria' }
-                  ]
-              },
-              {
-                  heading: 'Análisis',
-                  items: [
-                      { label: 'Tendencias del debate', href: 'noticias.html#cloud', desc: 'Nube de palabras del feed' },
-                      { label: 'Fuentes indexadas',     href: 'noticias.html#sources', desc: 'El Tiempo · Semana · Caracol +' }
-                  ]
-              }
+          title: 'Noticias',
+          items: [
+              { label: 'Feed de noticias',    href: 'noticias.html#noticias', desc: 'Agregador RSS de medios colombianos', icon: 'newspaper' },
+              { label: 'Videos YouTube',      href: 'noticias.html#youtube',  desc: 'Cobertura audiovisual en vivo',       icon: 'video' },
+              { label: 'Tendencias',          href: 'noticias.html#cloud',     desc: 'Nube de palabras del momento',        icon: 'ai' },
+              { label: 'Fuentes indexadas',   href: 'noticias.html#sources',  desc: 'El Tiempo, Semana, Caracol y más',    icon: 'fileText' }
           ]
       }
     },
 
     { id: 'denuncias', href: 'denuncias.html', label: 'Denuncias',
       submenu: {
-          title: 'Canales oficiales de denuncia',
-          subtitle: 'Este sitio NO recibe denuncias · esto te orienta hacia los canales del Estado',
-          columns: [
-              {
-                  heading: 'Autoridades',
-                  items: [
-                      { label: 'URIEL · Min. Interior',          href: 'denuncias.html#uriel',         desc: 'Línea 018000-93-9000' },
-                      { label: 'Registraduría Nacional',         href: 'denuncias.html#registraduria', desc: 'Logística electoral' },
-                      { label: 'Fiscalía General',               href: 'denuncias.html#fiscalia',      desc: 'Línea 122' }
-                  ]
-              },
-              {
-                  heading: 'Observación ciudadana',
-                  items: [
-                      { label: 'MOE · Misión Observación',  href: 'denuncias.html#moe',           desc: 'App "Pilas con el Voto"' },
-                      { label: 'Procuraduría',              href: 'denuncias.html#procuraduria',  desc: 'Vigilancia funcionarios' },
-                      { label: 'Defensoría del Pueblo',     href: 'denuncias.html#defensoria',    desc: 'Línea 144' }
-                  ]
-              }
+          title: 'Denuncias',
+          items: [
+              { label: 'Fiscalía General',       href: 'denuncias.html#fiscalia',     desc: 'Denuncia delitos electorales',        icon: 'alert' },
+              { label: 'Procuraduría',           href: 'denuncias.html#procuraduria', desc: 'Vigilancia de funcionarios',          icon: 'shield' },
+              { label: 'Registraduría',          href: 'denuncias.html#registraduria',desc: 'Denuncias de logística electoral',   icon: 'scale' },
+              { label: 'MOE Observación',        href: 'denuncias.html#moe',          desc: 'App "Pilas con el Voto"',            icon: 'users' }
           ]
       }
     },
 
     { id: 'datos', href: 'datos.html', label: 'Datos',
       submenu: {
-          title: 'Datos abiertos · metodología',
-          subtitle: 'JSON · CSV · licencia CC BY 4.0',
-          columns: [
-              {
-                  heading: 'Descarga',
-                  items: [
-                      { label: 'Matriz completa (JSON)',   href: 'datos.html#dlJson',  desc: 'Candidatos, matriz, encuestas' },
-                      { label: 'Matriz (CSV)',             href: 'datos.html#dlCsv',   desc: '30 filas · 10 inquietudes × 3' },
-                      { label: 'Encuestas históricas (CSV)', href: 'datos.html#dlPolls', desc: '6 meses de intención de voto' }
-                  ]
-              },
-              {
-                  heading: 'Documentación',
-                  items: [
-                      { label: 'Metodología',          href: 'datos.html#metodologia',    desc: 'Cómo se asignan los puntajes' },
-                      { label: 'Lo que NO hacemos',    href: 'datos.html#lo-que-no',      desc: 'Límites del proyecto' },
-                      { label: 'Licencia CC BY 4.0',   href: 'datos.html#licencia',       desc: 'Reúsalo citando la fuente' }
-                  ]
-              }
+          title: 'Datos',
+          items: [
+              { label: 'Matriz completa',      href: 'datos.html#dlJson',      desc: 'Descarga datos en JSON y CSV',      icon: 'download' },
+              { label: 'Metodología',        href: 'datos.html#metodologia', desc: 'Cómo se asignan los puntajes',     icon: 'fileText' },
+              { label: 'Licencia CC BY 4.0',  href: 'datos.html#licencia',    desc: 'Usa los datos libremente',         icon: 'scale' }
           ]
       }
     },
@@ -178,41 +101,48 @@ function activePageId() {
     return found ? found.id : '';
 }
 
+// Iconos SVG para el mega menú estilo Gaspar
+const MEGAMENU_ICONS = {
+    users: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    usersCompare: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M9 13v4"/><path d="M9 17l2-2"/><path d="M9 17l-2-2"/></svg>`,
+    barChart: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
+    radar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4v8c0 4-4 7.5-9 9-5-1.5-9-5-9-9V6l9-4z"/><path d="M12 6v10"/><path d="M6 10l6 6"/><path d="M18 10l-6 6"/></svg>`,
+    calculator: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>`,
+    ai: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+    newspaper: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0v-16"/><path d="M14 2v20"/><path d="M14 10h4"/><path d="M14 16h4"/></svg>`,
+    video: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M10 9l5 3-5 3V9z"/></svg>`,
+    alert: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+    shield: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    download: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
+    fileText: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
+    scale: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/></svg>`
+};
+
 function buildSubmenuHTML(item, prefix) {
     if (!item.submenu) return '';
     const sm = item.submenu;
-    const cols = sm.columns.map(col => `
+    // Usar items directos del submenu (formato Gaspar: icono + título + descripción)
+    const items = sm.items || [];
+    const cols = items.map(it => {
+        const iconSvg = MEGAMENU_ICONS[it.icon] || MEGAMENU_ICONS.users;
+        const badgeHtml = it.badge ? `<span class="megamenu-badge">${it.badge}</span>` : '';
+        return `
         <div class="megamenu-col">
-            <div class="megamenu-col-heading">${col.heading}</div>
-            <ul class="megamenu-col-items">
-                ${col.items.map(it => `
-                    <li>
-                        <a href="${prefix}${it.href}">
-                            ${it.color ? `<span class="megamenu-dot" style="background:${it.color}"></span>` : ''}
-                            <span class="megamenu-it-text">
-                                <span class="megamenu-it-label">${it.label}</span>
-                                ${it.desc ? `<span class="megamenu-it-desc">${it.desc}</span>` : ''}
-                            </span>
-                        </a>
-                    </li>
-                `).join('')}
-            </ul>
+            <a href="${prefix}${it.href}" class="megamenu-col-link">
+                <div class="megamenu-icon">${iconSvg}</div>
+                <div class="megamenu-text">
+                    <div class="megamenu-title">${it.label}${badgeHtml}</div>
+                    <div class="megamenu-desc">${it.desc || ''}</div>
+                </div>
+            </a>
         </div>
-    `).join('');
+    `;
+    }).join('');
+
     return `
         <div class="megamenu" id="megamenu-${item.id}" role="menu" aria-label="${sm.title}">
             <div class="megamenu-inner">
-                <div class="megamenu-head">
-                    <div class="megamenu-title">${sm.title}</div>
-                    ${sm.subtitle ? `<div class="megamenu-subtitle">${sm.subtitle}</div>` : ''}
-                </div>
                 <div class="megamenu-cols">${cols}</div>
-                <div class="megamenu-foot">
-                    <a class="megamenu-cta" href="${prefix}${item.href}">
-                        Ir a ${item.label}
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                    </a>
-                </div>
             </div>
         </div>
     `;
