@@ -177,18 +177,35 @@ function buildAnswer(query, results) {
     return { text: lines, source: sources };
 }
 
-function addMessage(role, text, source) {
+function addMessage(role, text, source, isAI = false) {
     const body = document.getElementById('chatBody');
     if (!body) return;
     const div = document.createElement('div');
-    div.className = `chat-msg ${role}`;
-    div.textContent = text;
+    div.className = `chat-msg ${role}${isAI ? ' ai-powered' : ''}`;
+    
+    // Convertir markdown simple a HTML (negritas y viñetas)
+    let htmlText = text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n- /g, '<br>• ')
+        .replace(/\n\n/g, '<br><br>');
+    
+    div.innerHTML = htmlText;
+    
     if (source) {
         const s = document.createElement('span');
         s.className = 'src';
         s.textContent = `Fuente: ${source}`;
         div.appendChild(s);
     }
+    
+    // Badge de IA si aplica
+    if (isAI) {
+        const badge = document.createElement('span');
+        badge.className = 'ai-badge';
+        badge.innerHTML = '✨ <strong>IA</strong>';
+        div.insertBefore(badge, div.firstChild);
+    }
+    
     body.appendChild(div);
     body.scrollTop = body.scrollHeight;
 }
@@ -204,8 +221,76 @@ function addTypingIndicator() {
     return div;
 }
 
+/* Comandos rápidos del chatbot */
+const QUICK_COMMANDS = {
+    '/paloma': 'Muéstrame información sobre Paloma Valencia',
+    '/cepeda': 'Muéstrame información sobre Iván Cepeda',
+    '/tigre': 'Muéstrame información sobre Abelardo de la Espriella',
+    '/comparar': 'Compara los 3 candidatos',
+    '/calculadora': 'Ir a la calculadora de afinidad',
+    '/noticias': 'Ver últimas noticias',
+    '/denuncias': 'Cómo reportar irregularidades',
+    '/ayuda': 'Mostrar comandos disponibles'
+};
+
+function processQuickCommand(query) {
+    const cmd = query.toLowerCase().trim();
+    
+    if (cmd === '/paloma') {
+        return { override: true, query: '¿Quién es Paloma Valencia? Sus propuestas y biografía.' };
+    }
+    if (cmd === '/cepeda') {
+        return { override: true, query: '¿Quién es Iván Cepeda? Sus propuestas y biografía.' };
+    }
+    if (cmd === '/tigre') {
+        return { override: true, query: '¿Quién es Abelardo de la Espriella? Sus propuestas y biografía.' };
+    }
+    if (cmd === '/comparar') {
+        return { override: true, query: 'Compara los 3 candidatos en las 10 inquietudes. ¿Quién lidera en cada una?' };
+    }
+    if (cmd === '/calculadora') {
+        return { override: true, action: 'redirect', url: './calculadora.html' };
+    }
+    if (cmd === '/noticias') {
+        return { override: true, action: 'redirect', url: './noticias.html' };
+    }
+    if (cmd === '/denuncias') {
+        return { override: true, query: '¿Cómo reportar irregularidades electorales? ¿Cuáles son los canales oficiales?' };
+    }
+    if (cmd === '/ayuda' || cmd === '/help') {
+        return { override: true, action: 'showHelp' };
+    }
+    
+    return { override: false, query };
+}
+
 async function handleChatQuery(query) {
     if (!query || !query.trim()) return;
+    
+    // Procesar comandos rápidos
+    const cmdResult = processQuickCommand(query);
+    
+    if (cmdResult.override) {
+        if (cmdResult.action === 'redirect') {
+            addMessage('user', query);
+            setTimeout(() => {
+                window.location.href = cmdResult.url;
+            }, 500);
+            return;
+        }
+        if (cmdResult.action === 'showHelp') {
+            addMessage('user', query);
+            const helpText = '📋 **Comandos rápidos disponibles:**\n\n' +
+                Object.entries(QUICK_COMMANDS).map(([cmd, desc]) => 
+                    `• **${cmd}** — ${desc}`
+                ).join('\n') +
+                '\n\n💡 También puedes preguntar naturalmente sobre candidatos, propuestas, noticias, etc.';
+            setTimeout(() => addMessage('bot', helpText, 'Asistente'), 200);
+            return;
+        }
+        query = cmdResult.query;
+    }
+    
     addMessage('user', query);
 
     /* Always retrieve local KB for context (incluso si usamos Gemini) */
@@ -216,12 +301,15 @@ async function handleChatQuery(query) {
     if (window.geminiChat && window.SECRETS?.GEMINI_API_KEY) {
         const typing = addTypingIndicator();
         try {
-            const text = await geminiChat(query, results);
+            // Usar versión con status tracking
+            const text = await (window.geminiGenerateWithStatus ? 
+                geminiChatWithTracking(query, results) : 
+                geminiChat(query, results));
             typing?.remove();
             const sources = results.length
                 ? [...new Set(results.map(r => r.source))].slice(0, 3).join(' · ')
                 : null;
-            addMessage('bot', text, sources);
+            addMessage('bot', text, sources, window.geminiStatus?.usingProxy === true);
             return;
         } catch (e) {
             typing?.remove();
@@ -232,6 +320,28 @@ async function handleChatQuery(query) {
 
     const answer = buildAnswer(query, results);
     setTimeout(() => addMessage('bot', answer.text, answer.source), 200);
+}
+
+/* Wrapper para geminiChat con tracking */
+async function geminiChatWithTracking(query, results) {
+    const ctx = results.map((e, i) => `[${i+1}] ${e.text} (Fuente: ${e.source})`).join('\n');
+    const prompt = `Pregunta del ciudadano: ${query}
+
+Contexto verificado del sitio (úsalo como única fuente):
+${ctx || '(sin contexto disponible)'}
+
+Responde la pregunta basándote SOLO en el contexto anterior. Cita el número de fuente entre corchetes [1], [2], etc.
+
+FORMATO:
+- Usa **negritas** para nombres de candidatos
+- Usa viñetas (-) para comparar
+- Incluye emojis SOLO si el usuario los usa
+- Máximo 6 líneas
+- Cita fuentes como [1], [2]
+- Si no sabes, di "No tengo ese dato verificado"
+- Ofrece link a página relevante si aplica`;
+    
+    return window.geminiGenerateWithStatus(prompt, { system: CHAT_SYSTEM, temperature: 0.3, maxTokens: 500 });
 }
 
 function initChatbot() {

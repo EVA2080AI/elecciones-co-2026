@@ -88,21 +88,53 @@ async function geminiDirect(prompt, opts) {
 /* Estrategia: proxy primero (esconde la key); si no existe, fetch directo
    con la key del cliente. Decisión cacheada para no reintentar cada llamada. */
 async function geminiGenerate(prompt, opts = {}) {
+    // Siempre intentar proxy primero (más seguro)
     if (GEMINI_USE_PROXY !== false) {
-        try { return await geminiViaProxy(prompt, opts); }
+        try { 
+            const result = await geminiViaProxy(prompt, opts);
+            // Proxy exitoso, marcar para futuras llamadas
+            GEMINI_USE_PROXY = true;
+            return result;
+        }
         catch (e) {
-            /* Si fue el descubrimiento (404) o un error transitorio del proxy,
-               intenta directo. Si el proxy SÍ existe pero devolvió error real
-               (429, 500), no caemos al directo para no consumir cuota dual. */
-            if (GEMINI_USE_PROXY === false) {
-                /* proxy confirmado ausente → directo */
-            } else {
-                throw e;
+            // Si el proxy no existe (404/405), intentar directo
+            if (GEMINI_USE_PROXY === false || e.message.includes('proxy unavailable')) {
+                GEMINI_USE_PROXY = false;
+                // Caer a modo directo (menos seguro pero funcional)
+                return geminiDirect(prompt, opts);
             }
+            // Error real del proxy (429, 500) - no intentar directo
+            throw e;
         }
     }
+    // Proxy ya confirmado como ausente, usar directo
     return geminiDirect(prompt, opts);
 }
+
+// Estado del chatbot para feedback visual
+window.geminiStatus = {
+    available: true,
+    usingProxy: null, // null = unknown, true = proxy, false = direct
+    lastError: null,
+    requestCount: 0
+};
+
+// Wrapper con tracking de estado
+async function geminiGenerateWithStatus(prompt, opts = {}) {
+    window.geminiStatus.requestCount++;
+    try {
+        const result = await geminiGenerate(prompt, opts);
+        window.geminiStatus.available = true;
+        window.geminiStatus.lastError = null;
+        return result;
+    } catch (error) {
+        window.geminiStatus.available = false;
+        window.geminiStatus.lastError = error.message;
+        throw error;
+    }
+}
+
+window.geminiGenerateWithStatus = geminiGenerateWithStatus;
 
 /* ---------- Chatbot ---------- */
 

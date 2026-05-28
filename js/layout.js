@@ -5,15 +5,162 @@
    y prefijo de ruta para subdirectorios.
    ========================================= */
 
+/* NAV ITEMS · cada item puede declarar `submenu` con secciones internas.
+   Cada submenu item tiene: label (obligatorio), href (opcional, si es ancla
+   interna o externa), desc (descripción corta), icon (svg inline opcional). */
 const NAV_ITEMS = [
-    { id: 'inicio',      href: 'index.html',        label: 'Inicio' },
-    { id: 'acerca',      href: 'acerca.html',       label: 'Acerca' },
-    { id: 'candidatos',  href: 'candidatos.html',   label: 'Candidatos' },
-    { id: 'analisis',    href: 'analisis.html',     label: 'Análisis' },
-    { id: 'calculadora', href: 'calculadora.html',  label: 'Calculadora' },
-    { id: 'noticias',    href: 'noticias.html',     label: 'Minuto a Minuto' },
-    { id: 'denuncias',   href: 'denuncias.html',    label: 'Denuncias' },
-    { id: 'faq',         href: 'faq.html',          label: 'FAQ' }
+    { id: 'inicio', href: 'index.html', label: 'Inicio' },
+
+    { id: 'acerca', href: 'acerca.html', label: 'Acerca' },
+
+    { id: 'candidatos', href: 'candidatos.html', label: 'Candidatos',
+      submenu: {
+          title: 'Los 3 candidatos a la Presidencia',
+          subtitle: 'Perfiles completos · biografía · propuestas · 10 inquietudes',
+          columns: [
+              {
+                  heading: 'Perfiles',
+                  items: [
+                      { label: 'Paloma Valencia',        href: 'candidato/paloma.html', desc: 'Centro Democrático · Derecha institucional',  color: '#3b82f6' },
+                      { label: 'Iván Cepeda',            href: 'candidato/cepeda.html', desc: 'Pacto Histórico · Izquierda progresista',       color: '#a855f7' },
+                      { label: 'A. de la Espriella',     href: 'candidato/tigre.html',  desc: 'Independiente · Derecha radical',                color: '#ef4444' }
+                  ]
+              },
+              {
+                  heading: 'Comparar',
+                  items: [
+                      { label: 'Vista general · todos',     href: 'candidatos.html',           desc: 'Tres perfiles uno al lado del otro' },
+                      { label: 'Comparador 1 vs 1',         href: 'analisis.html#comparador',  desc: 'Cara a cara por cada inquietud' },
+                      { label: 'Matriz base',               href: 'analisis.html#matriz',      desc: 'Tabla completa 10 × 3' }
+                  ]
+              }
+          ]
+      }
+    },
+
+    { id: 'analisis', href: 'analisis.html', label: 'Análisis',
+      submenu: {
+          title: 'Análisis cuantitativo',
+          subtitle: 'Datos objetivos · gráficos · matriz de propuestas',
+          columns: [
+              {
+                  heading: 'Indicadores',
+                  items: [
+                      { label: 'Índice de solidez',     href: 'analisis.html#solidez',     desc: 'Solidez dinámica con feed' },
+                      { label: 'Radar 10 problemáticas', href: 'analisis.html#radar',     desc: 'Afinidad por inquietud' },
+                      { label: 'Histórico de encuestas', href: 'analisis.html#historico', desc: 'Intención de voto · 6 meses' }
+                  ]
+              },
+              {
+                  heading: 'Comparativa',
+                  items: [
+                      { label: 'Comparador 1 vs 1', href: 'analisis.html#comparador', desc: 'Cara a cara por temática' },
+                      { label: 'Matriz base',       href: 'analisis.html#matriz',     desc: '10 inquietudes × 3 candidatos' },
+                      { label: 'Veredicto IA',      href: 'analisis.html#veredicto',  desc: 'Lectura imparcial de la matriz' }
+                  ]
+              }
+          ]
+      }
+    },
+
+    { id: 'calculadora', href: 'calculadora.html', label: 'Calculadora',
+      submenu: {
+          title: 'Calculadora de afinidad personal',
+          subtitle: 'Pondera tus prioridades y descubre tu match en 60 segundos',
+          columns: [
+              {
+                  heading: 'Modos',
+                  items: [
+                      { label: 'Sliders manuales',         href: 'calculadora.html',           desc: '10 inquietudes ponderadas' },
+                      { label: 'Describir en mis palabras', href: 'calculadora.html#nlpInput', desc: 'IA mapea tu frase a pesos' }
+                  ]
+              },
+              {
+                  heading: 'Después',
+                  items: [
+                      { label: 'Compartir resultado', href: 'calculadora.html', desc: 'URL personal · Web Share' },
+                      { label: 'Ver matriz completa', href: 'analisis.html#matriz', desc: 'Entiende los puntajes' }
+                  ]
+              }
+          ]
+      }
+    },
+
+    { id: 'noticias', href: 'noticias.html', label: 'Minuto a Minuto',
+      submenu: {
+          title: 'Pulso en vivo del proceso electoral',
+          subtitle: '7 fuentes RSS + YouTube · refresco cada 2 min',
+          columns: [
+              {
+                  heading: 'Feed',
+                  items: [
+                      { label: 'Feed agregado',     href: 'noticias.html#noticias', desc: 'Titulares de medios colombianos' },
+                      { label: 'Videos YouTube',    href: 'noticias.html#youtube',  desc: 'Cobertura audiovisual' },
+                      { label: 'Menciones en el tiempo', href: 'noticias.html#mentions', desc: 'Distribución horaria' }
+                  ]
+              },
+              {
+                  heading: 'Análisis',
+                  items: [
+                      { label: 'Tendencias del debate', href: 'noticias.html#cloud', desc: 'Nube de palabras del feed' },
+                      { label: 'Fuentes indexadas',     href: 'noticias.html#sources', desc: 'El Tiempo · Semana · Caracol +' }
+                  ]
+              }
+          ]
+      }
+    },
+
+    { id: 'denuncias', href: 'denuncias.html', label: 'Denuncias',
+      submenu: {
+          title: 'Canales oficiales de denuncia',
+          subtitle: 'Este sitio NO recibe denuncias · esto te orienta hacia los canales del Estado',
+          columns: [
+              {
+                  heading: 'Autoridades',
+                  items: [
+                      { label: 'URIEL · Min. Interior',          href: 'denuncias.html#uriel',         desc: 'Línea 018000-93-9000' },
+                      { label: 'Registraduría Nacional',         href: 'denuncias.html#registraduria', desc: 'Logística electoral' },
+                      { label: 'Fiscalía General',               href: 'denuncias.html#fiscalia',      desc: 'Línea 122' }
+                  ]
+              },
+              {
+                  heading: 'Observación ciudadana',
+                  items: [
+                      { label: 'MOE · Misión Observación',  href: 'denuncias.html#moe',           desc: 'App "Pilas con el Voto"' },
+                      { label: 'Procuraduría',              href: 'denuncias.html#procuraduria',  desc: 'Vigilancia funcionarios' },
+                      { label: 'Defensoría del Pueblo',     href: 'denuncias.html#defensoria',    desc: 'Línea 144' }
+                  ]
+              }
+          ]
+      }
+    },
+
+    { id: 'datos', href: 'datos.html', label: 'Datos',
+      submenu: {
+          title: 'Datos abiertos · metodología',
+          subtitle: 'JSON · CSV · licencia CC BY 4.0',
+          columns: [
+              {
+                  heading: 'Descarga',
+                  items: [
+                      { label: 'Matriz completa (JSON)',   href: 'datos.html#dlJson',  desc: 'Candidatos, matriz, encuestas' },
+                      { label: 'Matriz (CSV)',             href: 'datos.html#dlCsv',   desc: '30 filas · 10 inquietudes × 3' },
+                      { label: 'Encuestas históricas (CSV)', href: 'datos.html#dlPolls', desc: '6 meses de intención de voto' }
+                  ]
+              },
+              {
+                  heading: 'Documentación',
+                  items: [
+                      { label: 'Metodología',          href: 'datos.html#metodologia',    desc: 'Cómo se asignan los puntajes' },
+                      { label: 'Lo que NO hacemos',    href: 'datos.html#lo-que-no',      desc: 'Límites del proyecto' },
+                      { label: 'Licencia CC BY 4.0',   href: 'datos.html#licencia',       desc: 'Reúsalo citando la fuente' }
+                  ]
+              }
+          ]
+      }
+    },
+
+    { id: 'faq', href: 'faq.html', label: 'FAQ' }
 ];
 
 function pathPrefix() {
@@ -31,6 +178,46 @@ function activePageId() {
     return found ? found.id : '';
 }
 
+function buildSubmenuHTML(item, prefix) {
+    if (!item.submenu) return '';
+    const sm = item.submenu;
+    const cols = sm.columns.map(col => `
+        <div class="megamenu-col">
+            <div class="megamenu-col-heading">${col.heading}</div>
+            <ul class="megamenu-col-items">
+                ${col.items.map(it => `
+                    <li>
+                        <a href="${prefix}${it.href}">
+                            ${it.color ? `<span class="megamenu-dot" style="background:${it.color}"></span>` : ''}
+                            <span class="megamenu-it-text">
+                                <span class="megamenu-it-label">${it.label}</span>
+                                ${it.desc ? `<span class="megamenu-it-desc">${it.desc}</span>` : ''}
+                            </span>
+                        </a>
+                    </li>
+                `).join('')}
+            </ul>
+        </div>
+    `).join('');
+    return `
+        <div class="megamenu" id="megamenu-${item.id}" role="menu" aria-label="${sm.title}">
+            <div class="megamenu-inner">
+                <div class="megamenu-head">
+                    <div class="megamenu-title">${sm.title}</div>
+                    ${sm.subtitle ? `<div class="megamenu-subtitle">${sm.subtitle}</div>` : ''}
+                </div>
+                <div class="megamenu-cols">${cols}</div>
+                <div class="megamenu-foot">
+                    <a class="megamenu-cta" href="${prefix}${item.href}">
+                        Ir a ${item.label}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 function renderNavbar() {
     const root = document.getElementById('layout-nav');
     if (!root) return;
@@ -38,7 +225,16 @@ function renderNavbar() {
     const active = activePageId();
     const links = NAV_ITEMS.map(n => {
         const cls = n.id === active ? 'active' : '';
-        return `<a href="${prefix}${n.href}" class="${cls}"${n.id === active ? ' aria-current="page"' : ''}>${n.label}</a>`;
+        const hasMega = !!n.submenu;
+        const caret = hasMega ? '<svg class="nav-caret" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>' : '';
+        return `
+            <div class="nav-item${hasMega ? ' has-mega' : ''}" data-nav="${n.id}">
+                <a href="${prefix}${n.href}" class="${cls}"${n.id === active ? ' aria-current="page"' : ''}${hasMega ? ' aria-haspopup="true"' : ''}>
+                    ${n.label}${caret}
+                </a>
+                ${hasMega ? buildSubmenuHTML(n, prefix) : ''}
+            </div>
+        `;
     }).join('');
     root.innerHTML = `
     <nav class="navbar" aria-label="Navegación principal">
@@ -92,7 +288,32 @@ function renderNavbar() {
         linksEl.classList.contains('open') ? close() : open();
     });
     backdrop.addEventListener('click', close);
-    linksEl.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+    /* Click en link normal cierra; pero en items con submenu sólo cerramos si
+       se hace click en un sub-item, no en el parent (parent solo expande). */
+    linksEl.querySelectorAll('.nav-item').forEach(item => {
+        const isMega = item.classList.contains('has-mega');
+        const parentLink = item.querySelector(':scope > a');
+        if (isMega && parentLink) {
+            parentLink.addEventListener('click', e => {
+                /* En móvil: tap toggles expansion; sólo navega si ya está expandido. */
+                if (window.matchMedia('(max-width: 900px)').matches) {
+                    if (!item.classList.contains('expanded')) {
+                        e.preventDefault();
+                        linksEl.querySelectorAll('.nav-item.expanded').forEach(o => {
+                            if (o !== item) o.classList.remove('expanded');
+                        });
+                        item.classList.add('expanded');
+                    } else {
+                        close();
+                    }
+                }
+            });
+            /* Sub-items siempre cierran el drawer al hacer click */
+            item.querySelectorAll('.megamenu a').forEach(a => a.addEventListener('click', close));
+        } else if (parentLink) {
+            parentLink.addEventListener('click', close);
+        }
+    });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 }
 
@@ -185,14 +406,15 @@ function renderChatbot() {
         </header>
         <div class="chat-body" id="chatBody"></div>
         <div class="chat-suggestions">
-            <button class="sg">¿Qué propone Paloma Valencia?</button>
-            <button class="sg">¿Quién es Iván Cepeda?</button>
-            <button class="sg">Datos curiosos de Espriella</button>
-            <button class="sg">¿Cómo se calcula la afinidad?</button>
-            <button class="sg">¿El sitio es imparcial?</button>
+            <button class="sg">🗳️ /paloma</button>
+            <button class="sg">🗳️ /cepeda</button>
+            <button class="sg">🗳️ /tigre</button>
+            <button class="sg">📊 /comparar</button>
+            <button class="sg">🧮 /calculadora</button>
+            <button class="sg">📰 /noticias</button>
         </div>
         <div class="chat-input-row">
-            <input type="text" id="chatInput" placeholder="Pregunta sobre los candidatos…" aria-label="Mensaje al asistente">
+            <input type="text" id="chatInput" placeholder="Escribe /ayuda para ver comandos…" aria-label="Mensaje al asistente">
             <button id="chatSend" aria-label="Enviar">Enviar</button>
         </div>
     </aside>
