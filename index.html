@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="./css/responsive.css">
     <link rel="stylesheet" href="./css/visual-enhancements.css">
     <link rel="stylesheet" href="./css/pixel-perfect.css">
+    <link rel="stylesheet" href="./css/index-home.css">
 
     <!-- Chart.js no se necesita en home (sin <canvas>). Lo cargan analisis/noticias/dashboard. -->
 </head>
@@ -87,13 +88,13 @@
         </div>
 
         <aside class="hero-aside" aria-label="Candidatos y seguimiento en vivo">
-            <!-- Slider de candidatos -->
+            <!-- Slider de candidatos con FOTOS REALES -->
             <div class="candidate-slider">
                 <div class="candidate-slide active" data-candidate="paloma">
                     <div class="candidate-card-mini" style="--ccolor: #3b82f6;">
-                        <div class="candidate-avatar">
-                            <img src="./assets/candidato-paloma.svg" alt="Paloma Valencia" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-                            <div class="candidate-initials" style="display:none;">PV</div>
+                        <div class="candidate-avatar candidate-avatar-photo">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Paloma_Valencia_2020.jpg/440px-Paloma_Valencia_2020.jpg" alt="Paloma Valencia" loading="eager" fetchpriority="high"/>
+                            <div class="candidate-initials">PV</div>
                         </div>
                         <div class="candidate-mini-info">
                             <span class="candidate-party">Centro Democrático</span>
@@ -104,9 +105,9 @@
                 </div>
                 <div class="candidate-slide" data-candidate="cepeda">
                     <div class="candidate-card-mini" style="--ccolor: #a855f7;">
-                        <div class="candidate-avatar">
-                            <img src="./assets/candidato-cepeda.svg" alt="Iván Cepeda" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-                            <div class="candidate-initials" style="display:none;">IC</div>
+                        <div class="candidate-avatar candidate-avatar-photo">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Iv%C3%A1n_Cepeda_2018.jpg/440px-Iv%C3%A1n_Cepeda_2018.jpg" alt="Iván Cepeda" loading="eager" fetchpriority="high"/>
+                            <div class="candidate-initials">IC</div>
                         </div>
                         <div class="candidate-mini-info">
                             <span class="candidate-party">Pacto Histórico</span>
@@ -117,9 +118,9 @@
                 </div>
                 <div class="candidate-slide" data-candidate="tigre">
                     <div class="candidate-card-mini" style="--ccolor: #ef4444;">
-                        <div class="candidate-avatar">
-                            <img src="./assets/candidato-tigre.svg" alt="Abelardo de la Espriella" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-                            <div class="candidate-initials" style="display:none;">AT</div>
+                        <div class="candidate-avatar candidate-avatar-photo">
+                            <img src="https://www.abelardodelaespriella.com/wp-content/uploads/2023/08/abelardo-de-la-espriella-foto-perfil.jpg" alt="Abelardo de la Espriella" loading="eager" fetchpriority="high"/>
+                            <div class="candidate-initials">AT</div>
                         </div>
                         <div class="candidate-mini-info">
                             <span class="candidate-party">Independiente</span>
@@ -321,14 +322,73 @@
         </div>
     </section>
 
-    <!-- CANDIDATES PREVIEW -->
+    <!-- CANDIDATES PREVIEW · Con FOTOS GRANDES -->
     <section class="section-strip" style="margin-top:32px;">
-        <h2>Candidatos analizados</h2>
+        <h2>Candidatos a la Presidencia</h2>
         <p class="section-strip-lead">
-            En carrera presidencial hay varios candidatos. <strong>Este análisis se enfoca en los tres que han liderado las encuestas desde el 8 de marzo de 2026</strong> — Paloma Valencia, Iván Cepeda y Abelardo de la Espriella —, por representar corrientes políticas opuestas.
+            Conoce a los tres candidatos que han liderado las encuestas. Haz clic para ver su perfil completo, propuestas y posturas en las 10 inquietudes ciudadanas.
         </p>
     </section>
-    <section id="perfiles" class="candidates-grid" aria-label="Perfiles de candidatos"></section>
+    
+    <!-- CANDIDATES CON FOTOS -->
+    <section class="candidates-visual-grid" aria-label="Perfiles de candidatos con fotos">
+        <a href="./candidato/paloma.html" class="candidate-visual-card" style="--ccolor: #3b82f6;">
+            <div class="candidate-photo-wrapper">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Paloma_Valencia_2020.jpg/440px-Paloma_Valencia_2020.jpg" alt="Paloma Valencia" loading="lazy"/>
+                <div class="candidate-overlay">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+            </div>
+            <div class="candidate-info">
+                <span class="candidate-party-badge">Centro Democrático</span>
+                <h3 class="candidate-name">Paloma Valencia</h3>
+                <p class="candidate-slogan">"Orden, firmeza y corazón"</p>
+                <div class="candidate-stats-mini">
+                    <span class="stat"><strong>29%</strong> encuestas</span>
+                    <span class="stat"><strong>Derecha</strong> institucional</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="./candidato/cepeda.html" class="candidate-visual-card" style="--ccolor: #a855f7;">
+            <div class="candidate-photo-wrapper">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Iv%C3%A1n_Cepeda_2018.jpg/440px-Iv%C3%A1n_Cepeda_2018.jpg" alt="Iván Cepeda" loading="lazy"/>
+                <div class="candidate-overlay">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+            </div>
+            <div class="candidate-info">
+                <span class="candidate-party-badge">Pacto Histórico</span>
+                <h3 class="candidate-name">Iván Cepeda</h3>
+                <p class="candidate-slogan">"El poder de la verdad"</p>
+                <div class="candidate-stats-mini">
+                    <span class="stat"><strong>33%</strong> encuestas</span>
+                    <span class="stat"><strong>Izquierda</strong> progresista</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="./candidato/tigre.html" class="candidate-visual-card" style="--ccolor: #ef4444;">
+            <div class="candidate-photo-wrapper">
+                <img src="https://www.abelardodelaespriella.com/wp-content/uploads/2023/08/abelardo-de-la-espriella-foto-perfil.jpg" alt="Abelardo de la Espriella" loading="lazy"/>
+                <div class="candidate-overlay">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+            </div>
+            <div class="candidate-info">
+                <span class="candidate-party-badge">Independiente</span>
+                <h3 class="candidate-name">A. de la Espriella</h3>
+                <p class="candidate-slogan">"13 milagros para Colombia"</p>
+                <div class="candidate-stats-mini">
+                    <span class="stat"><strong>26%</strong> encuestas</span>
+                    <span class="stat"><strong>Derecha</strong> radical</span>
+                </div>
+            </div>
+        </a>
+    </section>
+
+    <!-- Grid original de perfiles (se mantiene para compatibilidad) -->
+    <section id="perfiles" class="candidates-grid" aria-label="Perfiles de candidatos" style="display:none;"></section>
 
     <!-- LATEST NEWS PREVIEW -->
     <section class="section-strip" style="margin-top:36px;">

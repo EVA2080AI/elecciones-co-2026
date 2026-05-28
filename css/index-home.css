@@ -1,0 +1,339 @@
+/* =========================================
+   INDEX HOME · Mejoras visuales específicas
+   ========================================= */
+
+/* Candidate Visual Grid - FOTOS GRANDES DE CANDIDATOS */
+.candidates-visual-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+    padding: 0 5%;
+}
+
+.candidate-visual-card {
+    display: block;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.candidate-visual-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--ccolor);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.candidate-visual-card:hover::before {
+    transform: scaleX(1);
+}
+
+.candidate-visual-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 20px 48px rgba(0,0,0,0.12),
+        0 0 0 1px rgba(59,130,246,0.1);
+}
+
+.candidate-photo-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 120%; /* Aspect ratio 5:6 */
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--ccolor) 0%, color-mix(in srgb, var(--ccolor) 70%, #000) 100%);
+}
+
+.candidate-photo-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.candidate-visual-card:hover .candidate-photo-wrapper img {
+    transform: scale(1.08);
+}
+
+.candidate-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0,0,0,0.6) 100%
+    );
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.candidate-visual-card:hover .candidate-overlay {
+    opacity: 1;
+}
+
+.candidate-overlay svg {
+    color: #fff;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+    transform: translateX(-10px);
+    transition: transform 0.3s ease;
+}
+
+.candidate-visual-card:hover .candidate-overlay svg {
+    transform: translateX(0);
+}
+
+.candidate-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.candidate-party-badge {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--ccolor);
+    background: color-mix(in srgb, var(--ccolor) 14%, transparent);
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.candidate-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 0 0 6px 0;
+    line-height: 1.2;
+}
+
+.candidate-slogan {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--text-light);
+    margin: 0 0 14px 0;
+    line-height: 1.4;
+}
+
+.candidate-stats-mini {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--divider);
+}
+
+.candidate-stats-mini .stat {
+    font-size: 11.5px;
+    color: var(--text-light);
+}
+
+.candidate-stats-mini .stat strong {
+    color: var(--ccolor);
+    font-weight: 800;
+}
+
+/* Hero Section con más impacto */
+.hero {
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(
+        ellipse,
+        rgba(252,209,22,0.08) 0%,
+        transparent 60%
+    );
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -10%;
+    width: 50%;
+    height: 150%;
+    background: radial-gradient(
+        ellipse,
+        rgba(206,17,38,0.06) 0%,
+        transparent 60%
+    );
+    transform: rotate(15deg);
+    pointer-events: none;
+}
+
+/* Hero CTA buttons mejorados */
+.hero-cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.hero-cta .btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-cta .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.hero-cta .btn-primary:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* AI Verdict Section mejorada */
+.ai-verdict-section {
+    position: relative;
+}
+
+.ai-verdict-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(
+        135deg,
+        var(--co-yellow),
+        var(--co-blue),
+        var(--co-red)
+    );
+    border-radius: 22px;
+    z-index: -1;
+    opacity: 0.3;
+    filter: blur(20px);
+}
+
+/* Feature Grid mejorado */
+.feature-grid {
+    gap: 20px;
+}
+
+.feature-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at center,
+        rgba(59,130,246,0.08) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.feature-card:hover::after {
+    opacity: 1;
+}
+
+/* KPI Strip mejorado */
+.kpi-strip {
+    position: relative;
+}
+
+.kpi {
+    position: relative;
+    overflow: hidden;
+}
+
+.kpi::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.1) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.kpi:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Responsive para candidate visual grid */
+@media (max-width: 900px) {
+    .candidates-visual-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .candidate-photo-wrapper {
+        padding-top: 60%; /* Más ancho en móvil */
+    }
+}
+
+@media (max-width: 600px) {
+    .candidate-photo-wrapper {
+        padding-top: 75%;
+    }
+    
+    .candidate-info {
+        padding: 16px;
+    }
+    
+    .candidate-name {
+        font-size: 18px;
+    }
+    
+    .candidate-stats-mini {
+        flex-direction: column;
+        gap: 6px;
+        align-items: center;
+    }
+}
