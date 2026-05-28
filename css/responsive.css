@@ -558,6 +558,185 @@
     }
 }
 
+/* =========================================
+   TABLET SPECIFIC FIXES (768px - 1023px)
+   ========================================= */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Ajustar grids para tablet */
+    .candidates-grid { grid-template-columns: repeat(2, 1fr); }
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+    .gauges-grid { grid-template-columns: repeat(3, 1fr); }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Charts en tablet necesitan altura ajustada */
+    .chart-container { height: 320px; }
+    .chart-container.tall { height: 380px; }
+    .chart-container.short { height: 240px; }
+
+    /* Radar chart específico */
+    #radarChart { min-height: 300px !important; }
+
+    /* Sliders en calculadora */
+    .slider-row .controls { min-width: 180px; }
+
+    /* Comparador */
+    .cmp-row { grid-template-columns: 1fr 40px 1fr; }
+
+    /* Timeline */
+    .timeline { max-height: 500px; }
+
+    /* YouTube grid */
+    .yt-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* =========================================
+   CHART RESPONSIVE FIXES
+   ========================================= */
+@media (max-width: 1023px) {
+    /* Asegurar que los charts no se desborden */
+    .chart-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Radar chart responsive */
+    canvas#radarChart,
+    canvas#trendChart,
+    canvas#solidityChart {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 700px) {
+    canvas#radarChart,
+    canvas#trendChart,
+    canvas#solidityChart {
+        max-height: 320px;
+    }
+}
+
+/* =========================================
+   TABLE RESPONSIVE - MEJORAS
+   ========================================= */
+@media (max-width: 1023px) {
+    .table-container {
+        border-radius: 8px;
+        margin: 0 -16px;
+        width: calc(100% + 32px);
+        max-width: none;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 10px 12px;
+    }
+}
+
+/* =========================================
+   CANDIDATE CARDS MOBILE STACK
+   ========================================= */
+@media (max-width: 640px) {
+    .candidate-card .cand-head {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .candidate-card .cand-stats {
+        flex-wrap: wrap;
+    }
+
+    .candidate-card .stat-pill {
+        flex: 1 1 calc(50% - 6px);
+        min-width: 80px;
+    }
+}
+
+/* =========================================
+   CALCULATOR MOBILE IMPROVEMENTS
+   ========================================= */
+@media (max-width: 700px) {
+    .slider-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .slider-row label {
+        font-size: 12px;
+    }
+
+    .slider-row .controls {
+        min-width: 0;
+        width: 100%;
+    }
+
+    /* Result bars más compactos */
+    .result-bar {
+        padding: 10px 12px;
+    }
+
+    .result-pct {
+        font-size: 18px;
+    }
+
+    /* Gauge cards */
+    .gauge-card {
+        padding: 12px;
+    }
+
+    .gauge-value {
+        font-size: 18px;
+    }
+}
+
+/* =========================================
+   NEWS FILTER IMPROVEMENTS
+   ========================================= */
+@media (max-width: 700px) {
+    .news-filter {
+        margin: 0 -16px;
+        padding: 0 16px 8px 16px;
+        width: calc(100% + 32px);
+    }
+
+    .news-filter .chip {
+        font-size: 11px;
+        padding: 6px 10px;
+        min-height: 32px;
+    }
+}
+
+/* =========================================
+   POSITION CARDS RESPONSIVE
+   ========================================= */
+@media (max-width: 700px) {
+    .position-card {
+        padding: 14px;
+    }
+
+    .position-card header {
+        gap: 8px;
+    }
+
+    .position-num {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+
+    .position-card h3 {
+        font-size: 13px;
+    }
+
+    .position-score {
+        font-size: 11px;
+    }
+}
+
 /* Print */
 @media print {
     .navbar, .chat-fab, .chat-panel, .refresh-btn, .hero-aside, .toast { display: none !important; }
