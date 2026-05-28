@@ -121,28 +121,36 @@ const MEGAMENU_ICONS = {
 function buildSubmenuHTML(item, prefix) {
     if (!item.submenu) return '';
     const sm = item.submenu;
-    // Usar items directos del submenu (formato Gaspar: icono + título + descripción)
     const items = sm.items || [];
-    const cols = items.map(it => {
-        const iconSvg = MEGAMENU_ICONS[it.icon] || MEGAMENU_ICONS.users;
-        const badgeHtml = it.badge ? `<span class="megamenu-badge">${it.badge}</span>` : '';
+    /* Lista vertical simple — sin iconos de card. Cada item es una línea
+       con label (semibold) y descripción al lado/debajo. */
+    const list = items.map(it => {
+        const badge = it.badge ? `<span class="megamenu-badge">${it.badge}</span>` : '';
         return `
-        <div class="megamenu-col">
-            <a href="${prefix}${it.href}" class="megamenu-col-link">
-                <div class="megamenu-icon">${iconSvg}</div>
-                <div class="megamenu-text">
-                    <div class="megamenu-title">${it.label}${badgeHtml}</div>
-                    <div class="megamenu-desc">${it.desc || ''}</div>
-                </div>
-            </a>
-        </div>
-    `;
+            <li>
+                <a href="${prefix}${it.href}" class="megamenu-link">
+                    <span class="megamenu-link-label">
+                        ${it.label}${badge}
+                    </span>
+                    ${it.desc ? `<span class="megamenu-link-desc">${it.desc}</span>` : ''}
+                </a>
+            </li>
+        `;
     }).join('');
-
     return `
         <div class="megamenu" id="megamenu-${item.id}" role="menu" aria-label="${sm.title}">
             <div class="megamenu-inner">
-                <div class="megamenu-cols">${cols}</div>
+                <div class="megamenu-head">
+                    <span class="megamenu-eyebrow">${sm.title}</span>
+                    ${sm.subtitle ? `<p class="megamenu-subtitle">${sm.subtitle}</p>` : ''}
+                </div>
+                <ul class="megamenu-list" role="menu">${list}</ul>
+                <div class="megamenu-foot">
+                    <a class="megamenu-cta" href="${prefix}${item.href}">
+                        Ver toda la sección
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
             </div>
         </div>
     `;
@@ -168,14 +176,22 @@ function renderNavbar() {
     }).join('');
     root.innerHTML = `
     <nav class="navbar" aria-label="Navegación principal">
-        <a class="brand" href="${prefix}index.html" aria-label="Inicio Elecciones Presidenciales Colombia 2026">
-            <svg viewBox="0 0 32 32" aria-hidden="true">
-                <circle cx="16" cy="16" r="15" fill="#0f172a" stroke="#0f172a" stroke-width="2"/>
-                <path d="M8 14h16v4H8z" fill="#fcd116"/>
-                <path d="M8 18h16v3H8z" fill="#003893"/>
-                <path d="M8 21h16v3H8z" fill="#ce1126"/>
-            </svg>
-            <span class="brand-text">Elecciones 2026</span>
+        <a class="brand" href="${prefix}index.html" aria-label="Elecciones Presidenciales Colombia 2026 - Ir al inicio">
+            <span class="brand-flag" aria-hidden="true">
+                <svg viewBox="0 0 44 44" width="44" height="44" role="img" aria-label="Bandera de Colombia">
+                    <defs><clipPath id="brandflag-mask"><circle cx="22" cy="22" r="20"/></clipPath></defs>
+                    <circle cx="22" cy="22" r="21" fill="#fff" stroke="rgba(15,23,42,0.10)" stroke-width="1"/>
+                    <g clip-path="url(#brandflag-mask)">
+                        <rect x="2"  y="2"  width="40" height="20" fill="#fcd116"/>
+                        <rect x="2"  y="22" width="40" height="10" fill="#003893"/>
+                        <rect x="2"  y="32" width="40" height="10" fill="#ce1126"/>
+                    </g>
+                </svg>
+            </span>
+            <span class="brand-text">
+                <span class="brand-title">Elecciones Presidenciales</span>
+                <span class="brand-sub">Colombia 2026</span>
+            </span>
         </a>
         <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
             <span></span><span></span><span></span>
