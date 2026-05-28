@@ -656,8 +656,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
 .chat-input-row input:focus { border-color: var(--highlight); }
 .chat-input-row button {
     background: var(--highlight); color: #fff; border: none;
-    border-radius: 12px; padding: 0 16px; font-weight: 700; cursor: pointer;
-    font-family: 'Source Serif 4', Georgia, serif;
+    border-radius: 12px; padding: 0 16px; font-weight: 600; cursor: pointer;
+    font-family: 'Inter', sans-serif;
 }
 .chat-input-row button:hover { background: var(--co-blue); }
 

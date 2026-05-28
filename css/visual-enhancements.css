@@ -118,28 +118,8 @@ input[type="range"]:active::-moz-range-thumb {
     box-shadow: 0 4px 12px rgba(59,130,246,0.5);
 }
 
-/* Efecto de pulse para elementos importantes */
-@keyframes subtlePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-}
-
-.candidate-card:hover,
-.feature-card:hover {
-    animation: subtlePulse 0.3s ease-in-out;
-}
-
-/* Gradientes animados para fondos */
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.cta-band {
-    background-size: 200% 200%;
-    animation: gradientShift 15s ease infinite;
-}
+/* Animaciones decorativas eliminadas: subtlePulse + gradientShift causaban
+   micro-jitter en hover de cards y movimiento infinito sin significado en CTA. */
 
 /* Tooltip styling mejorado */
 [title] {

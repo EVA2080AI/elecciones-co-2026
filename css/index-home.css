@@ -386,34 +386,14 @@
     content: '';
     position: absolute;
     inset: -20px;
-    border: 2px dashed var(--divider);
+    border: 1px dashed var(--divider);
     border-radius: 50%;
-    animation: spin 30s linear infinite;
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
-@keyframes spin {
-    100% { transform: rotate(360deg); }
-}
-
-.float-anim {
-    animation: float 4s ease-in-out infinite;
-}
-
-.pulse-anim {
-    animation: pulse 3s infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-@keyframes pulse {
-    0% { transform: scale(0.95); opacity: 0.8; }
-    50% { transform: scale(1.05); opacity: 1; }
-    100% { transform: scale(0.95); opacity: 0.8; }
-}
+/* Animaciones decorativas eliminadas: spin/float/pulse no aportan información
+   y conflictúan con el posicionamiento sobrio del sitio. */
+.float-anim, .pulse-anim { animation: none; }
 
 /* Slider Controls Navigation */
 .main-slider-nav {

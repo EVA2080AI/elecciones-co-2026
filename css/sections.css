@@ -394,7 +394,9 @@ body.dark .cmp-cell { background: rgba(255,255,255,0.03); }
     font-weight: 700; line-height: 1.1;
     transition: transform 0.2s ease, color 0.2s ease; cursor: default;
 }
-.cloud .w:hover { transform: scale(1.15); color: var(--accent); }
+/* Hover azul (no rojo): evita asociar "alerta/peligro" a términos políticos
+   en un sitio que se posiciona como imparcial. */
+.cloud .w:hover { transform: scale(1.12); color: var(--highlight); }
 .empty-state {
     color: var(--text-light); font-style: italic;
     text-align: center; padding: 30px; font-size: 14px;

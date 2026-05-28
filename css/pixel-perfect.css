@@ -165,11 +165,8 @@ img {
     will-change: transform, box-shadow;
 }
 
-/* Smooth scroll para toda la página */
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 100px;
-}
+/* scroll-padding-top y ::selection definidos en base.css — no redeclarar
+   (causaban override silencioso del amarillo Colombia → azul). */
 
 /* Focus visible mejorado para accesibilidad */
 :focus-visible {
@@ -188,33 +185,8 @@ textarea:focus-visible {
     box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.2);
 }
 
-/* Selection color personalizado */
-::selection {
-    background: rgba(59, 130, 246, 0.3);
-    color: var(--primary);
-}
-
-body.dark ::selection {
-    background: rgba(59, 130, 246, 0.4);
-    color: #f1f5f9;
-}
-
-/* Imágenes con lazy loading visual */
-img {
-    background: linear-gradient(
-        90deg,
-        var(--bar-bg) 0%,
-        color-mix(in srgb, var(--bar-bg) 80%, #fff) 50%,
-        var(--bar-bg) 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-}
-
-img.loaded {
-    background: none;
-    animation: none;
-}
+/* Bloque img duplicado eliminado — el de línea 37 con animation:none ya cubre
+   el caso. Re-declarar el shimmer aquí causaba conflicto con el !important. */
 
 /* Tablas con mejor styling */
 table {
