@@ -336,15 +336,12 @@ function renderChatbot() {
         </header>
         <div class="chat-body" id="chatBody"></div>
         <div class="chat-suggestions">
-            <button class="sg">🗳️ /paloma</button>
-            <button class="sg">🗳️ /cepeda</button>
-            <button class="sg">🗳️ /tigre</button>
-            <button class="sg">📊 /comparar</button>
-            <button class="sg">🧮 /calculadora</button>
-            <button class="sg">📰 /noticias</button>
+            <button class="sg">¿Quién es Paloma Valencia?</button>
+            <button class="sg">¿Quién es Iván Cepeda?</button>
+            <button class="sg">Comparar candidatos</button>
         </div>
         <div class="chat-input-row">
-            <input type="text" id="chatInput" placeholder="Escribe /ayuda para ver comandos…" aria-label="Mensaje al asistente">
+            <input type="text" id="chatInput" placeholder="Escribe tu pregunta sobre candidatos, propuestas..." aria-label="Mensaje al asistente">
             <button id="chatSend" aria-label="Enviar">Enviar</button>
         </div>
     </aside>
