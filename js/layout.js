@@ -520,10 +520,13 @@ function renderDisclaimer() {
   if (!root) return;
   root.innerHTML = `
     <div class="disclaimer" role="note" aria-label="Nota de imparcialidad">
-        <svg class="disclaimer-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></svg>
-        <strong>Sitio informativo imparcial.</strong>
-        Este portal se creó únicamente con fines de consulta y conteo ciudadano. Está programado de manera imparcial, <strong>sin inclinación hacia ningún partido o candidato</strong>.
-        <a href="${pathPrefix()}acerca.html" style="color:inherit;text-decoration:underline;">Conoce el propósito completo →</a>
+        <span class="disclaimer__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></svg>
+        </span>
+        <p class="disclaimer__text">
+            <strong>Sitio informativo imparcial.</strong> Creado únicamente con fines de consulta y conteo ciudadano, sin inclinación hacia ningún partido o candidato.
+            <a href="${pathPrefix()}acerca.html" class="disclaimer__link">Conoce el propósito&nbsp;→</a>
+        </p>
     </div>`;
 }
 
