@@ -1,0 +1,698 @@
+/* ================================================
+   DESIGN SYSTEM · Elecciones Colombia 2026
+   Sistema basado en variantes y tokens de diseño
+   ================================================ */
+
+/* ================================================
+   TOKENS DE COLOR PRIMARIOS
+   ================================================ */
+:root {
+  /* Colombia Brand Colors */
+  --co-yellow: #fcd116;
+  --co-blue: #003893;
+  --co-red: #ce1126;
+
+  /* Escalas de azul */
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-900: #003893;
+  --blue-950: #172554;
+
+  /* Escalas de gris */
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+  --gray-950: #020617;
+
+  /* Candidatos */
+  --paloma: #3b82f6;
+  --cepeda: #a855f7;
+  --tigre: #ef4444;
+
+  /* Semánticos */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+
+  /* Superficies */
+  --surface-primary: #ffffff;
+  --surface-secondary: #f8fafc;
+  --surface-tertiary: #f1f5f9;
+
+  /* Textos */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #94a3b8;
+  --text-inverse: #ffffff;
+
+  /* Bordes */
+  --border-light: rgba(226, 232, 240, 0.8);
+  --border-medium: rgba(203, 213, 225, 1);
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  /* Focos */
+  --focus-ring: 0 0 0 2px white, 0 0 0 4px var(--co-blue);
+  --focus-ring-offset: 0 0 0 2px white, 0 0 0 4px var(--co-yellow);
+
+  /* Radio de borde */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Tipografía */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* ================================================
+   NOTA DE ARQUITECTURA
+   ------------------------------------------------
+   El reset global, los estilos base (body, html, img,
+   a) y las utilidades genéricas los provee output.css
+   (Tailwind). Este archivo SOLO aporta los componentes
+   del sistema de diseño (navbar, menús, botones BEM,
+   cards, badges, inputs) y se carga DESPUÉS de
+   output.css en todas las páginas.
+   ================================================ */
+
+/* ================================================
+   COMPONENTE: NAVBAR
+   Variantes: default, transparent, condensed
+   ================================================ */
+
+/* Navbar Base */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--co-yellow) 33%, var(--co-blue) 33%, var(--co-blue) 66%, var(--co-red) 66%);
+}
+
+/* Navbar Variantes */
+
+/* Variante: Transparent (para heroes) */
+.navbar--transparent {
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+
+/* Variante: Condensed (para scroll) */
+.navbar--condensed {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.navbar--condensed .navbar__inner {
+  min-height: 56px;
+}
+
+/* Navbar Layout */
+.navbar__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .navbar__inner {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar__inner {
+    padding: 0 32px;
+  }
+}
+
+/* ================================================
+   COMPONENTE: BRAND
+   ================================================ */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.brand__logo {
+  flex-shrink: 0;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand__title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.brand__subtitle {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* ================================================
+   COMPONENTE: NAVIGATION
+   ================================================ */
+.nav {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+/* Nav Item Base */
+.nav__item {
+  position: relative;
+  list-style: none;
+}
+
+/* Nav Link Base */
+.nav__link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  transition: all 0.15s ease;
+}
+
+.nav__link:hover {
+  color: var(--text-primary);
+  background: var(--surface-tertiary);
+}
+
+.nav__link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* Variante: Active */
+.nav__link--active {
+  color: var(--blue-700);
+  background: var(--blue-50);
+  font-weight: 600;
+}
+
+/* Nav Link con Dropdown */
+.nav__link--has-dropdown::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  transition: transform 0.2s;
+}
+
+.nav__item:hover .nav__link--has-dropdown::after {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* ================================================
+   COMPONENTE: DROPDOWN MENU
+   ================================================ */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  min-width: 240px;
+  padding: 8px;
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-xl);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 100;
+}
+
+.nav__item:hover > .dropdown,
+.nav__item:focus-within > .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Dropdown Item */
+.dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  transition: all 0.15s;
+  cursor: pointer;
+}
+
+.dropdown__item:hover {
+  color: var(--text-primary);
+  background: var(--surface-secondary);
+}
+
+.dropdown__item--active {
+  color: var(--blue-700);
+  background: var(--blue-50);
+  font-weight: 500;
+}
+
+.dropdown__icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-tertiary);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+}
+
+.dropdown__item:hover .dropdown__icon {
+  background: var(--blue-100);
+  color: var(--blue-700);
+}
+
+/* ================================================
+   COMPONENTE: MEGA MENU
+   ================================================ */
+.mega-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  width: 720px;
+  max-width: calc(100vw - 32px);
+  padding: 16px;
+  background: white;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-2xl);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
+  z-index: 100;
+}
+
+.nav__item:hover > .mega-menu,
+.nav__item:focus-within > .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.mega-menu__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 900px) {
+  .mega-menu__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.mega-menu__card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s;
+}
+
+.mega-menu__card:hover {
+  background: var(--surface-secondary);
+}
+
+.mega-menu__icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--blue-100), var(--blue-50));
+  border-radius: var(--radius-md);
+  color: var(--blue-700);
+}
+
+.mega-menu__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mega-menu__desc {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  line-height: 1.4;
+}
+
+/* ================================================
+   COMPONENTE: BOTONES
+   Variantes: primary, secondary, ghost, danger
+   Tamaños: sm, md, lg
+   ================================================ */
+
+/* Botón Base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* Tamaños */
+.btn--sm {
+  padding: 8px 14px;
+  font-size: 13px;
+  border-radius: var(--radius-md);
+}
+
+.btn--md {
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: var(--radius-lg);
+}
+
+.btn--lg {
+  padding: 14px 24px;
+  font-size: 15px;
+  border-radius: var(--radius-lg);
+}
+
+/* Variante: Primary */
+.btn--primary {
+  color: white;
+  background: linear-gradient(135deg, var(--co-blue), var(--blue-800));
+  box-shadow: 0 4px 14px rgba(0, 56, 147, 0.3);
+}
+
+.btn--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 56, 147, 0.4);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+}
+
+/* Variante: Secondary */
+.btn--secondary {
+  color: var(--text-primary);
+  background: white;
+  border: 1.5px solid var(--border-medium);
+}
+
+.btn--secondary:hover {
+  background: var(--surface-tertiary);
+  border-color: var(--gray-300);
+}
+
+/* Variante: Ghost */
+.btn--ghost {
+  color: var(--text-secondary);
+  background: transparent;
+}
+
+.btn--ghost:hover {
+  color: var(--text-primary);
+  background: var(--surface-tertiary);
+}
+
+/* Variante: Danger */
+.btn--danger {
+  color: white;
+  background: linear-gradient(135deg, var(--danger), #dc2626);
+}
+
+.btn--danger:hover {
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
+}
+
+/* ================================================
+   COMPONENTE: CARDS
+   Variantes: default, outlined, elevated
+   ================================================ */
+
+.card {
+  background: white;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+}
+
+.card--elevated {
+  box-shadow: var(--shadow-lg);
+  border: none;
+}
+
+.card--outlined {
+  border: 2px solid var(--border-medium);
+}
+
+.card__header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.card__body {
+  padding: 24px;
+}
+
+.card__footer {
+  padding: 16px 24px;
+  background: var(--surface-secondary);
+  border-top: 1px solid var(--border-light);
+}
+
+/* ================================================
+   COMPONENTE: BADGES
+   ================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+}
+
+.badge--blue {
+  color: var(--blue-700);
+  background: var(--blue-100);
+}
+
+.badge--green {
+  color: #047857;
+  background: #d1fae5;
+}
+
+.badge--red {
+  color: #b91c1c;
+  background: #fee2e2;
+}
+
+.badge--yellow {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.badge--gray {
+  color: var(--text-secondary);
+  background: var(--surface-tertiary);
+}
+
+/* ================================================
+   COMPONENTE: INPUTS
+   ================================================ */
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  background: white;
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  transition: all 0.15s;
+}
+
+.input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.input:hover {
+  border-color: var(--gray-400);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ================================================
+   UTILIDADES
+   ------------------------------------------------
+   Las utilidades genéricas (.flex, .text-*, .bg-*,
+   .p-*, .container, etc.) las genera Tailwind en
+   output.css. No se redefinen aquí para no pisar
+   la cascada de Tailwind.
+   ================================================ */
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .menu-toggle {
+    display: none;
+  }
+}
+
+.menu-toggle__line {
+  width: 22px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+.menu-toggle--active .menu-toggle__line:first-child {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle--active .menu-toggle__line:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle--active .menu-toggle__line:last-child {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ================================================
+   COMPONENTE: MOBILE NAV
+   ================================================ */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  z-index: 40;
+  overflow-y: auto;
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--co-blue);
+  color: white;
+  padding: 8px 16px;
+  font-weight: 600;
+  border-radius: 0 0 8px 0;
+  z-index: 9999;
+}
+
+.skip-link:focus {
+  top: 0;
+}
