@@ -50,7 +50,7 @@
         <div class="page-hero-text">
             <span class="page-hero-eyebrow">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-                Colombia · 31 de mayo de 2026
+                Colombia · 28 de mayo de 2026
             </span>
             <h1>Elecciones Presidenciales <em>Colombia 2026</em></h1>
             <p class="lead">
@@ -72,9 +72,9 @@
         </div>
         <div class="page-hero-visual">
             <div class="hero-visual-trio" aria-hidden="true">
-                <div class="face" style="--c: #3b82f6;"><img src="./assets/foto-paloma.jpg" alt=""></div>
-                <div class="face" style="--c: #a855f7;"><img src="./assets/foto-cepeda.jpg" alt=""></div>
-                <div class="face" style="--c: #ef4444;"><img src="./assets/foto-tigre.jpg" alt=""></div>
+                <div class="face" style="--c: #3b82f6;"><img src="https://palomapresidente.com.co/images/slider/paloma-valencia-presidente.jpeg" alt="Paloma Valencia" loading="lazy"></div>
+                <div class="face" style="--c: #a855f7;"><img src="https://www.presidenteivancepeda.com/_next/image?url=%2Fivnaaida.png&w=3840&q=75" alt="Iván Cepeda" loading="lazy"></div>
+                <div class="face" style="--c: #ef4444;"><img src="https://media.gettyimages.com/id/2275512113/es/foto/colombias-right-wing-presidential-candidate-abelardo-de-la-espriella-speaks-behind-bulletproof.jpg" alt="Abelardo de la Espriella" loading="lazy"></div>
             </div>
         </div>
     </div>
@@ -238,7 +238,7 @@
     <section class="candidates-visual-grid" aria-label="Perfiles de candidatos con fotos">
         <a href="./candidato/paloma.html" class="candidate-visual-card" style="--ccolor: #3b82f6;">
             <div class="candidate-photo-wrapper">
-                <img src="./assets/foto-paloma.jpg" alt="Paloma Valencia" loading="lazy"/>
+                <img src="https://palomapresidente.com.co/images/slider/paloma-valencia-presidente.jpeg" alt="Paloma Valencia" loading="lazy" onerror="this.src='./assets/foto-paloma.jpg'"/>
                 <div class="candidate-overlay">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </div>
@@ -253,10 +253,10 @@
                 </div>
             </div>
         </a>
-        
+
         <a href="./candidato/cepeda.html" class="candidate-visual-card" style="--ccolor: #a855f7;">
             <div class="candidate-photo-wrapper">
-                <img src="./assets/foto-cepeda.jpg" alt="Iván Cepeda" loading="lazy"/>
+                <img src="https://www.presidenteivancepeda.com/_next/image?url=%2Fivnaaida.png&w=3840&q=75" alt="Iván Cepeda" loading="lazy" onerror="this.src='./assets/foto-cepeda.jpg'"/>
                 <div class="candidate-overlay">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </div>
@@ -271,7 +271,7 @@
                 </div>
             </div>
         </a>
-        
+
         <a href="./candidato/tigre.html" class="candidate-visual-card" style="--ccolor: #ef4444;">
             <div class="candidate-photo-wrapper">
                 <img src="./assets/foto-tigre.jpg" alt="Abelardo de la Espriella" loading="lazy"/>
@@ -291,8 +291,210 @@
         </a>
     </section>
 
+    <!-- ACORDEÓN DE INFORMACIÓN DE CANDIDATOS -->
+    <section class="section-strip" style="margin-top: 48px;">
+        <h2>Información Detallada de los Candidatos</h2>
+        <p class="section-strip-lead">Expande cada candidato para conocer su perfil completo, propuestas y trayectoria.</p>
+    </section>
+
+    <section class="candidate-accordion" aria-label="Acordeón de candidatos" style="max-width: 900px; margin: 0 auto 48px; padding: 0 5%;">
+        <!-- Paloma Valencia -->
+        <div class="accordion-item" style="border: 1px solid var(--card-border); border-radius: 16px; margin-bottom: 12px; overflow: hidden; background: var(--card-bg);">
+            <button class="accordion-header" aria-expanded="false" style="width: 100%; padding: 20px 24px; background: transparent; border: none; display: flex; align-items: center; gap: 16px; cursor: pointer; text-align: left;">
+                <img src="https://palomapresidente.com.co/images/slider/paloma-valencia-presidente.jpeg" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0;" onerror="this.style.display='none'">
+                <div style="flex: 1;">
+                    <h3 style="margin: 0; font-size: 17px; color: var(--primary); font-weight: 700;">Paloma Valencia</h3>
+                    <span style="font-size: 13px; color: #3b82f6; font-weight: 600;">Centro Democrático · Orden, firmeza y corazón</span>
+                </div>
+                <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.3s ease; color: var(--text-light);">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
+                <div style="padding: 0 24px 24px;">
+                    <div style="display: grid; gap: 16px;">
+                        <div>
+                            <h4 style="font-size: 14px; color: var(--primary); margin: 0 0 8px;">Perfil</h4>
+                            <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-secondary); margin: 0;">Senadora del Centro Democrático, abogada de la Universidad de los Andes. Líder de la oposición durante el gobierno Petro. Fórmula vicepresidencial: Juan Daniel Oviedo (exdirector del DANE).</p>
+                        </div>
+                        <div>
+                            <h4 style="font-size: 14px; color: var(--primary); margin: 0 0 8px;">Propuestas Principales</h4>
+                            <ul style="font-size: 13.5px; line-height: 1.7; color: var(--text-secondary); margin: 0; padding-left: 20px;">
+                                <li>Orden público con mano firme contra el narcotráfico</li>
+                                <li>Economía de libre mercado y apertura comercial</li>
+                                <li>Reducción de impuestos a empresas y personas</li>
+                                <li>Reforma a la salud con enfoque en aseguramiento privado</li>
+                                <li>Alianza con sector empresarial y Estados Unidos</li>
+                            </ul>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; padding: 16px; background: rgba(59,130,246,0.06); border-radius: 12px;">
+                            <div>
+                                <span style="font-size: 11px; color: var(--text-light); text-transform: uppercase;">Edad</span>
+                                <p style="font-size: 14px; font-weight: 600; margin: 2px 0 0;">44 años</p>
+                            </div>
+                            <div>
+                                <span style="font-size: 11px; color: var(--text-light); text-transform: uppercase;">Profesión</span>
+                                <p style="font-size: 14px; font-weight: 600; margin: 2px 0 0;">Abogada</p>
+                            </div>
+                            <div>
+                                <span style="font-size: 11px; color: var(--text-light); text-transform: uppercase;">Experiencia</span>
+                                <p style="font-size: 14px; font-weight: 600; margin: 2px 0 0;">Senadora</p>
+                            </div>
+                            <div>
+                                <span style="font-size: 11px; color: var(--text-light); text-transform: uppercase;">Fórmula</span>
+                                <p style="font-size: 14px; font-weight: 600; margin: 2px 0 0;">J.D. Oviedo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Iván Cepeda -->
+        <div class="accordion-item" style="border: 1px solid var(--card-border); border-radius: 16px; margin-bottom: 12px; overflow: hidden; background: var(--card-bg);">
+            <button class="accordion-header" aria-expanded="false" style="width: 100%; padding: 20px 24px; background: transparent; border: none; display: flex; align-items: center; gap: 16px; cursor: pointer; text-align: left;">
+                <img src="https://www.presidenteivancepeda.com/_next/image?url=%2Fivnaaida.png&w=3840&q=75" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0;" onerror="this.style.display='none'">
+                <div style="flex: 1;">
+                    <h3 style="margin: 0; font-size: 17px; color: var(--primary); font-weight: 700;">Iván Cepeda Castro</h3>
+                    <span style="font-size: 13px; color: #a855f7; font-weight: 600;">Pacto Histórico · El poder de la verdad</span>
+                </div>
+                <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.3s ease; color: var(--text-light);">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
+                <div style="padding: 0 24px 24px;">
+                    <div style="display: grid; gap: 16px;">
+                        <div>
+                            <h4 style="font-size: 14px; color: var(--primary); margin: 0 0 8px;">Perfil</h4>
+                            <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-secondary); margin: 0;">Senador del Pacto Histórico, defensor de derechos humanos. Hijo del senador Manuel Cepeda Vargas. Fórmula vicepresidencial: Aída Quilcué (líder indígena nasa y senadora).</p>
+                        </div>
+                        <div>
+                            <h4 style="font-size: 14px; color: var(--primary); margin: 0 0 8px;">4 Ejes del Programa de Gobierno</h4>
+                            <ul style="font-size: 13.5px; line-height: 1.7; color: var(--text-secondary); margin: 0; padding-left: 20px;">
+                                <li><strong>Paz completa:</strong> Implementación total del Acuerdo de Paz y diálogos con grupos armados</li>
+                                <li><strong>Justicia social:</strong> Colombia Mayor, Renta Joven, Renta Ciudadana, subsidios directos</li>
+                                <li><strong>Transición energética:</strong> Energías limpias y cuidado del medio ambiente</li>
+                                <li><strong>Protección de líderes:</strong> Seguridad integral para defensores de derechos humanos</li>
+                            </ul>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; padding: 16px; background: rgba(168,85,247,0.06); border-radius: 12px;">
+                            <div>
+                                <span style="font-size: 11px; color: var(--text-light); text-transform: uppercase;">Edad</span>
+                                <p style="font-size: 14px; font-weight: 600; margin: 2px 0 0;">63 años</p>
+                            </div>
+                            <div>
+                                <span style="font-size: 11px; color: var(--text-light); text-transform: uppercase;">Profesión</span>
+                                <p style="font-size: 14px; font-weight: 600; margin: 2px 0 0;">Abogado</p>
+                            </div>
+                            <div>
+                                <span style="font-size: 11px; color: var(--text-light); text-transform: uppercase;">Experiencia</span>
+                                <p style="font-size: 14px; font-weight: 600; margin: 2px 0 0;">Senador</p>
+                            </div>
+                            <div>
+                                <span style="font-size: 11px; color: var(--text-light); text-transform: uppercase;">Fórmula</span>
+                                <p style="font-size: 14px; font-weight: 600; margin: 2px 0 0;">Aída Quilcué</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Abelardo de la Espriella -->
+        <div class="accordion-item" style="border: 1px solid var(--card-border); border-radius: 16px; margin-bottom: 12px; overflow: hidden; background: var(--card-bg);">
+            <button class="accordion-header" aria-expanded="false" style="width: 100%; padding: 20px 24px; background: transparent; border: none; display: flex; align-items: center; gap: 16px; cursor: pointer; text-align: left;">
+                <img src="./assets/foto-tigre.jpg" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+                <div style="flex: 1;">
+                    <h3 style="margin: 0; font-size: 17px; color: var(--primary); font-weight: 700;">Abelardo de la Espriella</h3>
+                    <span style="font-size: 13px; color: #ef4444; font-weight: 600;">Defensores de la Patria · 13 milagros</span>
+                </div>
+                <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.3s ease; color: var(--text-light);">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
+                <div style="padding: 0 24px 24px;">
+                    <div style="display: grid; gap: 16px;">
+                        <div>
+                            <h4 style="font-size: 14px; color: var(--primary); margin: 0 0 8px;">Perfil</h4>
+                            <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-secondary); margin: 0;">Abogado y empresario conocido como "El Tigre". Fundador de De La Espriella Lawyers. Candidato "outsider" de derecha radical inspirado en modelos de Bukele (El Salvador) y Milei (Argentina). Fórmula: José Manuel Restrepo (exministro de Hacienda).</p>
+                        </div>
+                        <div>
+                            <h4 style="font-size: 14px; color: var(--primary); margin: 0 0 8px;">Propuestas Principales</h4>
+                            <ul style="font-size: 13.5px; line-height: 1.7; color: var(--text-secondary); margin: 0; padding-left: 20px;">
+                                <li>"Patria Milagro": 13 reformas radicales para Colombia</li>
+                                <li>Mano dura contra la delincuencia y reducción de la inseguridad</li>
+                                <li>Reducción drástica del tamaño del Estado</li>
+                                <li>Impuestos bajos y apertura comercial total</li>
+                                <li>Modelo Bukele-Milei: orden, seguridad y libertad económica</li>
+                            </ul>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; padding: 16px; background: rgba(239,68,68,0.06); border-radius: 12px;">
+                            <div>
+                                <span style="font-size: 11px; color: var(--text-light); text-transform: uppercase;">Edad</span>
+                                <p style="font-size: 14px; font-weight: 600; margin: 2px 0 0;">47 años</p>
+                            </div>
+                            <div>
+                                <span style="font-size: 11px; color: var(--text-light); text-transform: uppercase;">Profesión</span>
+                                <p style="font-size: 14px; font-weight: 600; margin: 2px 0 0;">Abogado</p>
+                            </div>
+                            <div>
+                                <span style="font-size: 11px; color: var(--text-light); text-transform: uppercase;">Experiencia</span>
+                                <p style="font-size: 14px; font-weight: 600; margin: 2px 0 0;">Empresario</p>
+                            </div>
+                            <div>
+                                <span style="font-size: 11px; color: var(--text-light); text-transform: uppercase;">Fórmula</span>
+                                <p style="font-size: 14px; font-weight: 600; margin: 2px 0 0;">J.M. Restrepo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Grid original de perfiles (se mantiene para compatibilidad) -->
     <section id="perfiles" class="candidates-grid" aria-label="Perfiles de candidatos" style="display:none;"></section>
+
+    <!-- Script para el acordeón -->
+    <script>
+    (function() {
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.closest('.accordion-item');
+                const content = item.querySelector('.accordion-content');
+                const icon = header.querySelector('.accordion-icon');
+                const isOpen = header.getAttribute('aria-expanded') === 'true';
+
+                // Cerrar todos los demás
+                document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                    if (otherItem !== item) {
+                        const otherHeader = otherItem.querySelector('.accordion-header');
+                        const otherContent = otherItem.querySelector('.accordion-content');
+                        const otherIcon = otherItem.querySelector('.accordion-icon');
+                        otherHeader.setAttribute('aria-expanded', 'false');
+                        otherContent.style.maxHeight = '0';
+                        otherIcon.style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                // Toggle el actual
+                if (isOpen) {
+                    header.setAttribute('aria-expanded', 'false');
+                    content.style.maxHeight = '0';
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    header.setAttribute('aria-expanded', 'true');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+    })();
+    </script>
 
     <!-- Sección "Minuto a minuto" removida del home — vive en /noticias.html con
          su propia UX y datos. El home se concentra en presentar candidatos +
