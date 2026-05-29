@@ -1,0 +1,16 @@
+{
+  "name": "Elecciones Presidenciales Colombia 2026",
+  "short_name": "Elecciones 2026",
+  "description": "Análisis imparcial, calculadora de afinidad y noticias en vivo de las Elecciones Presidenciales de Colombia 2026.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "lang": "es-CO",
+  "background_color": "#0b1224",
+  "theme_color": "#003893",
+  "icons": [
+    { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
