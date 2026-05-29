@@ -145,7 +145,7 @@ const ICONS = {
   arrowRight: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`,
   chevronRight: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>`,
   arrowUpRight: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg>`,
-  logo: `<svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="url(#nav-logo-grad)"/><path d="M13 28V13h4l4 8 4-8h4v15h-3V18l-3.5 7h-2L17 18v10h-4z" fill="white"/><defs><linearGradient id="nav-logo-grad" x1="0" y1="0" x2="40" y2="40"><stop offset="0%" stop-color="#fcd116"/><stop offset="50%" stop-color="#003893"/><stop offset="100%" stop-color="#ce1126"/></linearGradient></defs></svg>`
+  logo: `<svg viewBox="0 0 44 44" width="100%" height="100%" role="img" aria-label="Bandera de Colombia"><defs><clipPath id="brand-flag"><circle cx="22" cy="22" r="22"/></clipPath></defs><g clip-path="url(#brand-flag)"><rect x="0" y="0" width="44" height="22" fill="#fcd116"/><rect x="0" y="22" width="44" height="11" fill="#003893"/><rect x="0" y="33" width="44" height="11" fill="#ce1126"/></g><circle cx="22" cy="22" r="21" fill="none" stroke="rgba(15,23,42,0.14)" stroke-width="1.5"/></svg>`
 };
 
 /* =========================================
@@ -175,14 +175,14 @@ function activePageId() {
  */
 function buildBrand(prefix) {
   return `
-    <a href="${prefix}index.html" class="brand" aria-label="Mi Presidente - Inicio">
-      <div class="brand__logo" style="width: 40px; height: 40px;">
+    <a href="${prefix}index.html" class="brand" aria-label="Elecciones Presidenciales Colombia 2026 — Inicio">
+      <span class="brand__logo">
         ${ICONS.logo}
-      </div>
-      <div class="brand__text">
-        <span class="brand__title">Mi Presidente</span>
-        <span class="brand__subtitle">Elecciones 2026</span>
-      </div>
+      </span>
+      <span class="brand__text">
+        <span class="brand__title">Elecciones Presidenciales</span>
+        <span class="brand__subtitle">Colombia · 2026</span>
+      </span>
     </a>
   `;
 }

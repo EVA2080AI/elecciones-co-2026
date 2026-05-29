@@ -41,7 +41,7 @@
         }
 
         /* NAVBAR */
-        .navbar {
+        .is-dashboard .navbar {
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
             padding: 14px 5%; position: sticky; top: 0; z-index: 1000;
@@ -49,13 +49,13 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
             flex-wrap: wrap;
         }
-        .navbar a {
+        .is-dashboard .navbar a {
             font-family: 'Outfit', sans-serif; color: rgba(255,255,255,0.8);
             text-decoration: none; font-weight: 600; font-size: 13px;
             padding: 8px 14px; border-radius: 20px;
             transition: all 0.3s ease; white-space: nowrap;
         }
-        .navbar a:hover { color: #fff; background: var(--highlight); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+        .is-dashboard .navbar a:hover { color: #fff; background: var(--highlight); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
         .nav-actions { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); display: flex; gap: 10px; }
         .theme-toggle {
             background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
@@ -336,8 +336,8 @@
         }
         @media (max-width: 700px) {
             .header h1 { font-size: 24px; }
-            .navbar { gap: 6px; padding: 12px; }
-            .navbar a { font-size: 12px; padding: 6px 12px; }
+            .is-dashboard .navbar { gap: 6px; padding: 12px; }
+            .is-dashboard .navbar a { font-size: 12px; padding: 6px 12px; }
             .nav-actions { position: static; transform: none; margin-top: 8px; width: 100%; justify-content: center; }
             .section { padding: 20px; }
             .kpi-strip { grid-template-columns: 1fr; }
