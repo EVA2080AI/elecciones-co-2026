@@ -1204,3 +1204,223 @@
 @media (max-width: 560px) {
   .disclaimer { padding: 12px 18px; font-size: 12.5px; }
 }
+
+/* ================================================
+   PÁGINAS DE CANDIDATO (.cdetail-*, .position-*, .hist-*)
+   Estos estilos faltaban por completo: el perfil del
+   candidato se mostraba sin formato. --ccolor = color
+   del partido (lo pone render.js por candidato).
+   ================================================ */
+
+/* Hero: breadcrumb arriba, contenido a lo ancho */
+.hero-candidato .page-hero-inner {
+  display: block;
+  max-width: 1100px;
+}
+.cdetail-hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+.cdetail-avatar {
+  width: 132px;
+  height: 132px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  font-weight: 800;
+  color: #fff;
+  background: var(--ccolor, var(--co-blue));
+  box-shadow: 0 10px 28px -10px var(--ccolor, var(--co-blue));
+}
+.cdetail-avatar-photo { padding: 4px; background: var(--ccolor, var(--co-blue)); }
+.cdetail-avatar-photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  border: 3px solid #fff;
+  display: block;
+}
+.cdetail-party {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ccolor, var(--co-blue));
+  background: color-mix(in srgb, var(--ccolor, var(--co-blue)) 13%, white);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+.cdetail-hero-inner h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 5vw, 46px);
+  margin: 12px 0 4px;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.cdetail-slogan {
+  font-size: 16px;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+}
+.cdetail-stats {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.cdetail-stats > div { display: flex; flex-direction: column; }
+.cdetail-stats .num {
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.cdetail-stats .lab {
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  margin-top: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Cuerpo: grid principal + aside */
+.cdetail-grid {
+  max-width: 1100px;
+  margin: 32px auto 0;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 860px) { .cdetail-grid { grid-template-columns: 1fr; } }
+.cdetail-main, .cdetail-aside { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.cdetail-card {
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 24px;
+}
+.cdetail-card h2 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  margin: 0 0 14px;
+  color: var(--text-primary);
+}
+.cdetail-card > p { color: var(--text-secondary); line-height: 1.65; margin: 0; }
+
+/* Meta bio (dl) */
+.hist-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 20px;
+  margin: 18px 0 0;
+}
+.hist-meta div { display: flex; flex-direction: column; }
+.hist-meta dt {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  font-weight: 700;
+}
+.hist-meta dd { margin: 3px 0 0; font-size: 14px; color: var(--text-primary); line-height: 1.4; }
+
+/* Propuestas */
+.proposal-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.proposal-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-size: 14.5px;
+}
+.proposal-list svg { flex-shrink: 0; margin-top: 3px; color: var(--success); }
+
+/* Línea de tiempo */
+.hist-timeline { list-style: none; margin: 0; padding: 0; }
+.hist-timeline li {
+  position: relative;
+  padding: 0 0 18px 22px;
+  border-left: 2px solid var(--border-light);
+}
+.hist-timeline li:last-child { padding-bottom: 0; border-left-color: transparent; }
+.hist-timeline li::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--co-blue);
+}
+.hist-year { display: block; font-weight: 700; color: var(--co-blue); font-size: 13px; }
+.hist-event { display: block; color: var(--text-secondary); font-size: 14px; margin-top: 3px; line-height: 1.5; }
+
+/* Curiosidades */
+.hist-facts { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 11px; }
+.hist-facts li { color: var(--text-secondary); font-size: 14px; line-height: 1.55; }
+
+/* Posturas en las 10 inquietudes */
+.positions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+.position-card {
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 18px;
+}
+.position-card.is-winner {
+  border-color: color-mix(in srgb, var(--ccolor, var(--co-blue)) 45%, var(--border-light));
+  box-shadow: 0 10px 24px -12px var(--ccolor, var(--co-blue));
+}
+.position-card header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.position-num { font-size: 12px; font-weight: 800; color: var(--ccolor, var(--co-blue)); }
+.position-card h3 { font-size: 15px; margin: 0; flex: 1; color: var(--text-primary); line-height: 1.3; }
+.position-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #047857;
+  background: #d1fae5;
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.position-card > p { font-size: 14px; color: var(--text-secondary); line-height: 1.55; margin: 0 0 14px; }
+.position-card footer { display: flex; align-items: center; gap: 10px; }
+.position-meter {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-tertiary);
+  overflow: hidden;
+}
+.position-meter span { display: block; height: 100%; border-radius: 999px; }
+.position-score { font-size: 13px; font-weight: 700; color: var(--text-primary); }
