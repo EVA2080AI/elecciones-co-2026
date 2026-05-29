@@ -16,7 +16,7 @@
     <meta property="og:site_name" content="Elecciones Presidenciales Colombia 2026">
     <meta property="og:title" content="Elecciones Presidenciales Colombia 2026 · Análisis Imparcial">
     <meta property="og:description" content="Análisis cuantitativo de candidatos, calculadora de afinidad y pulso de noticias en vivo.">
-    <meta property="og:image" content="https://eleccionespresidenciales2026.com/assets/og-image.svg">
+    <meta property="og:image" content="https://eleccionespresidenciales2026.com/assets/og-image.jpg">
     <meta property="og:locale" content="es_CO">
     <meta name="twitter:card" content="summary_large_image">
 
@@ -32,6 +32,33 @@
     <link rel="stylesheet" href="./css/design-system.css">
 
     <!-- Chart.js no se necesita en home (sin <canvas>). Lo cargan analisis/noticias/dashboard. -->
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://eleccionespresidenciales2026.com/#organization",
+          "name": "Elecciones Presidenciales Colombia 2026",
+          "url": "https://eleccionespresidenciales2026.com/",
+          "logo": "https://eleccionespresidenciales2026.com/assets/og-image.jpg",
+          "description": "Sitio informativo imparcial sobre las Elecciones Presidenciales de Colombia 2026: análisis cuantitativo, calculadora de afinidad y pulso de noticias en vivo.",
+          "founder": { "@type": "Person", "name": "Antonio Villalba" },
+          "email": "antonio.villalba.matamoros@gmail.com",
+          "knowsLanguage": "es-CO"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://eleccionespresidenciales2026.com/#website",
+          "url": "https://eleccionespresidenciales2026.com/",
+          "name": "Elecciones Presidenciales Colombia 2026",
+          "inLanguage": "es-CO",
+          "publisher": { "@id": "https://eleccionespresidenciales2026.com/#organization" }
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body data-page="inicio">

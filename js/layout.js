@@ -27,6 +27,7 @@ const TOKENS = {
    ========================================= */
 const NAV_ITEMS = [
   { id: 'inicio', href: 'index.html', label: 'Inicio' },
+  { id: 'resultados', href: 'resultados.html', label: 'Resultados' },
   { id: 'acerca', href: 'acerca.html', label: 'Acerca' },
   {
     id: 'candidatos',
@@ -536,16 +537,20 @@ function renderFooter() {
   root.innerHTML = `
     <footer class="footer">
         <div class="footer-grid">
-            <div class="footer-col">
-                <div class="footer-brand">
-                    <span class="footer-flag" aria-hidden="true"></span>
-                    Elecciones Presidenciales Colombia 2026
-                </div>
-                <p class="footer-mission">Sitio informativo independiente. Sin filiación política. Construido con fines de consulta ciudadana.</p>
+            <div class="footer-col footer-col--brand">
+                <a href="${prefix}index.html" class="footer-brand" aria-label="Elecciones Presidenciales Colombia 2026 — Inicio">
+                    <span class="footer-brand__logo">${ICONS.logo}</span>
+                    <span class="footer-brand__text">
+                        <span class="footer-brand__title">Elecciones Presidenciales</span>
+                        <span class="footer-brand__sub">Colombia · 2026</span>
+                    </span>
+                </a>
+                <p class="footer-mission">Herramienta cívica abierta e imparcial. Sin filiación política ni financiamiento de campañas. Datos de planes de gobierno oficiales y medios públicos.</p>
             </div>
             <div class="footer-col">
                 <h4>Explorar</h4>
                 <ul>
+                    <li><a href="${prefix}resultados.html">Resultados en vivo</a></li>
                     <li><a href="${prefix}acerca.html">Acerca del proyecto</a></li>
                     <li><a href="${prefix}candidatos.html">Candidatos</a></li>
                     <li><a href="${prefix}analisis.html">Análisis cuantitativo</a></li>
