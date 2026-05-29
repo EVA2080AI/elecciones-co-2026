@@ -33,11 +33,19 @@ const NAV_ITEMS = [
     href: 'candidatos.html',
     label: 'Candidatos',
     variant: 'mega',
+    accent: '#003893',
+    feature: {
+      eyebrow: 'Comparador 2026',
+      title: 'Conoce a los candidatos',
+      desc: 'Propuestas, trayectoria y afinidad — lado a lado y sin sesgo.',
+      cta: 'Ver comparación completa',
+      href: 'candidatos.html'
+    },
     items: [
-      { label: 'Paloma Valencia', href: 'candidato/paloma.html', desc: 'Centro Democrático · Derecha institucional', icon: 'users' },
-      { label: 'Iván Cepeda', href: 'candidato/cepeda.html', desc: 'Pacto Histórico · Izquierda progresista', icon: 'users' },
-      { label: 'Abelardo de la Espriella', href: 'candidato/tigre.html', desc: 'Independiente · Derecha radical', icon: 'users' },
-      { label: 'Ver todos', href: 'candidatos.html', desc: 'Compara los tres perfiles lado a lado', icon: 'usersCompare' }
+      { label: 'Paloma Valencia', href: 'candidato/paloma.html', desc: 'Centro Democrático', avatar: 'assets/foto-paloma.jpg', accent: '#3b82f6' },
+      { label: 'Iván Cepeda', href: 'candidato/cepeda.html', desc: 'Pacto Histórico', avatar: 'assets/foto-cepeda.jpg', accent: '#a855f7' },
+      { label: 'Abelardo de la Espriella', href: 'candidato/tigre.html', desc: 'Defensores de la Patria', avatar: 'assets/foto-tigre.jpg', accent: '#ef4444' },
+      { label: 'Comparar los tres', href: 'candidatos.html', desc: 'Perfiles enfrentados lado a lado', icon: 'usersCompare', accent: '#003893' }
     ]
   },
   {
@@ -45,11 +53,19 @@ const NAV_ITEMS = [
     href: 'analisis.html',
     label: 'Análisis',
     variant: 'mega',
+    accent: '#1d4ed8',
+    feature: {
+      eyebrow: 'Datos abiertos',
+      title: 'Análisis cuantitativo',
+      desc: 'Metodología imparcial sobre fuentes públicas verificables.',
+      cta: 'Explorar el análisis',
+      href: 'analisis.html'
+    },
     items: [
       { label: 'Índice de solidez', href: 'analisis.html#solidez', desc: 'Solidez dinámica de propuestas', icon: 'barChart' },
-      { label: 'Radar de afinidad', href: 'analisis.html#radar', desc: 'Visualiza coincidencias por tema', icon: 'radar' },
+      { label: 'Radar de afinidad', href: 'analisis.html#radar', desc: 'Coincidencias por tema, visualizadas', icon: 'radar' },
       { label: 'Comparador 1 vs 1', href: 'analisis.html#comparador', desc: 'Compara candidatos cara a cara', icon: 'usersCompare' },
-      { label: 'Veredicto IA', href: 'analisis.html#veredicto', desc: 'Análisis imparcial de la IA', icon: 'ai' }
+      { label: 'Veredicto IA', href: 'analisis.html#veredicto', desc: 'Lectura imparcial de la IA', icon: 'ai' }
     ]
   },
   {
@@ -57,10 +73,11 @@ const NAV_ITEMS = [
     href: 'calculadora.html',
     label: 'Calculadora',
     variant: 'dropdown',
+    accent: '#2563eb',
     items: [
-      { label: 'Modo sliders', href: 'calculadora.html', desc: 'Pondera 10 inquietudes manualmente', icon: 'calculator' },
+      { label: 'Modo sliders', href: 'calculadora.html', desc: 'Pondera 10 inquietudes a mano', icon: 'calculator' },
       { label: 'Describir con IA', href: 'calculadora.html#nlpInput', desc: 'La IA interpreta tus prioridades', icon: 'ai', badge: 'Nuevo' },
-      { label: 'Ver matriz', href: 'analisis.html#matriz', desc: 'Entiende cómo se calculan los puntajes', icon: 'barChart' }
+      { label: 'Ver matriz', href: 'analisis.html#matriz', desc: 'Cómo se calculan los puntajes', icon: 'barChart' }
     ]
   },
   {
@@ -68,6 +85,14 @@ const NAV_ITEMS = [
     href: 'noticias.html',
     label: 'Minuto a Minuto',
     variant: 'mega',
+    accent: '#be123c',
+    feature: {
+      eyebrow: 'En vivo',
+      title: 'Minuto a minuto',
+      desc: 'Cobertura agregada de los principales medios del país.',
+      cta: 'Abrir el feed en vivo',
+      href: 'noticias.html'
+    },
     items: [
       { label: 'Feed de noticias', href: 'noticias.html#noticias', desc: 'Agregador RSS de medios colombianos', icon: 'newspaper' },
       { label: 'Videos YouTube', href: 'noticias.html#youtube', desc: 'Cobertura audiovisual en vivo', icon: 'video' },
@@ -80,10 +105,18 @@ const NAV_ITEMS = [
     href: 'denuncias.html',
     label: 'Denuncias',
     variant: 'mega',
+    accent: '#b45309',
+    feature: {
+      eyebrow: 'Protege el voto',
+      title: 'Reporta irregularidades',
+      desc: 'Canales oficiales para denunciar delitos electorales.',
+      cta: 'Ver canales oficiales',
+      href: 'denuncias.html'
+    },
     items: [
       { label: 'Fiscalía General', href: 'denuncias.html#fiscalia', desc: 'Denuncia delitos electorales', icon: 'alert' },
       { label: 'Procuraduría', href: 'denuncias.html#procuraduria', desc: 'Vigilancia de funcionarios', icon: 'shield' },
-      { label: 'Registraduría', href: 'denuncias.html#registraduria', desc: 'Denuncias de logística electoral', icon: 'scale' },
+      { label: 'Registraduría', href: 'denuncias.html#registraduria', desc: 'Logística electoral', icon: 'scale' },
       { label: 'MOE Observación', href: 'denuncias.html#moe', desc: 'App "Pilas con el Voto"', icon: 'users' }
     ]
   },
@@ -110,6 +143,8 @@ const ICONS = {
   chevronDown: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>`,
   x: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>`,
   arrowRight: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`,
+  chevronRight: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>`,
+  arrowUpRight: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg>`,
   logo: `<svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="url(#nav-logo-grad)"/><path d="M13 28V13h4l4 8 4-8h4v15h-3V18l-3.5 7h-2L17 18v10h-4z" fill="white"/><defs><linearGradient id="nav-logo-grad" x1="0" y1="0" x2="40" y2="40"><stop offset="0%" stop-color="#fcd116"/><stop offset="50%" stop-color="#003893"/><stop offset="100%" stop-color="#ce1126"/></linearGradient></defs></svg>`
 };
 
@@ -172,49 +207,72 @@ function buildNavLink(item, prefix, activeId) {
 }
 
 /**
- * Dropdown Component
- * Variantes: default
+ * Fila de flyout (compartida por dropdown y mega-menú)
+ * Soporta avatar (foto) o icon-chip, con acento por fila.
+ */
+function buildFlyoutRow(sub, prefix, fallbackAccent) {
+  const accent = sub.accent || fallbackAccent || 'var(--co-blue)';
+  let media;
+  if (sub.avatar) {
+    media = `<span class="flyout-row__avatar"><img src="${prefix}${sub.avatar}" alt="" loading="lazy"></span>`;
+  } else {
+    const iconSvg = ICONS[sub.icon] || ICONS.users;
+    media = `<span class="flyout-row__icon">${iconSvg}</span>`;
+  }
+  const badge = sub.badge ? `<span class="flyout-row__badge">${sub.badge}</span>` : '';
+  return `
+    <a href="${prefix}${sub.href}" class="flyout-row" role="menuitem" style="--row-accent:${accent}">
+      ${media}
+      <span class="flyout-row__text">
+        <span class="flyout-row__title">${sub.label}${badge}</span>
+        <span class="flyout-row__desc">${sub.desc || ''}</span>
+      </span>
+      <span class="flyout-row__arrow" aria-hidden="true">${ICONS.chevronRight}</span>
+    </a>
+  `;
+}
+
+/**
+ * Panel destacado del mega-menú (gradiente de acento + CTA).
+ */
+function buildFeature(feature, prefix, accent) {
+  if (!feature) return '';
+  return `
+    <a href="${prefix}${feature.href}" class="flyout-feature" style="--feat-accent:${accent || 'var(--co-blue)'}">
+      <span class="flyout-feature__glow" aria-hidden="true"></span>
+      <span class="flyout-feature__eyebrow">${feature.eyebrow || ''}</span>
+      <span class="flyout-feature__title">${feature.title || ''}</span>
+      <span class="flyout-feature__desc">${feature.desc || ''}</span>
+      <span class="flyout-feature__cta">${feature.cta || 'Ver más'}<span class="flyout-feature__cta-arrow" aria-hidden="true">${ICONS.arrowUpRight}</span></span>
+    </a>
+  `;
+}
+
+/**
+ * Dropdown Component (compacto, una columna)
  */
 function buildDropdown(item, prefix) {
-  const items = item.items.map(sub => {
-    const iconSvg = ICONS[sub.icon] || ICONS.users;
-    const badge = sub.badge ? `<span class="badge badge--blue" style="margin-left: auto;">${sub.badge}</span>` : '';
-    return `
-      <a href="${prefix}${sub.href}" class="dropdown__item">
-        <span class="dropdown__icon" style="width: 20px; height: 20px;">${iconSvg}</span>
-        <span>${sub.label}</span>
-        ${badge}
-      </a>
-    `;
-  }).join('');
-
+  const rows = item.items.map(sub => buildFlyoutRow(sub, prefix, item.accent)).join('');
   return `
-    <div class="dropdown" role="menu">
-      ${items}
+    <div class="dropdown" role="menu" style="--shift:0px">
+      <div class="flyout flyout--drop" style="--accent:${item.accent || 'var(--co-blue)'}">
+        <div class="flyout-list">${rows}</div>
+      </div>
     </div>
   `;
 }
 
 /**
- * Mega Menu Component
- * Variantes: default
+ * Mega Menu Component (panel destacado + lista de filas)
  */
 function buildMegaMenu(item, prefix) {
-  const cards = item.items.map(sub => {
-    const iconSvg = ICONS[sub.icon] || ICONS.users;
-    return `
-      <a href="${prefix}${sub.href}" class="mega-menu__card">
-        <span class="mega-menu__icon" style="width: 24px; height: 24px;">${iconSvg}</span>
-        <span class="mega-menu__title">${sub.label}</span>
-        <span class="mega-menu__desc">${sub.desc || ''}</span>
-      </a>
-    `;
-  }).join('');
-
+  const rows = item.items.map(sub => buildFlyoutRow(sub, prefix, item.accent)).join('');
+  const feature = buildFeature(item.feature, prefix, item.accent);
   return `
-    <div class="mega-menu" role="menu">
-      <div class="mega-menu__grid">
-        ${cards}
+    <div class="mega-menu" role="menu" style="--shift:0px">
+      <div class="flyout flyout--mega${feature ? ' flyout--has-feature' : ''}" style="--accent:${item.accent || 'var(--co-blue)'}">
+        ${feature}
+        <div class="flyout-list">${rows}</div>
       </div>
     </div>
   `;
@@ -350,6 +408,44 @@ function renderNavbar() {
 
   setupMobileMenu();
   setupNavbarScroll();
+  setupFlyoutPositioning();
+}
+
+/* =========================================
+   POSICIONAMIENTO DE FLYOUTS
+   Evita que el mega-menú/dropdown se salga del
+   viewport: al abrir, mide y aplica un desplazamiento
+   horizontal (--shift) para mantenerlo dentro.
+   ========================================= */
+function setupFlyoutPositioning() {
+  const margin = 16;
+  document.querySelectorAll('.nav__item').forEach(navItem => {
+    const flyout = navItem.querySelector('.mega-menu, .dropdown');
+    if (!flyout) return;
+
+    const reposition = () => {
+      flyout.style.setProperty('--shift', '0px');
+      // Forzamos lectura tras resetear el shift.
+      const rect = flyout.getBoundingClientRect();
+      const vw = document.documentElement.clientWidth;
+      let shift = 0;
+      if (rect.right > vw - margin) shift = (vw - margin) - rect.right;
+      else if (rect.left < margin) shift = margin - rect.left;
+      if (shift) flyout.style.setProperty('--shift', `${Math.round(shift)}px`);
+    };
+
+    navItem.addEventListener('mouseenter', reposition);
+    navItem.addEventListener('focusin', reposition);
+  });
+
+  // Recalcular si cambia el ancho de la ventana.
+  let raf;
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      document.querySelectorAll('.mega-menu, .dropdown').forEach(f => f.style.setProperty('--shift', '0px'));
+    });
+  }, { passive: true });
 }
 
 /* =========================================

@@ -276,148 +276,319 @@
 }
 
 /* ================================================
-   COMPONENTE: DROPDOWN MENU
+   COMPONENTE: FLYOUT (dropdown + mega-menú)
+   Sistema de navegación desplegable premium.
+   El contenedor (.dropdown / .mega-menu) posiciona;
+   el panel (.flyout) anima. --shift lo recoloca el JS
+   para no salirse del viewport.
    ================================================ */
-.dropdown {
+
+.dropdown,
+.mega-menu {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 11px);
   left: 50%;
-  transform: translateX(-50%) translateY(-8px);
-  min-width: 240px;
-  padding: 8px;
-  background: white;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-light);
-  box-shadow: var(--shadow-xl);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.2s ease;
+  transform: translateX(calc(-50% + var(--shift, 0px)));
   z-index: 100;
+  pointer-events: none;
+}
+
+/* Puente invisible sobre el espacio nav→panel para no perder el hover */
+.dropdown::before,
+.mega-menu::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
 }
 
 .nav__item:hover > .dropdown,
-.nav__item:focus-within > .dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
-/* Dropdown Item */
-.dropdown__item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  font-size: 14px;
-  color: var(--text-secondary);
-  border-radius: var(--radius-md);
-  transition: all 0.15s;
-  cursor: pointer;
-}
-
-.dropdown__item:hover {
-  color: var(--text-primary);
-  background: var(--surface-secondary);
-}
-
-.dropdown__item--active {
-  color: var(--blue-700);
-  background: var(--blue-50);
-  font-weight: 500;
-}
-
-.dropdown__icon {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--surface-tertiary);
-  border-radius: var(--radius-md);
-  color: var(--text-secondary);
-}
-
-.dropdown__item:hover .dropdown__icon {
-  background: var(--blue-100);
-  color: var(--blue-700);
-}
-
-/* ================================================
-   COMPONENTE: MEGA MENU
-   ================================================ */
-.mega-menu {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%) translateY(-8px);
-  width: 720px;
-  max-width: calc(100vw - 32px);
-  padding: 16px;
-  background: white;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border-light);
-  box-shadow: var(--shadow-2xl);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.25s ease;
-  z-index: 100;
-}
-
+.nav__item:focus-within > .dropdown,
 .nav__item:hover > .mega-menu,
 .nav__item:focus-within > .mega-menu {
+  pointer-events: auto;
+}
+
+/* Panel animado */
+.flyout {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  box-shadow:
+    0 1px 1px rgba(15, 23, 42, 0.04),
+    0 14px 28px -10px rgba(15, 23, 42, 0.18),
+    0 36px 64px -24px rgba(15, 23, 42, 0.26);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(0.985);
+  transform-origin: top center;
+  transition:
+    opacity 0.22s ease,
+    transform 0.34s cubic-bezier(0.2, 0.9, 0.3, 1),
+    visibility 0.34s;
+}
+
+/* Barra tricolor superior (identidad Colombia) */
+.flyout::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--co-yellow) 0 33%,
+    var(--co-blue) 33% 66%,
+    var(--co-red) 66%);
+  z-index: 2;
+}
+
+.nav__item:hover .flyout,
+.nav__item:focus-within .flyout {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0) scale(1);
 }
 
-.mega-menu__grid {
+/* ---- Variante MEGA ---- */
+.flyout--mega {
+  width: 344px;
+  padding: 14px;
+}
+.flyout--mega.flyout--has-feature {
+  width: 600px;
+  padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  grid-template-columns: 226px 1fr;
+}
+.flyout--mega.flyout--has-feature .flyout-list {
+  padding: 14px;
 }
 
-@media (max-width: 900px) {
-  .mega-menu__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* ---- Variante DROPDOWN ---- */
+.flyout--drop {
+  width: 340px;
+  padding: 12px;
 }
 
-.mega-menu__card {
+/* Lista de filas */
+.flyout-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 16px;
-  border-radius: var(--radius-lg);
+  gap: 2px;
+}
+
+/* Fila */
+.flyout-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 13px;
+  padding: 10px 12px;
+  border-radius: 13px;
   text-decoration: none;
   color: inherit;
-  transition: all 0.15s;
+  transition: background 0.16s ease;
+}
+.flyout-row:hover,
+.flyout-row:focus-visible {
+  background: color-mix(in srgb, var(--row-accent) 8%, white);
+  outline: none;
 }
 
-.mega-menu__card:hover {
-  background: var(--surface-secondary);
-}
-
-.mega-menu__icon {
+/* Chip de icono */
+.flyout-row__icon {
   width: 40px;
   height: 40px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--blue-100), var(--blue-50));
-  border-radius: var(--radius-md);
-  color: var(--blue-700);
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--row-accent) 12%, white);
+  color: var(--row-accent);
+  border: 1px solid color-mix(in srgb, var(--row-accent) 16%, transparent);
+  transition: transform 0.18s ease, background 0.16s ease;
+}
+.flyout-row__icon svg { width: 20px; height: 20px; }
+.flyout-row:hover .flyout-row__icon {
+  background: color-mix(in srgb, var(--row-accent) 18%, white);
+  transform: scale(1.06);
 }
 
-.mega-menu__title {
-  font-size: 14px;
+/* Avatar (foto de candidato) con anillo de color de partido */
+.flyout-row__avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  padding: 2px;
+  background: var(--row-accent);
+  box-shadow: 0 3px 9px -3px color-mix(in srgb, var(--row-accent) 65%, transparent);
+  transition: transform 0.18s ease;
+}
+.flyout-row:hover .flyout-row__avatar { transform: scale(1.06); }
+.flyout-row__avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  border: 2px solid #fff;
+  background: var(--surface-tertiary);
+}
+
+/* Texto */
+.flyout-row__text { min-width: 0; }
+.flyout-row__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
   font-weight: 600;
   color: var(--text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.flyout-row__desc {
+  display: block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+  line-height: 1.35;
 }
 
-.mega-menu__desc {
+/* Badge "Nuevo" */
+.flyout-row__badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  color: var(--co-blue);
+  background: var(--blue-100);
+}
+
+/* Flecha (aparece al hover) */
+.flyout-row__arrow {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: flex;
+  color: var(--gray-300);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease, color 0.18s ease;
+}
+.flyout-row__arrow svg { width: 18px; height: 18px; }
+.flyout-row:hover .flyout-row__arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--row-accent);
+}
+
+/* ---- Panel destacado (mega) ---- */
+.flyout-feature {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 20px;
+  text-decoration: none;
+  overflow: hidden;
+  color: #fff;
+  background:
+    linear-gradient(155deg,
+      var(--feat-accent) 0%,
+      color-mix(in srgb, var(--feat-accent) 76%, #0b1224) 100%);
+}
+.flyout-feature__glow {
+  position: absolute;
+  top: -42%;
+  right: -32%;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.30), transparent 70%);
+  pointer-events: none;
+}
+.flyout-feature__eyebrow {
+  position: relative;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.72);
+}
+.flyout-feature__title {
+  position: relative;
+  margin-top: 10px;
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.flyout-feature__desc {
+  position: relative;
+  margin-top: 9px;
   font-size: 13px;
-  color: var(--text-tertiary);
-  line-height: 1.4;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+}
+.flyout-feature__cta {
+  position: relative;
+  margin-top: auto;
+  padding-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+.flyout-feature__cta-arrow {
+  display: inline-flex;
+  width: 15px;
+  height: 15px;
+  transition: transform 0.2s ease;
+}
+.flyout-feature__cta-arrow svg { width: 15px; height: 15px; }
+.flyout-feature:hover .flyout-feature__cta-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Entrada escalonada de las filas */
+.nav__item:hover .flyout-row,
+.nav__item:focus-within .flyout-row {
+  animation: flyout-row-in 0.32s cubic-bezier(0.2, 0.9, 0.3, 1) backwards;
+}
+.flyout-list .flyout-row:nth-child(1) { animation-delay: 0.03s; }
+.flyout-list .flyout-row:nth-child(2) { animation-delay: 0.07s; }
+.flyout-list .flyout-row:nth-child(3) { animation-delay: 0.11s; }
+.flyout-list .flyout-row:nth-child(4) { animation-delay: 0.15s; }
+@keyframes flyout-row-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Respeta prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .flyout,
+  .flyout-row,
+  .flyout-row__icon,
+  .flyout-row__avatar,
+  .flyout-row__arrow,
+  .flyout-feature__cta-arrow {
+    transition: none;
+    animation: none;
+  }
 }
 
 /* ================================================
