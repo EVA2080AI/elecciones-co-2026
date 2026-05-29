@@ -1424,3 +1424,98 @@
 }
 .position-meter span { display: block; height: 100%; border-radius: 999px; }
 .position-score { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+
+/* ================================================
+   HERO · mini-maquetas de los slides 2–4
+   Reemplazan el icono suelto por una vista que
+   ilustra el mensaje de cada slide.
+   ================================================ */
+.hero-mock {
+  width: 100%;
+  max-width: 380px;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow:
+    0 24px 48px -22px rgba(15, 23, 42, 0.28),
+    0 2px 8px rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.hero-mock__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+}
+.hmk-foot {
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  text-align: center;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-light);
+}
+
+/* Slide 2 · candidatos */
+.hmk-cand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 11px;
+  border-radius: 12px;
+  background: var(--surface-secondary);
+}
+.hmk-cand img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  border: 2px solid var(--c, var(--co-blue));
+  flex-shrink: 0;
+}
+.hmk-cand span { display: flex; flex-direction: column; min-width: 0; }
+.hmk-cand strong { font-size: 14px; color: var(--text-primary); line-height: 1.2; }
+.hmk-cand small { font-size: 12px; color: var(--text-tertiary); margin-top: 1px; }
+
+/* Slide 3 · barras de solidez */
+.hmk-bar { display: flex; align-items: center; gap: 10px; }
+.hmk-bar .nm { font-size: 12.5px; color: var(--text-secondary); width: 76px; flex-shrink: 0; }
+.hmk-bar .track {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--surface-tertiary);
+  overflow: hidden;
+}
+.hmk-bar .track i { display: block; height: 100%; border-radius: 999px; }
+.hmk-bar b { font-size: 13px; font-weight: 700; color: var(--text-primary); width: 26px; text-align: right; }
+
+/* Slide 4 · feed en vivo */
+.hmk-live {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ce1126;
+  flex-shrink: 0;
+  animation: hmk-pulse 1.8s infinite;
+}
+@keyframes hmk-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(206, 17, 38, 0.45); }
+  70% { box-shadow: 0 0 0 7px rgba(206, 17, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(206, 17, 38, 0); }
+}
+.hmk-news { display: flex; align-items: center; gap: 12px; }
+.hmk-news .src { width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0; opacity: 0.9; }
+.hmk-news .ln { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.hmk-news .ln i { display: block; height: 8px; border-radius: 999px; background: var(--surface-tertiary); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hmk-live { animation: none; }
+}
