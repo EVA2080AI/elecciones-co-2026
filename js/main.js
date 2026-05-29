@@ -105,24 +105,6 @@ function initHeroSlider() {
     startSlider();
 }
 
-function initTheme() {
-    if (localStorage.getItem('dashTheme') === 'dark') document.body.classList.add('dark');
-    const btn = document.getElementById('themeToggle');
-    if (!btn) return;
-    /* aria-pressed comunica el estado del toggle a lectores de pantalla. */
-    const syncAria = () => {
-        const dark = document.body.classList.contains('dark');
-        btn.setAttribute('aria-pressed', String(dark));
-        btn.setAttribute('aria-label', dark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
-    };
-    syncAria();
-    btn.addEventListener('click', () => {
-        document.body.classList.toggle('dark');
-        localStorage.setItem('dashTheme', document.body.classList.contains('dark') ? 'dark' : 'light');
-        syncAria();
-        if (window.applyThemeToCharts) applyThemeToCharts();
-    });
-}
 
 /* Navbar fija y sobria — sin auto-hide al scroll, sin clase scrolled.
    La navegación que se mueve sola interrumpe la lectura. */
@@ -167,8 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* 1. Layout shell first (navbar, footer, disclaimer, chatbot) */
     if (window.renderLayout) renderLayout();
 
-    /* 2. Theme + chatbot (every page) */
-    initTheme();
+    /* 2. Chatbot (every page) */
     if (window.initChatbot) initChatbot();
 
     /* 3. Structured data */

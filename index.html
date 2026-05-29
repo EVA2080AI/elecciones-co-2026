@@ -38,40 +38,127 @@
 <a href="#main" class="skip-link">Saltar al contenido</a>
 <div id="layout-nav"></div>
 
-<!-- HERO PRINCIPAL · mismo sistema que las páginas internas -->
-<section class="page-hero hero-home" aria-label="Encabezado principal">
-    <div class="page-hero-inner">
-        <div class="page-hero-text">
-            <span class="page-hero-eyebrow">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-                Colombia · 28 de mayo de 2026
-            </span>
-            <h1>Elecciones Presidenciales <em>Colombia 2026</em></h1>
-            <p class="lead">
-                <strong>Por primera vez en Colombia la inteligencia artificial se pone al servicio de los ciudadanos.</strong> Compara propuestas, calcula tu afinidad y sigue las noticias en vivo — todo en un solo lugar, imparcial y abierto.
-            </p>
-            <div class="hero-cta" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;">
-                <a class="btn-primary" href="./calculadora.html">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                    Calcular mi afinidad
-                </a>
-                <a class="btn-ghost" href="./candidatos.html">Ver candidatos</a>
+<!-- HERO PRINCIPAL SLIDER -->
+<section class="page-hero hero-home hero-carousel" aria-label="Encabezado principal">
+    
+    <!-- SLIDE 1: IA y General -->
+    <div class="hero-slide active">
+        <div class="page-hero-inner slide-layout-alt">
+            <div class="page-hero-text hero-content">
+                <span class="page-hero-eyebrow">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                    Colombia · 28 de mayo de 2026
+                </span>
+                <h1>Elecciones Presidenciales <em>Colombia 2026</em></h1>
+                <p class="lead">
+                    <strong>Por primera vez en Colombia la inteligencia artificial se pone al servicio de los ciudadanos.</strong> Compara propuestas, calcula tu afinidad y sigue las noticias en vivo — todo en un solo lugar, imparcial y abierto.
+                </p>
+                <div class="hero-cta" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;">
+                    <a class="btn-primary" href="./calculadora.html">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        Calcular mi afinidad
+                    </a>
+                    <a class="btn-ghost" href="./candidatos.html">Ver candidatos</a>
+                </div>
             </div>
-            <div class="page-hero-meta">
-                <div class="page-hero-meta-item"><span class="k">Candidatos</span><span class="v">3</span></div>
-                <div class="page-hero-meta-item"><span class="k">Inquietudes</span><span class="v">10</span></div>
-                <div class="page-hero-meta-item"><span class="k">Fuentes en vivo</span><span class="v">7</span></div>
-                <div class="page-hero-meta-item"><span class="k">Datos abiertos</span><span class="v">JSON<small> · CSV</small></span></div>
-            </div>
-        </div>
-        <div class="page-hero-visual">
-            <div class="hero-visual-trio" aria-hidden="true">
-                <div class="face" style="--c: #3b82f6;"><img src="https://palomapresidente.com.co/images/slider/paloma-valencia-presidente.jpeg" alt="Paloma Valencia" loading="lazy"></div>
-                <div class="face" style="--c: #a855f7;"><img src="https://www.presidenteivancepeda.com/_next/image?url=%2Fivnaaida.png&w=3840&q=75" alt="Iván Cepeda" loading="lazy"></div>
-                <div class="face" style="--c: #ef4444;"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/A_de_la_Espriella.jpg" alt="Abelardo de la Espriella" loading="lazy"></div>
+            <div class="page-hero-visual hero-aside">
+                <div class="hero-visual-trio" aria-hidden="true">
+                    <div class="face" style="--c: #3b82f6;"><img src="https://palomapresidente.com.co/images/slider/paloma-valencia-presidente.jpeg" alt="Paloma Valencia" loading="lazy"></div>
+                    <div class="face" style="--c: #a855f7;"><img src="https://www.presidenteivancepeda.com/_next/image?url=%2Fivnaaida.png&w=3840&q=75" alt="Iván Cepeda" loading="lazy"></div>
+                    <div class="face" style="--c: #ef4444;"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/A_de_la_Espriella.jpg" alt="Abelardo de la Espriella" loading="lazy"></div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- SLIDE 2: Perfiles -->
+    <div class="hero-slide">
+        <div class="page-hero-inner slide-layout-alt">
+            <div class="page-hero-text hero-content">
+                <span class="page-hero-eyebrow">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    Conoce a los candidatos
+                </span>
+                <h1>Más allá de las <em>Promesas</em></h1>
+                <p class="lead">
+                    Analizamos a fondo los planes de gobierno, trayectoria y posturas técnicas de Paloma Valencia, Iván Cepeda y Abelardo de la Espriella. Sin sesgos editoriales.
+                </p>
+                <div class="hero-cta" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;">
+                    <a class="btn-primary" href="./candidatos.html">Ver Perfiles</a>
+                </div>
+            </div>
+            <div class="page-hero-visual hero-aside center-aside">
+                <div class="slide-graphic">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--highlight)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: Análisis de datos -->
+    <div class="hero-slide">
+        <div class="page-hero-inner slide-layout-alt">
+            <div class="page-hero-text hero-content">
+                <span class="page-hero-eyebrow">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    10 Inquietudes Ciudadanas
+                </span>
+                <h1>Matriz de <em>Análisis</em> Cuantitativo</h1>
+                <p class="lead">
+                    Cruzamos los planes de gobierno con los 10 temas que más preocupan al país. Compara directamente candidato vs candidato con datos objetivos y radar interactivo.
+                </p>
+                <div class="hero-cta" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;">
+                    <a class="btn-primary" href="./analisis.html">Explorar Análisis</a>
+                </div>
+            </div>
+            <div class="page-hero-visual hero-aside center-aside">
+                <div class="slide-graphic">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: Minuto a minuto -->
+    <div class="hero-slide">
+        <div class="page-hero-inner slide-layout-alt">
+            <div class="page-hero-text hero-content">
+                <span class="page-hero-eyebrow">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+                    Actualización en vivo
+                </span>
+                <h1>El Pulso de la <em>Campaña</em> en Vivo</h1>
+                <p class="lead">
+                    Sigue el minuto a minuto de las elecciones con un feed consolidado de Caracol, RCN, Semana, El Tiempo y CNN. Con inteligencia artificial resumiendo tendencias.
+                </p>
+                <div class="hero-cta" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;">
+                    <a class="btn-primary" href="./noticias.html">Ver Noticias</a>
+                </div>
+            </div>
+            <div class="page-hero-visual hero-aside center-aside">
+                <div class="slide-graphic">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION CONTROLS -->
+    <div class="main-slider-nav">
+        <button class="nav-arrow prev" aria-label="Anterior slide">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="nav-dots">
+            <button class="main-dot active" aria-label="Slide 1"></button>
+            <button class="main-dot" aria-label="Slide 2"></button>
+            <button class="main-dot" aria-label="Slide 3"></button>
+            <button class="main-dot" aria-label="Slide 4"></button>
+        </div>
+        <button class="nav-arrow next" aria-label="Siguiente slide">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+    </div>
+
 </section>
 
 <div id="layout-disclaimer"></div>
