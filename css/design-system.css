@@ -1519,3 +1519,127 @@
 @media (prefers-reduced-motion: reduce) {
   .hmk-live { animation: none; }
 }
+
+/* ================================================
+   CONTENIDO · artículos (.prose) y avisos (.callout)
+   Faltaba el CSS: las páginas de texto (acerca,
+   denuncias, datos, contacto) salían sin formato.
+   ================================================ */
+.prose {
+  max-width: 760px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  font-size: 16.5px;
+  line-height: 1.75;
+}
+.prose > h2 {
+  font-family: var(--font-serif);
+  font-size: 27px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 50px 0 16px;
+}
+.prose > h2:first-child { margin-top: 4px; }
+.prose > h2::before {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--co-yellow), var(--co-blue), var(--co-red));
+  margin-bottom: 16px;
+}
+.prose h3 {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 30px 0 10px;
+}
+.prose p { margin: 0 0 18px; }
+.prose strong { color: var(--text-primary); font-weight: 600; }
+.prose em { color: var(--text-primary); }
+.prose a {
+  color: var(--blue-600);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--blue-600) 35%, transparent);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.prose a:hover { color: var(--blue-700); border-bottom-color: var(--blue-600); }
+.prose hr {
+  border: none;
+  height: 1px;
+  background: var(--border-light);
+  margin: 44px 0;
+}
+
+/* Listas con marcadores propios */
+.prose ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.prose ul > li {
+  position: relative;
+  padding-left: 26px;
+  line-height: 1.65;
+}
+.prose ul > li::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--co-blue);
+}
+.prose ol {
+  padding-left: 24px;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.prose ol > li { padding-left: 6px; line-height: 1.65; }
+.prose ol > li::marker { color: var(--co-blue); font-weight: 800; }
+
+/* Avisos / callouts */
+.callout {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: var(--blue-50);
+  border: 1px solid var(--border-light);
+  border-left: 4px solid var(--co-blue);
+  margin: 26px 0;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.callout > div:not(.callout-icon) { flex: 1; min-width: 0; }
+.callout strong { color: var(--text-primary); }
+.callout a { color: var(--blue-700); font-weight: 600; }
+.callout-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--co-blue);
+  color: #fff;
+}
+.callout.success { background: #ecfdf5; border-left-color: #10b981; }
+.callout.success .callout-icon { background: #10b981; }
+.callout.warning { background: #fffbeb; border-left-color: #f59e0b; }
+.callout.warning .callout-icon { background: #f59e0b; }
+.callout.danger { background: #fef2f2; border-left-color: #ef4444; }
+.callout.danger .callout-icon { background: #ef4444; }
