@@ -2244,3 +2244,53 @@
 }
 .hero-visual-contact .email svg { flex-shrink: 0; color: var(--co-blue); }
 .hero-visual-contact .email:hover { text-decoration: underline; }
+
+/* Resultados en vivo · estado de espera / cuenta regresiva */
+.live-results__body { padding: 44px 22px 40px; }
+.lr-wait {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.lr-wait__icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--co-blue) 10%, white);
+  color: var(--co-blue);
+  margin-bottom: 4px;
+}
+.lr-wait__icon svg { width: 28px; height: 28px; }
+.lr-wait h3 { font-family: var(--font-serif); font-size: 20px; color: var(--text-primary); margin: 0; line-height: 1.25; }
+.lr-wait p { font-size: 14px; color: var(--text-secondary); margin: 0; line-height: 1.55; }
+.lr-count {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--co-blue);
+  letter-spacing: -0.01em;
+  margin: 8px 0;
+  font-variant-numeric: tabular-nums;
+}
+.lr-count.is-live {
+  font-size: 17px;
+  color: #ce1126;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.lr-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ce1126;
+  animation: hmk-pulse 1.8s infinite;
+}
+.lr-wait .btn { margin-top: 6px; }

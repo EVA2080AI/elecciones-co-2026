@@ -119,14 +119,52 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg>
             </a>
         </div>
-        <div class="live-results__frame">
-            <iframe src="https://resultados.registraduria.gov.co/" title="Resultados oficiales – Registraduría Nacional del Estado Civil" loading="lazy" referrerpolicy="no-referrer"></iframe>
+        <div class="live-results__body" id="resultadosBody">
+            <div class="lr-wait">
+                <span class="lr-wait__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                </span>
+                <h3 id="lrTitle">Los resultados oficiales se publican a las 4:00 p.m.</h3>
+                <p id="lrSub">La Registraduría Nacional inicia el preconteo al cierre de las urnas (hora de Colombia, UTC-5).</p>
+                <div class="lr-count" id="lrCount" aria-live="polite">—</div>
+                <a class="btn btn--primary btn--md" href="https://resultados.registraduria.gov.co/" target="_blank" rel="noopener">
+                    Ver en el portal oficial
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg>
+                </a>
+            </div>
         </div>
         <p class="live-results__note">
-            Fuente: <strong>Registraduría Nacional del Estado Civil</strong> · preconteo preliminar e informativo. El <em>escrutinio</em> oficial puede tardar días y es el que define al ganador. Si el recuadro no carga, abre el <a href="https://resultados.registraduria.gov.co/" target="_blank" rel="noopener">portal oficial ↗</a>.
+            Fuente: <strong>Registraduría Nacional del Estado Civil</strong> · preconteo preliminar e informativo. El <em>escrutinio</em> oficial puede tardar días y es el que define al ganador.
         </p>
     </div>
 </section>
+<script>
+(function(){
+  var target = new Date('2026-05-31T16:00:00-05:00').getTime();
+  var elCount = document.getElementById('lrCount');
+  var elTitle = document.getElementById('lrTitle');
+  var elSub = document.getElementById('lrSub');
+  if (!elCount) return;
+  function pad(n){ return (n<10?'0':'')+n; }
+  function tick(){
+    var diff = target - Date.now();
+    if (diff > 0) {
+      var h = Math.floor(diff/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      elCount.textContent = h + 'h ' + pad(m) + 'm ' + pad(s) + 's';
+    } else {
+      elCount.classList.add('is-live');
+      elCount.innerHTML = '<span class="lr-dot"></span> Preconteo disponible ahora';
+      elTitle.textContent = 'El preconteo oficial ya está disponible';
+      elSub.textContent = 'Las cifras se actualizan en vivo a medida que los jurados transmiten. Síguelas en el portal oficial de la Registraduría.';
+      clearInterval(iv);
+    }
+  }
+  tick();
+  var iv = setInterval(tick, 1000);
+})();
+</script>
 
 <main id="main" style="max-width:880px;margin:0 auto;padding:36px 5%;">
 
