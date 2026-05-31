@@ -140,29 +140,58 @@
 </section>
 <script>
 (function(){
-  var target = new Date('2026-05-31T16:00:00-05:00').getTime();
+  var TARGET = new Date('2026-05-31T16:00:00-05:00').getTime();
+  var PORTAL = 'https://resultados.registraduria.gov.co/';
+  var body = document.getElementById('resultadosBody');
   var elCount = document.getElementById('lrCount');
   var elTitle = document.getElementById('lrTitle');
   var elSub = document.getElementById('lrSub');
-  if (!elCount) return;
+  if (!body) return;
+  var hasLive = false;
   function pad(n){ return (n<10?'0':'')+n; }
-  function tick(){
-    var diff = target - Date.now();
+  function fmt(s){ return s==null ? '—' : String(s).replace(/\D/g,'').replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+
+  /* Cuenta regresiva (solo actualiza texto, sin reconstruir el panel) */
+  function tickCountdown(){
+    if (hasLive || !elCount) return;
+    var diff = TARGET - Date.now();
     if (diff > 0) {
-      var h = Math.floor(diff/3600000);
-      var m = Math.floor((diff%3600000)/60000);
-      var s = Math.floor((diff%60000)/1000);
+      var h = Math.floor(diff/3600000), m = Math.floor((diff%3600000)/60000), s = Math.floor((diff%60000)/1000);
       elCount.textContent = h + 'h ' + pad(m) + 'm ' + pad(s) + 's';
     } else {
       elCount.classList.add('is-live');
       elCount.innerHTML = '<span class="lr-dot"></span> Preconteo disponible ahora';
       elTitle.textContent = 'El preconteo oficial ya está disponible';
-      elSub.textContent = 'Las cifras se actualizan en vivo a medida que los jurados transmiten. Síguelas en el portal oficial de la Registraduría.';
-      clearInterval(iv);
+      elSub.textContent = 'Las cifras se actualizan en vivo a medida que los jurados transmiten.';
     }
   }
-  tick();
-  var iv = setInterval(tick, 1000);
+
+  /* Render de participación oficial en vivo */
+  function renderLive(d){
+    var prev = d.participacionPrev ? ' <small>(' + d.participacionPrev + ' en 2022)</small>' : '';
+    body.innerHTML =
+      '<div class="lr-live">' +
+        '<div class="lr-live__row">' +
+          '<div class="lr-stat"><span class="lr-stat__num">' + fmt(d.votos) + '</span><span class="lr-stat__lab">Votos contabilizados</span></div>' +
+          '<div class="lr-stat"><span class="lr-stat__num lr-stat__num--accent">' + (d.participacion || '—') + '</span><span class="lr-stat__lab">Participación' + prev + '</span></div>' +
+        '</div>' +
+        '<p class="lr-live__meta">Preconteo' + (d.hora ? ' · actualizado ' + d.hora : '') + ' · Fuente: Registraduría Nacional</p>' +
+        '<a class="btn btn--primary btn--md" href="' + PORTAL + '" target="_blank" rel="noopener">Ver resultados por candidato en el portal oficial ' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></a>' +
+      '</div>';
+  }
+
+  function poll(){
+    fetch('/api/resultados', { cache: 'no-store' })
+      .then(function(r){ return r.json(); })
+      .then(function(d){ if (d && d.ok && (d.participacion || d.votos)) { hasLive = true; renderLive(d); } })
+      .catch(function(){});
+  }
+
+  tickCountdown();
+  setInterval(tickCountdown, 1000);
+  poll();
+  setInterval(poll, 30000);
 })();
 </script>
 
