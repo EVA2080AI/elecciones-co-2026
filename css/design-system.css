@@ -1732,3 +1732,212 @@
   padding: 2px 7px;
   border-radius: 6px;
 }
+
+/* ================================================
+   AUDITORÍA · componentes huérfanos (markup sin CSS
+   tras la migración a Tailwind). Recuperados aquí.
+   ================================================ */
+
+/* Breadcrumb (todas las subpáginas) */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+.breadcrumb a { color: var(--text-tertiary); text-decoration: none; transition: color 0.15s ease; }
+.breadcrumb a:hover { color: var(--blue-600); }
+.breadcrumb .sep { color: var(--gray-300); }
+.breadcrumb .current { color: var(--text-secondary); font-weight: 500; }
+
+/* FAQ · intro */
+.faq-intro {
+  background: var(--blue-50);
+  border: 1px solid var(--border-light);
+  border-left: 4px solid var(--co-blue);
+  border-radius: 12px;
+  padding: 16px 18px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+.faq-intro strong { color: var(--text-primary); }
+
+/* FAQ · acordeón (<details>) */
+.faq-list { display: flex; flex-direction: column; gap: 10px; }
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.faq-item[open] {
+  border-color: color-mix(in srgb, var(--co-blue) 30%, var(--border-light));
+  box-shadow: 0 10px 24px -14px rgba(0, 56, 147, 0.3);
+}
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 17px 20px;
+  font-weight: 600;
+  font-size: 15.5px;
+  color: var(--text-primary);
+  transition: background 0.15s ease;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { background: var(--surface-secondary); }
+.faq-q { flex: 1; line-height: 1.4; }
+.faq-chevron { flex-shrink: 0; display: flex; color: var(--text-tertiary); transition: transform 0.3s ease, color 0.2s ease; }
+.faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--co-blue); }
+.faq-a {
+  padding: 2px 20px 20px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-size: 14.5px;
+}
+
+/* FAQ · burbujas del hero */
+.hero-visual-faq { display: flex; flex-direction: column; gap: 12px; }
+.hero-visual-faq .qa {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 12px 16px;
+  box-shadow: 0 6px 18px -10px rgba(15, 23, 42, 0.18);
+}
+.hero-visual-faq .q {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--blue-100);
+  color: var(--co-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+}
+.hero-visual-faq .text { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+
+/* Página 404 */
+.notfound { max-width: 620px; margin: 0 auto; padding: 80px 5% 100px; text-align: center; }
+.notfound-code {
+  font-family: var(--font-serif);
+  font-size: clamp(80px, 18vw, 150px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--co-yellow), var(--co-blue), var(--co-red));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.notfound h1 { font-family: var(--font-serif); font-size: clamp(24px, 4vw, 32px); margin: 16px 0 12px; color: var(--text-primary); }
+.notfound p { color: var(--text-secondary); line-height: 1.65; max-width: 470px; margin: 0 auto; }
+
+/* Denuncias · aviso "no recibe denuncias" */
+.report-warning {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto 22px;
+  padding: 18px 20px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-left: 4px solid #ef4444;
+  border-radius: 14px;
+}
+.report-warning-icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ef4444;
+  color: #fff;
+}
+.report-warning h3 { margin: 0 0 4px; font-size: 16px; color: #b91c1c; }
+.report-warning p { margin: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.report-warning p strong { color: var(--text-primary); }
+
+/* Denuncias · tipos de irregularidad */
+.irregular-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 14px;
+  max-width: 1100px;
+  margin: 0 auto 8px;
+}
+.irregular-card {
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.irregular-card:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -14px rgba(15, 23, 42, 0.2); }
+.irregular-card .it { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+.irregular-card .desc { font-size: 13.5px; color: var(--text-secondary); line-height: 1.55; }
+
+/* Chatbot · burbujas de mensaje */
+.chat-msg {
+  max-width: 86%;
+  margin-bottom: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+.chat-msg.user {
+  margin-left: auto;
+  background: var(--co-blue);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.chat-msg.bot {
+  margin-right: auto;
+  background: var(--surface-tertiary);
+  color: var(--text-primary);
+  border-bottom-left-radius: 4px;
+}
+.chat-msg .src { display: block; margin-top: 6px; font-size: 11px; color: var(--text-tertiary); }
+.chat-msg.user .src { color: rgba(255, 255, 255, 0.72); }
+.chat-msg .ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--cepeda);
+  margin-right: 6px;
+}
+.chat-typing { display: inline-flex !important; gap: 5px; align-items: center; }
+.chat-typing .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gray-400);
+  animation: chat-dot 1.2s infinite;
+}
+.chat-typing .dot:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing .dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes chat-dot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+@media (prefers-reduced-motion: reduce) { .chat-typing .dot { animation: none; } }
