@@ -105,22 +105,30 @@
 
 <div id="layout-disclaimer"></div>
 
-<main id="main" style="max-width:880px;margin:0 auto;padding:36px 5%;">
-
-    <!-- Resultados oficiales (fuente) -->
-    <div class="card card--elevated" style="padding:24px;margin-bottom:28px;border-left:4px solid var(--co-blue);">
-        <h2 style="margin-top:0;">Resultados oficiales en vivo</h2>
-        <p style="color:var(--text-secondary);line-height:1.6;">
-            El único conteo oficial lo publica la <strong>Registraduría Nacional del Estado Civil</strong> la noche de la elección, a medida que avanza el preconteo. Sigue las cifras verificadas directamente en su portal:
-        </p>
-        <a class="btn btn--primary btn--md" href="https://www.registraduria.gov.co/" target="_blank" rel="noopener" style="margin-top:6px;">
-            Ver resultados en la Registraduría
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg>
-        </a>
-        <p style="font-size:13px;color:var(--text-tertiary);margin-top:14px;">
-            El <em>preconteo</em> (resultados rápidos la misma noche) es informativo; el <em>escrutinio</em> oficial puede tardar días y es el que define al ganador.
+<!-- RESULTADOS OFICIALES EN VIVO (portal Registraduría embebido) -->
+<section style="max-width:1120px;margin:26px auto 0;padding:0 5%;" aria-label="Resultados oficiales en vivo">
+    <div class="live-results">
+        <div class="live-results__head">
+            <span class="live-results__badge"><span class="pulse-dot"></span> En vivo</span>
+            <div class="live-results__title">
+                <h2>Resultados oficiales · Preconteo Registraduría</h2>
+                <p>Se actualiza desde el cierre de urnas (4:00 p.m.). Cifras preliminares e informativas.</p>
+            </div>
+            <a class="btn btn--primary btn--sm" href="https://resultados.registraduria.gov.co/" target="_blank" rel="noopener">
+                Abrir portal oficial
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg>
+            </a>
+        </div>
+        <div class="live-results__frame">
+            <iframe src="https://resultados.registraduria.gov.co/" title="Resultados oficiales – Registraduría Nacional del Estado Civil" loading="lazy" referrerpolicy="no-referrer"></iframe>
+        </div>
+        <p class="live-results__note">
+            Fuente: <strong>Registraduría Nacional del Estado Civil</strong> · preconteo preliminar e informativo. El <em>escrutinio</em> oficial puede tardar días y es el que define al ganador. Si el recuadro no carga, abre el <a href="https://resultados.registraduria.gov.co/" target="_blank" rel="noopener">portal oficial ↗</a>.
         </p>
     </div>
+</section>
+
+<main id="main" style="max-width:880px;margin:0 auto;padding:36px 5%;">
 
     <!-- Calendario electoral -->
     <section class="section-strip" style="text-align:left;padding:0;margin-bottom:16px;">
