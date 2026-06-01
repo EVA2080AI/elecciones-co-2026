@@ -171,11 +171,12 @@
     var prev = d.participacionPrev ? ' <small>(' + d.participacionPrev + ' en 2022)</small>' : '';
     body.innerHTML =
       '<div class="lr-live">' +
+        '<span class="lr-prelim"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Cifras preliminares · pueden cambiar</span>' +
         '<div class="lr-live__row">' +
           '<div class="lr-stat"><span class="lr-stat__num">' + fmt(d.votos) + '</span><span class="lr-stat__lab">Votos contabilizados</span></div>' +
           '<div class="lr-stat"><span class="lr-stat__num lr-stat__num--accent">' + (d.participacion || '—') + '</span><span class="lr-stat__lab">Participación' + prev + '</span></div>' +
         '</div>' +
-        '<p class="lr-live__meta">Preconteo' + (d.hora ? ' · actualizado ' + d.hora : '') + ' · Fuente: Registraduría Nacional</p>' +
+        '<p class="lr-live__meta">Preconteo oficial' + (d.hora ? ' · actualizado ' + d.hora : '') + ' · Fuente: Registraduría Nacional</p>' +
         '<a class="btn btn--primary btn--md" href="' + PORTAL + '" target="_blank" rel="noopener">Ver resultados por candidato en el portal oficial ' +
         '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg></a>' +
       '</div>';
