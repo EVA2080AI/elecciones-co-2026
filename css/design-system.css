@@ -2330,3 +2330,179 @@
   border-radius: 999px;
 }
 .lr-prelim svg { flex-shrink: 0; }
+
+/* ================================================
+   SEGUNDA VUELTA · balotaje (panel de resultados)
+   ================================================ */
+
+/* Badge de cabecera para el estado "segunda vuelta" */
+.live-results__badge--vuelta {
+  color: #003893;
+  background: #eff5ff;
+  border-color: #bfd4ff;
+}
+
+.runoff {
+  max-width: 660px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+/* Cuenta regresiva */
+.runoff__count { text-align: center; }
+.runoff__count-num {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-serif);
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--co-blue);
+  font-variant-numeric: tabular-nums;
+}
+.runoff__count-num i {
+  font-style: normal;
+  font-family: var(--font-sans, Inter, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  margin-right: 10px;
+  letter-spacing: 0;
+}
+.runoff__count-num i:last-child { margin-right: 0; }
+.runoff__count-lab {
+  display: block;
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Enfrentamiento de los dos finalistas */
+.runoff__vs {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+}
+.runoff__cand {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  padding: 22px 16px 18px;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-top: 4px solid var(--c, var(--co-blue));
+  border-radius: 16px;
+  box-shadow: 0 14px 30px -20px rgba(15, 23, 42, 0.25);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.runoff__cand:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 40px -22px color-mix(in srgb, var(--c, var(--co-blue)) 55%, transparent);
+}
+.runoff__cand img {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  border: 3px solid var(--c, var(--co-blue));
+  margin-bottom: 4px;
+}
+.runoff__cand strong { font-size: 16px; color: var(--text-primary); line-height: 1.25; }
+.runoff__cand small { font-size: 12.5px; color: var(--text-tertiary); line-height: 1.3; }
+.runoff__pct {
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--c, var(--co-blue));
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+}
+.runoff__pct em {
+  font-style: normal;
+  font-family: var(--font-sans, Inter, sans-serif);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 3px;
+}
+.runoff__x {
+  align-self: center;
+  flex-shrink: 0;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-tertiary);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-light);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 480px) {
+  .runoff__count-num { font-size: 36px; }
+  .runoff__vs { gap: 8px; }
+  .runoff__cand { padding: 18px 10px 14px; }
+  .runoff__cand img { width: 66px; height: 66px; }
+  .runoff__x { width: 34px; height: 34px; font-size: 13px; }
+}
+
+/* Banner compacto de balotaje en el hero del home */
+.hero-runoff {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 9px 14px 9px 9px;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  box-shadow: 0 8px 22px -16px rgba(206, 17, 38, 0.55);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+.hero-runoff:hover {
+  transform: translateY(-1px);
+  border-color: #fecaca;
+  box-shadow: 0 12px 26px -16px rgba(206, 17, 38, 0.7);
+}
+.hero-runoff__tag {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: #ce1126;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.hero-runoff__txt strong { color: var(--text-primary); }
+.hero-runoff svg { flex-shrink: 0; color: #ce1126; }
+@media (max-width: 380px) { .hero-runoff { font-size: 12.5px; } }

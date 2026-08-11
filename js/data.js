@@ -300,7 +300,7 @@ window.PROJECT_FAQ = [
     },
     {
         q: '¿Cuándo son las elecciones presidenciales 2026?',
-        a: 'La primera vuelta está prevista para el último domingo de mayo de 2026 (31 de mayo). Si ningún candidato obtiene más del 50% de los votos válidos, se realiza una segunda vuelta tres semanas después.'
+        a: 'La primera vuelta se realizó el 31 de mayo de 2026 y ningún candidato superó el 50% de los votos válidos. La elección se define en segunda vuelta el domingo 21 de junio de 2026, entre Abelardo de la Espriella e Iván Cepeda, los dos más votados.'
     },
     {
         q: '¿Cómo funciona el asistente del sitio?',
